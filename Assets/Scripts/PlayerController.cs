@@ -109,11 +109,6 @@ public class PlayerController : MonoBehaviour
     {
         HP -= dmg;
     }
-    public void addJumps(int amount)
-    {
-        maxJumps += amount;
-        //coins -= gameManager.instance.jumpCost;
-    }
     public void addCoins(int amount)
     {
         coins += amount;
