@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
 {
     [Header("___| Components |___")]
     [SerializeField] CharacterController controller;
+    [SerializeField] Renderer modelBody;
+    [SerializeField] Renderer modelHead;
 
     [Header("___| Player Settings |___")]
     [SerializeField] int HP;
@@ -39,8 +41,9 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        movement();
-        StartCoroutine(shoot());
+        movement(); //REMOVE THIS ONCE CODE IS UNCOMMENTED
+        StartCoroutine(shoot()); //REMOVE THIS ONCE CODE IS UNCOMMENTED
+
         //if (!gameManager.instance.isPaused)
         //{
         //    movement();
