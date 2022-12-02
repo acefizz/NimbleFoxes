@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
                     hit.collider.GetComponent<IDamage>().takeDamage(shotDamage);
                 }
             }
-
+            Debug.Log("I Shoot");
             yield return new WaitForSeconds(shotRate);
             isShooting = false;
         }
