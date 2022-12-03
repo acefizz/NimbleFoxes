@@ -117,7 +117,7 @@ public class PlayerController : MonoBehaviour
     public void takeDamage(int dmg)
     {
         HP -= dmg;
-        //////PlayerDamageFlash();
+        //////StartCoroutine(PlayerDamageFlash());
         //////if (HP <= 0)
         //////{
         //////    GameManager.instance.Pause();
@@ -131,7 +131,7 @@ public class PlayerController : MonoBehaviour
     //////    transform.position = GameManager.instance.playerSpawnPos.transform.position;
     //////    controller.enabled = true;
     //////}
-    
+
     public void ResetHP()
     {
         HP = HPOrig;
