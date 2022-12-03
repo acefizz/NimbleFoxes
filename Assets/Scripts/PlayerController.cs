@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
 
     //////Color rectOrigColor;
     int timesJumped;
+    int HPOrig;
     private Vector3 playerVelocity;
     Vector3 move;
     bool isShooting;
@@ -37,6 +38,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         //////rectOrigColor = recticle.GetComponent<Image>().color;
+        //////SetPlayerPos();
+        HPOrig = HP;
     }
 
     void Update()
@@ -108,6 +111,12 @@ public class PlayerController : MonoBehaviour
     public void takeDamage(int dmg)
     {
         HP -= dmg;
+        if (HP <= 0)
+        {
+            //////GameManager.instance.Pause();
+            //////GameManager.instance.loseMenu.SetActive(true);
+            //////GameManager.instance.activeMenu = GameManager.instance.loseMenu;
+        }
     }
     //////public void SetPlayerPos()
     //////{
@@ -115,6 +124,11 @@ public class PlayerController : MonoBehaviour
     //////    transform.position = GameManager.instance.playerSpawnPos.transform.position;
     //////    controller.enabled = true;
     //////}
+    
+    public void ResetHP()
+    {
+        HP = HPOrig;
+    }
     public void AddCoins(int amount)
     {
         coins += amount;
