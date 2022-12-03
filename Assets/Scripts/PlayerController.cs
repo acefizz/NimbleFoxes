@@ -26,9 +26,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] int shotDamage;
     [SerializeField] float shotRate;
     [SerializeField] int shotDist;
-    //////[SerializeField] GameObject recticle;
+    //////[SerializeField] GameObject reticle;
 
-    //////Color rectOrigColor;
+    //////Color retOrigColor;
     int timesJumped;
     int HPOrig;
     private Vector3 playerVelocity;
@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        //////rectOrigColor = recticle.GetComponent<Image>().color;
+        //////retOrigColor = reticle.GetComponent<Image>().color;
         //////SetPlayerPos();
         HPOrig = HP;
     }
@@ -52,10 +52,10 @@ public class PlayerController : MonoBehaviour
         //    movement();
         //    StartCoroutine(shoot());
         //}
-        //////if (rectOnEnemy())
-        //////    recticle.GetComponent<Image>().color = Color.red;
+        //////if (RetOnEnemy())
+        //////    reticle.GetComponent<Image>().color = Color.red;
         //////else
-        //////    recticle.GetComponent<Image>().color = rectOrigColor;
+        //////    reticle.GetComponent<Image>().color = retOrigColor;
     }
     void Movement()
     {
@@ -96,7 +96,13 @@ public class PlayerController : MonoBehaviour
             isShooting = false;
         }
     }
-    //////bool rectOnEnemy()
+    //////IEnumerator PlayerDamageFlash()
+    //////{
+    //////    GameManager.instance.playerFlashDamage.SetActive(true);
+    //////    yield return new WaitForSeconds(0.1f);
+    //////    GameManager.instance.playerFlashDamage.SetActive(false);
+    //////}
+    //////bool RetOnEnemy()
     //////{
     //////    RaycastHit hit;
     //////    if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shotDist))
@@ -111,12 +117,13 @@ public class PlayerController : MonoBehaviour
     public void takeDamage(int dmg)
     {
         HP -= dmg;
-        if (HP <= 0)
-        {
-            //////GameManager.instance.Pause();
-            //////GameManager.instance.loseMenu.SetActive(true);
-            //////GameManager.instance.activeMenu = GameManager.instance.loseMenu;
-        }
+        //////PlayerDamageFlash();
+        //////if (HP <= 0)
+        //////{
+        //////    GameManager.instance.Pause();
+        //////    GameManager.instance.loseMenu.SetActive(true);
+        //////    GameManager.instance.activeMenu = GameManager.instance.loseMenu;
+        //////}
     }
     //////public void SetPlayerPos()
     //////{
