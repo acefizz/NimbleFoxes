@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyAI : MonoBehaviour // ,IDamage        need to include IDamage.
+public class EnemyAI : MonoBehaviour, IDamage       
 {
     [Header("---Components--")]
     [SerializeField] Renderer model;
@@ -11,6 +11,9 @@ public class EnemyAI : MonoBehaviour // ,IDamage        need to include IDamage.
 
     [Header("---Enemy Stats---")]
     [SerializeField] int HP;
+    [SerializeField] int playerFaceSpeed;
+    [SerializeField] int sightAngle;
+    [SerializeField] Transform headPos;
 
     [Header("---Enemy Gun Stats")]
     [SerializeField] float shootRate;
@@ -19,6 +22,9 @@ public class EnemyAI : MonoBehaviour // ,IDamage        need to include IDamage.
 
     int HPorg;
     bool isShooting;
+    bool playerInRange;
+    Vector3 playerDirection;
+    float angleToPlayer;
 
     // Start is called before the first frame update
     void Start()
@@ -29,11 +35,56 @@ public class EnemyAI : MonoBehaviour // ,IDamage        need to include IDamage.
     // Update is called once per frame
     void Update()
     {
-      //  agent.SetDestination(GameManager.instance.player.transform.position);
-      // need GameManager for this so that the AI can track the player.
-        if (!isShooting)
+        if (playerInRange) 
         {
-            StartCoroutine(shoot());
+            canSeePlayer();
+        }
+       
+     
+   
+    }
+    void canSeePlayer()
+    {
+        //  playerDirection =(GameManager.instance.player.transform.position - headPos.position);
+        angleToPlayer = Vector3.Angle(playerDirection, transform.forward);
+
+        RaycastHit hit;
+        if (Physics.Raycast(headPos.position, playerDirection, out hit))
+        {
+            if (hit.collider.CompareTag("Player") && angleToPlayer <= sightAngle)
+            {
+                // agent.SetDestination(GameManager.instance.player.transform.position);
+                // need GameManager for this so that the AI can track the player.
+                if (!isShooting)
+                {
+                    StartCoroutine(shoot());
+                }
+            }
+        }
+        if (agent.remainingDistance <= agent.stoppingDistance)
+        {
+            facePlayer();
+        }
+
+    }
+    void facePlayer()
+    {
+        playerDirection.y = 0;
+        Quaternion rotation = Quaternion.LookRotation(playerDirection);
+        transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * playerFaceSpeed);
+    }
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = true;
+        }
+    }
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = false;
         }
     }
     IEnumerator shoot()
@@ -58,8 +109,9 @@ public class EnemyAI : MonoBehaviour // ,IDamage        need to include IDamage.
             //GameManager.instance.playerScript.addCoins(HPorg);
             //"Left this marked out because I need GameManager and uncomment if we need it for our upgrades"- FVF
             
-        
+            
             Destroy(gameObject);
         }
+
     }
 }
