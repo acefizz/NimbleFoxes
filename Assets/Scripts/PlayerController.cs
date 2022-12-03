@@ -26,35 +26,38 @@ public class PlayerController : MonoBehaviour
     [SerializeField] int shotDamage;
     [SerializeField] float shotRate;
     [SerializeField] int shotDist;
-    //////[SerializeField] GameObject recticle;
+    //////[SerializeField] GameObject reticle;
 
-    //////Color rectOrigColor;
+    //////Color retOrigColor;
     int timesJumped;
+    int HPOrig;
     private Vector3 playerVelocity;
     Vector3 move;
     bool isShooting;
 
     void Start()
     {
-        //////rectOrigColor = recticle.GetComponent<Image>().color;
+        //////retOrigColor = reticle.GetComponent<Image>().color;
+        //////SetPlayerPos();
+        HPOrig = HP;
     }
 
     void Update()
     {
-        movement(); //REMOVE THIS ONCE CODE IS UNCOMMENTED
-        StartCoroutine(shoot()); //REMOVE THIS ONCE CODE IS UNCOMMENTED
+        Movement(); //REMOVE THIS ONCE CODE IS UNCOMMENTED
+        StartCoroutine(Shoot()); //REMOVE THIS ONCE CODE IS UNCOMMENTED
 
         //if (!gameManager.instance.isPaused)
         //{
         //    movement();
         //    StartCoroutine(shoot());
         //}
-        //////if (rectOnEnemy())
-        //////    recticle.GetComponent<Image>().color = Color.red;
+        //////if (RetOnEnemy())
+        //////    reticle.GetComponent<Image>().color = Color.red;
         //////else
-        //////    recticle.GetComponent<Image>().color = rectOrigColor;
+        //////    reticle.GetComponent<Image>().color = retOrigColor;
     }
-    void movement()
+    void Movement()
     {
         if (controller.isGrounded && playerVelocity.y < 0)
         {
@@ -74,7 +77,7 @@ public class PlayerController : MonoBehaviour
         playerVelocity.y -= gravity * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
     }
-    IEnumerator shoot()
+    IEnumerator Shoot()
     {
         if (!isShooting && Input.GetButton("Shoot"))
         {
@@ -88,12 +91,18 @@ public class PlayerController : MonoBehaviour
                     hit.collider.GetComponent<IDamage>().takeDamage(shotDamage);
                 }
             }
-            Debug.Log("I Shoot");
+            //Debug.Log("I Shoot");
             yield return new WaitForSeconds(shotRate);
             isShooting = false;
         }
     }
-    //////bool rectOnEnemy()
+    //////IEnumerator PlayerDamageFlash()
+    //////{
+    //////    GameManager.instance.playerFlashDamage.SetActive(true);
+    //////    yield return new WaitForSeconds(0.1f);
+    //////    GameManager.instance.playerFlashDamage.SetActive(false);
+    //////}
+    //////bool RetOnEnemy()
     //////{
     //////    RaycastHit hit;
     //////    if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shotDist))
@@ -108,8 +117,26 @@ public class PlayerController : MonoBehaviour
     public void takeDamage(int dmg)
     {
         HP -= dmg;
+        //////StartCoroutine(PlayerDamageFlash());
+        //////if (HP <= 0)
+        //////{
+        //////    GameManager.instance.Pause();
+        //////    GameManager.instance.loseMenu.SetActive(true);
+        //////    GameManager.instance.activeMenu = GameManager.instance.loseMenu;
+        //////}
     }
-    public void addCoins(int amount)
+    //////public void SetPlayerPos()
+    //////{
+    //////    controller.enabled = false;
+    //////    transform.position = GameManager.instance.playerSpawnPos.transform.position;
+    //////    controller.enabled = true;
+    //////}
+
+    public void ResetHP()
+    {
+        HP = HPOrig;
+    }
+    public void AddCoins(int amount)
     {
         coins += amount;
     }
