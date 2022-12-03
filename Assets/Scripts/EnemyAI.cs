@@ -58,7 +58,7 @@ public class EnemyAI : MonoBehaviour // ,IDamage        need to include IDamage.
             //GameManager.instance.playerScript.addCoins(HPorg);
             //"Left this marked out because I need GameManager and uncomment if we need it for our upgrades"- FVF
             
-            
+        
             Destroy(gameObject);
         }
     }
