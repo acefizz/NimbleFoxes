@@ -41,8 +41,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        movement(); //REMOVE THIS ONCE CODE IS UNCOMMENTED
-        StartCoroutine(shoot()); //REMOVE THIS ONCE CODE IS UNCOMMENTED
+        Movement(); //REMOVE THIS ONCE CODE IS UNCOMMENTED
+        StartCoroutine(Shoot()); //REMOVE THIS ONCE CODE IS UNCOMMENTED
 
         //if (!gameManager.instance.isPaused)
         //{
@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
         //////else
         //////    recticle.GetComponent<Image>().color = rectOrigColor;
     }
-    void movement()
+    void Movement()
     {
         if (controller.isGrounded && playerVelocity.y < 0)
         {
@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour
         playerVelocity.y -= gravity * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
     }
-    IEnumerator shoot()
+    IEnumerator Shoot()
     {
         if (!isShooting && Input.GetButton("Shoot"))
         {
@@ -88,7 +88,7 @@ public class PlayerController : MonoBehaviour
                     hit.collider.GetComponent<IDamage>().takeDamage(shotDamage);
                 }
             }
-            Debug.Log("I Shoot");
+            //Debug.Log("I Shoot");
             yield return new WaitForSeconds(shotRate);
             isShooting = false;
         }
@@ -109,7 +109,13 @@ public class PlayerController : MonoBehaviour
     {
         HP -= dmg;
     }
-    public void addCoins(int amount)
+    //////public void SetPlayerPos()
+    //////{
+    //////    controller.enabled = false;
+    //////    transform.position = GameManager.instance.playerSpawnPos.transform.position;
+    //////    controller.enabled = true;
+    //////}
+    public void AddCoins(int amount)
     {
         coins += amount;
     }
