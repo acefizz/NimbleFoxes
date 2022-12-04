@@ -56,6 +56,10 @@ public class PlayerController : MonoBehaviour
         //////    reticle.GetComponent<Image>().color = Color.red;
         //////else
         //////    reticle.GetComponent<Image>().color = retOrigColor;
+        ///
+
+        //I added this
+
     }
     void Movement()
     {
