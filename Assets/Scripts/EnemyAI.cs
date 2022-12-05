@@ -53,7 +53,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         {
             if (hit.collider.CompareTag("Player") && angleToPlayer <= sightAngle)
             {
-                // agent.SetDestination(GameManager.instance.player.transform.position);
+                agent.SetDestination(GameManager.instance.player.transform.position);
                 // need GameManager for this so that the AI can track the player.
                 if (!isShooting)
                 {
@@ -106,7 +106,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         StartCoroutine(flashDamage());
         if (HP <= 0)
         {
-            //GameManager.instance.playerScript.addCoins(HPorg);
+            GameManager.instance.playerScript.AddCoins(HPorg);
             //"Left this marked out because I need GameManager and uncomment if we need it for our upgrades"- FVF
             
             

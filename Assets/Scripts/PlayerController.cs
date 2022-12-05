@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,15 +21,13 @@ public class PlayerController : MonoBehaviour
     [Header("___| Collectables |___")]
     public int coins;
 
-
-
     [Header("---| Gun Stats |---")]
     [SerializeField] int shotDamage;
     [SerializeField] float shotRate;
     [SerializeField] int shotDist;
-    //////[SerializeField] GameObject reticle;
+    [SerializeField] GameObject reticle;
 
-    //////Color retOrigColor;
+    Color retOrigColor;
     int timesJumped;
     int HPOrig;
     private Vector3 playerVelocity;
@@ -37,8 +36,8 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        //////retOrigColor = reticle.GetComponent<Image>().color;
-        //////SetPlayerPos();
+        retOrigColor = reticle.GetComponent<Image>().color;
+        SetPlayerPos();
         HPOrig = HP;
     }
 
@@ -47,15 +46,15 @@ public class PlayerController : MonoBehaviour
         Movement(); //REMOVE THIS ONCE CODE IS UNCOMMENTED
         StartCoroutine(Shoot()); //REMOVE THIS ONCE CODE IS UNCOMMENTED
 
-        //if (!gameManager.instance.isPaused)
-        //{
-        //    movement();
-        //    StartCoroutine(shoot());
-        //}
-        //////if (RetOnEnemy())
-        //////    reticle.GetComponent<Image>().color = Color.red;
-        //////else
-        //////    reticle.GetComponent<Image>().color = retOrigColor;
+        if (!GameManager.instance.isPaused)
+        {
+            Movement();
+            StartCoroutine(Shoot());
+        }
+        if (RetOnEnemy())
+            reticle.GetComponent<Image>().color = Color.red;
+        else
+            reticle.GetComponent<Image>().color = retOrigColor;
     }
     void Movement()
     {
@@ -96,41 +95,40 @@ public class PlayerController : MonoBehaviour
             isShooting = false;
         }
     }
-    //////IEnumerator PlayerDamageFlash()
-    //////{
-    //////    GameManager.instance.playerFlashDamage.SetActive(true);
-    //////    yield return new WaitForSeconds(0.1f);
-    //////    GameManager.instance.playerFlashDamage.SetActive(false);
-    //////}
-    //////bool RetOnEnemy()
-    //////{
-    //////    RaycastHit hit;
-    //////    if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shotDist))
-    //////    {
-    //////        if (hit.collider.GetComponent<IDamage>() != null)
-    //////        {
-    //////            return true;
-    //////        }
-    //////    }
-    //////    return false;
-    //////}
+        IEnumerator PlayerDamageFlash()
+    {
+        GameManager.instance.ShowMenu(GameManager.MenuType.PlayerDamageFlash, true);
+        yield return new WaitForSeconds(0.1f);
+        GameManager.instance.ShowMenu(GameManager.MenuType.PlayerDamageFlash, false);
+    }
+    bool RetOnEnemy()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shotDist))
+        {
+            if (hit.collider.GetComponent<IDamage>() != null)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
     public void takeDamage(int dmg)
     {
         HP -= dmg;
-        //////StartCoroutine(PlayerDamageFlash());
-        //////if (HP <= 0)
-        //////{
-        //////    GameManager.instance.Pause();
-        //////    GameManager.instance.loseMenu.SetActive(true);
-        //////    GameManager.instance.activeMenu = GameManager.instance.loseMenu;
-        //////}
+        StartCoroutine(PlayerDamageFlash());
+        if (HP <= 0)
+        {
+            GameManager.instance.PauseGame();
+            GameManager.instance.ShowMenu(GameManager.MenuType.Lose, true);
+        }
     }
-    //////public void SetPlayerPos()
-    //////{
-    //////    controller.enabled = false;
-    //////    transform.position = GameManager.instance.playerSpawnPos.transform.position;
-    //////    controller.enabled = true;
-    //////}
+    public void SetPlayerPos()
+    {
+        controller.enabled = false;
+        transform.position = GameManager.instance.playerSpawnPos.transform.position;
+        controller.enabled = true;
+    }
 
     public void ResetHP()
     {
@@ -139,5 +137,10 @@ public class PlayerController : MonoBehaviour
     public void AddCoins(int amount)
     {
         coins += amount;
+    }
+
+    public void AddJumps(int amount)
+    {
+        maxJumps += amount;
     }
 }
