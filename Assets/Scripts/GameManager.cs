@@ -92,6 +92,7 @@ public class GameManager : MonoBehaviour
         if (menu != MenuType.PlayerDamageFlash)
         {
             Cursor.lockState = activeState ? CursorLockMode.Confined : CursorLockMode.Locked;
+            Cursor.visible = activeState;
             Time.timeScale = activeState ? 0 : timeScaleOriginal;
         }
 
