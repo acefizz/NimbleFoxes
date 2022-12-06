@@ -371,7 +371,6 @@ MonoBehaviour:
   shotDamage: 1
   shotRate: 1
   shotDist: 100
-  reticle: {fileID: 0}
 --- !u!143 &4533570552687267968
 CharacterController:
   m_ObjectHideFlags: 0

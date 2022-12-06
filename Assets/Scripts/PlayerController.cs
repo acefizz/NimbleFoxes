@@ -24,7 +24,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] int shotDamage;
     [SerializeField] float shotRate;
     [SerializeField] int shotDist;
-    [SerializeField] GameObject reticle;
 
     Color retOrigColor;
     int timesJumped;
@@ -36,25 +35,18 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        retOrigColor = reticle.GetComponent<Image>().color;
-        SetPlayerPos();
         HPOrig = HP;
+        SetPlayerPos();
+        ResetHP();
     }
 
     void Update()
     {
-        Movement(); //REMOVE THIS ONCE CODE IS UNCOMMENTED
-        StartCoroutine(Shoot()); //REMOVE THIS ONCE CODE IS UNCOMMENTED
-
         if (!GameManager.instance.isPaused)
         {
             Movement();
             StartCoroutine(Shoot());
         }
-        if (RetOnEnemy())
-            reticle.GetComponent<Image>().color = Color.red;
-        else
-            reticle.GetComponent<Image>().color = retOrigColor;
     }
     void Movement()
     {
@@ -101,21 +93,10 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         GameManager.instance.ShowMenu(GameManager.MenuType.PlayerDamageFlash, false);
     }
-    bool RetOnEnemy()
-    {
-        RaycastHit hit;
-        if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shotDist))
-        {
-            if (hit.collider.GetComponent<IDamage>() != null)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
     public void takeDamage(int dmg)
     {
         HP -= dmg;
+        GameManager.instance.UpdatePlayerHealth(HP, HPOrig);
         StartCoroutine(PlayerDamageFlash());
         if (HP <= 0)
         {
@@ -133,6 +114,8 @@ public class PlayerController : MonoBehaviour
     public void ResetHP()
     {
         HP = HPOrig;
+        GameManager.instance.UpdatePlayerHealth(HP, HPOrig);
+
     }
     public void AddCoins(int amount)
     {
