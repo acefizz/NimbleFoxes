@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] Rigidbody rig;
+    [SerializeField] Rigidbody rb;
 
     [SerializeField] int damage;
     [SerializeField] int speed;
@@ -14,7 +14,7 @@ public class Bullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rig.velocity = transform.forward * speed;
+        rb.velocity = transform.forward * speed;
         Destroy(gameObject, timer);
     }
 
@@ -27,7 +27,7 @@ public class Bullet : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-        //    GameManager.instance.playerScript.takeDamage(damage);
+            GameManager.instance.playerScript.takeDamage(damage);
         }
         Destroy(gameObject);
     }
