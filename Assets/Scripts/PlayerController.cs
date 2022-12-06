@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -90,7 +89,6 @@ public class PlayerController : MonoBehaviour
                     hit.collider.GetComponent<IDamage>().takeDamage(shotDamage);
                 }
             }
-            //Debug.Log("I Shoot");
             yield return new WaitForSeconds(shotRate);
             isShooting = false;
         }
@@ -142,5 +140,30 @@ public class PlayerController : MonoBehaviour
     public void AddJumps(int amount)
     {
         maxJumps += amount;
+    }
+
+    public void AddSpeed(int amount)
+    {
+        playerSpeed += amount;
+    }
+
+    public void AddDamage(int amount)
+    {
+        shotDamage += amount;
+    }
+
+    public int GetMaxJumps()
+    {
+        return maxJumps;
+    }
+
+    public int GetSpeed()
+    {
+        return playerSpeed;
+    }
+
+    public int GetDamage()
+    {
+        return shotDamage;
     }
 }
