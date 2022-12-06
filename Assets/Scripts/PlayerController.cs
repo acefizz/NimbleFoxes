@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 playerVelocity;
     Vector3 move;
     bool isShooting;
+    bool isSprinting;
 
     void Start()
     {
@@ -63,8 +64,9 @@ public class PlayerController : MonoBehaviour
             playerVelocity.y = 0f;
         }
 
+        isSprinting = Input.GetKey(KeyCode.LeftShift);
         move = (transform.right * Input.GetAxis("Horizontal")) + (transform.forward * Input.GetAxis("Vertical"));
-        controller.Move(move * Time.deltaTime * playerSpeed);
+        controller.Move(move * Time.deltaTime * (isSprinting ? playerSpeed * 2 : playerSpeed));
 
         if (Input.GetButtonDown("Jump") && timesJumped < maxJumps)
         {
