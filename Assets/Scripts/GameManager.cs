@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -6,30 +7,46 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     [Header("Player")]
-    public PlayerController player;
+    public GameObject player;
     public PlayerController playerScript;
     public GameObject playerSpawnPos;
 
-    public bool isPaused;
+    internal bool isPaused;
     float timeScaleOriginal;
 
     [Header("--- UI Menus ---")]
     public GameObject pauseMenu;
     public GameObject winMenu;
     public GameObject loseMenu;
+    public GameObject upgradeMenu;
     public GameObject playerFlashDamage;
+
+    [Header("--- UI Upgrade Text ---")]
+    //textmeshpro
+    public TextMeshProUGUI speedCount;
+    public TextMeshProUGUI jumpCount;
+    public TextMeshProUGUI damageCount;
 
     [Header("--- Upgrade Costs ---")]
     [SerializeField]
     [Range(1, 3)] public int jumpCost = 1;
+    [SerializeField]
+    [Range(1, 3)] public int damageCost = 1;
+    [SerializeField]
+    [Range(1, 3)] public int speedCost = 1;
+
+    public int enemyCount = 0;
 
     //An enum to enforce menu types.
-    public enum MenuType { Pause, Win, Lose, PlayerDamageFlash }
+    public enum MenuType { Pause, Win, Lose, Upgrade, PlayerDamageFlash }
 
     private void Awake()
     {
         if (instance == null)
             instance = this;
+
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerScript = player.GetComponent<PlayerController>();
 
         timeScaleOriginal = Time.timeScale;
     }
@@ -40,7 +57,18 @@ public class GameManager : MonoBehaviour
         {
             PauseGame();
             ShowMenu(MenuType.Pause, isPaused);
+            //Always default to closed
+            ShowMenu(MenuType.Upgrade, false);
         }
+        if (isPaused)
+            DoStats();
+    }
+
+    private void DoStats()
+    {
+        jumpCount.text = "Jumps : " + playerScript.GetMaxJumps();
+        damageCount.text = "Damage : " + playerScript.GetDamage();
+        speedCount.text = "Speed : " + playerScript.GetSpeed();
     }
 
     public void PauseGame()
@@ -71,31 +99,25 @@ public class GameManager : MonoBehaviour
             case MenuType.Lose:
                 loseMenu.SetActive(activeState);
                 break;
+            case MenuType.Upgrade:
+                upgradeMenu.SetActive(activeState);
+                break;
             case MenuType.PlayerDamageFlash:
                 playerFlashDamage.SetActive(activeState);
                 break;
             default:
                 break;
 
-                //Just in case
-                /*
-                case "pause":
-                    pauseMenu.SetActive(activeState);
-                    break;
-                case "lose":
-                    loseMenu.SetActive(activeState);
-                    break;
-                case "win":
-                    winMenu.SetActive(activeState);
-                    break;
-                case "playerflash":
-                    playerFlashDamageMenu.SetActive(activeState);
-                    break;
-                default:
-                    Debug.LogError("Menu not found");
-                    break;
-                */
+        }
+    }
 
+    public void UpdateEnemyCount(int amount)
+    {
+        enemyCount += amount;
+        if (enemyCount <= 0)
+        {
+            ShowMenu(MenuType.Win, true);
+            PauseGame();
         }
     }
 }
