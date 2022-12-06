@@ -99,6 +99,7 @@ public class GameManager : MonoBehaviour
                 upgradeMenu.SetActive(false);
                 break;
             case MenuType.Win:
+                GameManager.instance.playerScript.isDead = true; //lol
                 winMenu.SetActive(activeState);
                 break;
             case MenuType.Lose:
