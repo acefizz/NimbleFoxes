@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
     public PlayerController playerScript;
     public GameObject playerSpawnPos;
     public TextMeshProUGUI playerHealth;
+    public TextMeshProUGUI enemiesLeft;
+
+    public GameObject reticle;
 
     internal bool isPaused = false;
     float timeScaleOriginal;
@@ -40,7 +43,7 @@ public class GameManager : MonoBehaviour
     public int enemyCount = 0;
 
     //An enum to enforce menu types.
-    public enum MenuType { Pause, Win, Lose, Upgrade, PlayerDamageFlash }
+    public enum MenuType { Pause, Win, Lose, Upgrade, PlayerDamageFlash, CloseAll }
 
     private void Awake()
     {
@@ -57,13 +60,13 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Cancel"))
+        if (Input.GetButtonDown("Cancel")  && !playerScript.isDead)
         {
-            PauseGame();
-            ShowMenu(MenuType.Pause, isPaused);
-            //Always default to closed
+            isPaused = !isPaused;
             if (isPaused)
-                ShowMenu(MenuType.Upgrade, false);
+                ShowMenu(MenuType.Pause, true);
+            else
+                ShowMenu(MenuType.CloseAll);
         }
         if (isPaused)
             DoStats();
@@ -75,14 +78,6 @@ public class GameManager : MonoBehaviour
         damageCount.text = "Damage : " + playerScript.GetDamage();
         speedCount.text = "Speed : " + playerScript.GetSpeed();
         playerCoins.text = playerScript.coins.ToString() + " out of " + jumpCost.ToString() + " coins";
-        
-    }
-
-    public void PauseGame()
-    {
-        isPaused = !isPaused;
-        Time.timeScale = isPaused ? 0 : timeScaleOriginal;
-        Cursor.lockState = isPaused ? CursorLockMode.Confined : CursorLockMode.Locked;
     }
 
     /// <summary>
@@ -92,25 +87,41 @@ public class GameManager : MonoBehaviour
     /// <param name="activeState"></param>
 
 
-    public void ShowMenu(MenuType menu, bool activeState)
+    public void ShowMenu(MenuType menu, bool activeState = false)
     {
-        //refactor the menu to an enum later. It'll be much better on intellisense and easier to know what to put into the params.
+        if (menu != MenuType.PlayerDamageFlash)
+        {
+            Cursor.lockState = activeState ? CursorLockMode.Confined : CursorLockMode.Locked;
+            Time.timeScale = activeState ? 0 : timeScaleOriginal;
+        }
+
         switch (menu)
         {
             case MenuType.Pause:
                 pauseMenu.SetActive(activeState);
+                upgradeMenu.SetActive(false);
                 break;
             case MenuType.Win:
+                GameManager.instance.playerScript.isDead = true; //lol
                 winMenu.SetActive(activeState);
                 break;
             case MenuType.Lose:
                 loseMenu.SetActive(activeState);
                 break;
             case MenuType.Upgrade:
+                pauseMenu.SetActive(false);
                 upgradeMenu.SetActive(activeState);
                 break;
             case MenuType.PlayerDamageFlash:
                 playerFlashDamage.SetActive(activeState);
+                break;
+            case MenuType.CloseAll:
+                pauseMenu.SetActive(false);
+                winMenu.SetActive(false);
+                loseMenu.SetActive(false);
+                upgradeMenu.SetActive(false);
+                playerFlashDamage.SetActive(false);
+                isPaused = false;
                 break;
             default:
                 break;
@@ -121,14 +132,15 @@ public class GameManager : MonoBehaviour
     public void UpdateEnemyCount(int amount)
     {
         enemyCount += amount;
+        enemiesLeft.text = "Enemies Left: " + enemyCount;
         if (enemyCount <= 0)
         {
             ShowMenu(MenuType.Win, true);
-            PauseGame();
         }
     }
     public void UpdatePlayerHealth(int hp, int hpOrig)
     {
         playerHealth.text = "HP: " + hp + " / " + hpOrig;
     }
+
 }

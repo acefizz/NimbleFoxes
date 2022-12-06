@@ -33,6 +33,8 @@ public class PlayerController : MonoBehaviour
     bool isShooting;
     bool isSprinting;
 
+    public bool isDead;
+
     void Start()
     {
         HPOrig = HP;
@@ -47,6 +49,7 @@ public class PlayerController : MonoBehaviour
             Movement();
             StartCoroutine(Shoot());
         }
+        GameManager.instance.reticle.GetComponent<Image>().color = AimonEnemy() ? Color.green : Color.red;
     }
     void Movement()
     {
@@ -100,7 +103,7 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(PlayerDamageFlash());
         if (HP <= 0)
         {
-            GameManager.instance.PauseGame();
+            isDead = true;
             GameManager.instance.ShowMenu(GameManager.MenuType.Lose, true);
         }
     }
@@ -116,6 +119,19 @@ public class PlayerController : MonoBehaviour
         HP = HPOrig;
         GameManager.instance.UpdatePlayerHealth(HP, HPOrig);
 
+    }
+
+    bool AimonEnemy()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shotDist))
+        {
+            if (hit.collider.GetComponent<IDamage>() != null)
+            {
+                return true;
+            }
+        }
+        return false;
     }
     public void AddCoins(int amount)
     {

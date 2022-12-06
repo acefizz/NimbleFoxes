@@ -107,6 +107,7 @@ public class EnemyAI : MonoBehaviour, IDamage
   public void takeDamage(int dmg)
   {
     HP -= dmg;
+    agent.SetDestination(GameManager.instance.player.transform.position);
     StartCoroutine(flashDamage());
     if (HP <= 0)
     {
