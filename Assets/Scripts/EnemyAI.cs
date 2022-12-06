@@ -30,6 +30,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     void Start()
     {
         HPorg = HP;
+       GameManager.instance.UpdateEnemyCount(1);
     }
 
     // Update is called once per frame
@@ -45,8 +46,11 @@ public class EnemyAI : MonoBehaviour, IDamage
     }
     void canSeePlayer()
     {
-        //  playerDirection =(GameManager.instance.player.transform.position - headPos.position);
+        playerDirection = GameManager.instance.player.transform.position - headPos.position;
         angleToPlayer = Vector3.Angle(playerDirection, transform.forward);
+       
+        Debug.Log(angleToPlayer);
+        Debug.DrawRay(headPos.position, playerDirection, Color.yellow);
 
         RaycastHit hit;
         if (Physics.Raycast(headPos.position, playerDirection, out hit))
@@ -54,7 +58,7 @@ public class EnemyAI : MonoBehaviour, IDamage
             if (hit.collider.CompareTag("Player") && angleToPlayer <= sightAngle)
             {
                 agent.SetDestination(GameManager.instance.player.transform.position);
-                // need GameManager for this so that the AI can track the player.
+                
                 if (!isShooting)
                 {
                     StartCoroutine(shoot());
@@ -107,9 +111,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         if (HP <= 0)
         {
             GameManager.instance.playerScript.AddCoins(HPorg);
-            //"Left this marked out because I need GameManager and uncomment if we need it for our upgrades"- FVF
-            
-            
+           GameManager.instance.UpdateEnemyCount(-1);
             Destroy(gameObject);
         }
 

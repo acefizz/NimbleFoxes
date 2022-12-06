@@ -27,7 +27,7 @@ public class Bullet : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-        //    GameManager.instance.playerScript.takeDamage(damage);
+            GameManager.instance.playerScript.takeDamage(damage);
         }
         Destroy(gameObject);
     }
