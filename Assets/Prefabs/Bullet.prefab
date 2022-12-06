@@ -50,8 +50,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rig: {fileID: 1734497236913347674}
-  damage: 1
-  speed: 15
+  damage: 2
+  speed: 25
   timer: 3
 --- !u!96 &7522014570273739103
 TrailRenderer:
