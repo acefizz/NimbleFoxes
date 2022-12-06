@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
     public PlayerController playerScript;
     public GameObject playerSpawnPos;
     public TextMeshProUGUI playerHealth;
+    public TextMeshProUGUI enemiesLeft;
+
+    public GameObject reticle;
 
     internal bool isPaused = false;
     float timeScaleOriginal;
@@ -129,6 +132,7 @@ public class GameManager : MonoBehaviour
     public void UpdateEnemyCount(int amount)
     {
         enemyCount += amount;
+        enemiesLeft.text = "Enemies Left: " + enemyCount;
         if (enemyCount <= 0)
         {
             ShowMenu(MenuType.Win, true);
@@ -138,4 +142,5 @@ public class GameManager : MonoBehaviour
     {
         playerHealth.text = "HP: " + hp + " / " + hpOrig;
     }
+
 }
