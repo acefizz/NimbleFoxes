@@ -10,8 +10,9 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     public PlayerController playerScript;
     public GameObject playerSpawnPos;
+    public TextMeshProUGUI playerHealth;
 
-    internal bool isPaused;
+    internal bool isPaused = false;
     float timeScaleOriginal;
 
     [Header("--- UI Menus ---")]
@@ -26,6 +27,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI speedCount;
     public TextMeshProUGUI jumpCount;
     public TextMeshProUGUI damageCount;
+    public TextMeshProUGUI playerCoins;
 
     [Header("--- Upgrade Costs ---")]
     [SerializeField]
@@ -48,6 +50,8 @@ public class GameManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
 
+        playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
+
         timeScaleOriginal = Time.timeScale;
     }
 
@@ -58,7 +62,8 @@ public class GameManager : MonoBehaviour
             PauseGame();
             ShowMenu(MenuType.Pause, isPaused);
             //Always default to closed
-            ShowMenu(MenuType.Upgrade, false);
+            if (isPaused)
+                ShowMenu(MenuType.Upgrade, false);
         }
         if (isPaused)
             DoStats();
@@ -69,13 +74,15 @@ public class GameManager : MonoBehaviour
         jumpCount.text = "Jumps : " + playerScript.GetMaxJumps();
         damageCount.text = "Damage : " + playerScript.GetDamage();
         speedCount.text = "Speed : " + playerScript.GetSpeed();
+        playerCoins.text = playerScript.coins.ToString() + " out of " + jumpCost.ToString() + " coins";
+        
     }
 
     public void PauseGame()
     {
         isPaused = !isPaused;
         Time.timeScale = isPaused ? 0 : timeScaleOriginal;
-        Cursor.lockState = isPaused ? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.lockState = isPaused ? CursorLockMode.Confined : CursorLockMode.Locked;
     }
 
     /// <summary>
@@ -119,5 +126,9 @@ public class GameManager : MonoBehaviour
             ShowMenu(MenuType.Win, true);
             PauseGame();
         }
+    }
+    public void UpdatePlayerHealth(int hp, int hpOrig)
+    {
+        playerHealth.text = "HP: " + hp + " / " + hpOrig;
     }
 }
