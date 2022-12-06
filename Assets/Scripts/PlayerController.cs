@@ -33,6 +33,8 @@ public class PlayerController : MonoBehaviour
     bool isShooting;
     bool isSprinting;
 
+    public bool isDead;
+
     void Start()
     {
         HPOrig = HP;
@@ -100,7 +102,7 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(PlayerDamageFlash());
         if (HP <= 0)
         {
-            GameManager.instance.PauseGame();
+            isDead = true;
             GameManager.instance.ShowMenu(GameManager.MenuType.Lose, true);
         }
     }

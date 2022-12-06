@@ -7,8 +7,7 @@ public class ButtonFunctions : MonoBehaviour
     public void ResumeGame()
     {
         //Unpause the game
-        GameManager.instance.PauseGame();
-        GameManager.instance.ShowMenu(GameManager.MenuType.Pause, GameManager.instance.isPaused);
+        GameManager.instance.ShowMenu(GameManager.MenuType.CloseAll);
     }
     public void QuitGame()
     {
@@ -16,26 +15,17 @@ public class ButtonFunctions : MonoBehaviour
     }
     public void RestartGame()
     {
-        //Unpause the game
-        GameManager.instance.PauseGame();
+        GameManager.instance.ShowMenu(GameManager.MenuType.CloseAll);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void UpgradeMenuOpen()
     {
-        upgradeMenuOpen = true;
-        //Show upgrade menu.
-        GameManager.instance.ShowMenu(GameManager.MenuType.Upgrade, upgradeMenuOpen);
-        //Hide pause menu
-        GameManager.instance.ShowMenu(GameManager.MenuType.Pause, !upgradeMenuOpen);
+        GameManager.instance.ShowMenu(GameManager.MenuType.Upgrade, true);
     }
     public void UpgradeMenuClose()
     {
-        upgradeMenuOpen = false;
-        //Show upgrade menu.
-        GameManager.instance.ShowMenu(GameManager.MenuType.Upgrade, upgradeMenuOpen);
-        //Hide pause menu
-        GameManager.instance.ShowMenu(GameManager.MenuType.Pause, !upgradeMenuOpen);
+        GameManager.instance.ShowMenu(GameManager.MenuType.Pause, true);
     }
 
     public void AddMaxJumps(int amount)
