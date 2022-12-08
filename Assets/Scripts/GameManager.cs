@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,8 +11,9 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     public PlayerController playerScript;
     public GameObject playerSpawnPos;
-    public TextMeshProUGUI playerHealth;
-    public TextMeshProUGUI enemiesLeft;
+    public GameObject playerFlashDamage;
+    public Image playerHpBar;
+    
 
     public GameObject reticle;
 
@@ -23,7 +25,6 @@ public class GameManager : MonoBehaviour
     public GameObject winMenu;
     public GameObject loseMenu;
     public GameObject upgradeMenu;
-    public GameObject playerFlashDamage;
 
     [Header("--- UI Upgrade Text ---")]
     //textmeshpro
@@ -31,6 +32,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI jumpCount;
     public TextMeshProUGUI damageCount;
     public TextMeshProUGUI playerCoins;
+    public TextMeshProUGUI enemiesLeft;
 
     [Header("--- Upgrade Costs ---")]
     [SerializeField]
@@ -133,15 +135,11 @@ public class GameManager : MonoBehaviour
     public void UpdateEnemyCount(int amount)
     {
         enemyCount += amount;
-        enemiesLeft.text = "Enemies Left: " + enemyCount;
+        enemiesLeft.text = enemyCount.ToString("F0");
         if (enemyCount <= 0)
         {
             ShowMenu(MenuType.Win, true);
         }
-    }
-    public void UpdatePlayerHealth(int hp, int hpOrig)
-    {
-        playerHealth.text = "HP: " + hp + " / " + hpOrig;
     }
 
 }

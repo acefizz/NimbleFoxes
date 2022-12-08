@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class EnemyAI : MonoBehaviour, IDamage
 {
@@ -20,7 +21,11 @@ public class EnemyAI : MonoBehaviour, IDamage
   [SerializeField] GameObject bullet;
   [SerializeField] Transform shootPos;
 
-  int HPorg;
+    [Header("___| Enemy UI |___")]
+    [SerializeField] Image enemyHPBar;
+    [SerializeField] GameObject enemyUI;
+
+    int HPorg;
   bool isShooting;
   bool playerInRange;
   Vector3 playerDirection;
@@ -30,7 +35,8 @@ public class EnemyAI : MonoBehaviour, IDamage
   void Start()
   {
     HPorg = HP;
-    GameManager.instance.UpdateEnemyCount(1);
+        UpdateEnemyHPBar();
+        GameManager.instance.UpdateEnemyCount(1);
   }
 
   // Update is called once per frame
@@ -104,10 +110,23 @@ public class EnemyAI : MonoBehaviour, IDamage
     yield return new WaitForSeconds(0.2f);
     model.material.color = Color.white;
   }
-  public void takeDamage(int dmg)
+    IEnumerator ShowHP()
+    {
+        enemyUI.SetActive(true);
+        yield return new WaitForSeconds(5f);
+        enemyUI.SetActive(false);
+    }
+    void UpdateEnemyHPBar()
+    {
+        enemyHPBar.fillAmount = (float)HP / (float)HPorg;
+
+    }
+    public void takeDamage(int dmg)
   {
     HP -= dmg;
-    agent.SetDestination(GameManager.instance.player.transform.position);
+        UpdateEnemyHPBar();
+        StartCoroutine(ShowHP());
+        agent.SetDestination(GameManager.instance.player.transform.position);
     StartCoroutine(flashDamage());
     if (HP <= 0)
     {
