@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,6 +22,8 @@ public class PlayerController : MonoBehaviour
     public int coins;
 
     [Header("---| Gun Stats |---")]
+    [SerializeField] List<GunSetup> gunList = new List<GunSetup>();
+    [SerializeField] GameObject gunModel;
     [SerializeField] int shotDamage;
     [SerializeField] float shotRate;
     [SerializeField] int shotDist;
@@ -99,7 +102,7 @@ public class PlayerController : MonoBehaviour
     public void takeDamage(int dmg)
     {
         HP -= dmg;
-        GameManager.instance.UpdatePlayerHealth(HP, HPOrig);
+        UpdatePlayerHPBar();
         StartCoroutine(PlayerDamageFlash());
         if (HP <= 0)
         {
@@ -117,8 +120,7 @@ public class PlayerController : MonoBehaviour
     public void ResetHP()
     {
         HP = HPOrig;
-        GameManager.instance.UpdatePlayerHealth(HP, HPOrig);
-
+        UpdatePlayerHPBar();
     }
 
     bool AimonEnemy()
@@ -133,6 +135,26 @@ public class PlayerController : MonoBehaviour
         }
         return false;
     }
+    public void UpdatePlayerHPBar()
+    {
+        GameManager.instance.playerHpBar.fillAmount = (float)HP / (float)HPOrig;
+        if (HP > HPOrig / 2)
+            GameManager.instance.playerHpBar.color = Color.green;
+        else if (HP <= HPOrig / 2)
+            GameManager.instance.playerHpBar.color = Color.red;
+    }
+    public void GunPickup(GunSetup gun)
+    {
+        shotDamage = gun.shotDamage;
+        shotRate = gun.shotRate;
+        shotDist = gun.shotDist;
+
+        gunModel.GetComponent<MeshFilter>().sharedMesh = gun.GunModel.GetComponent<MeshFilter>().sharedMesh;
+        gunModel.GetComponent<MeshRenderer>().sharedMaterial = gun.GunModel.GetComponent<MeshRenderer>().sharedMaterial;
+
+        gunList.Add(gun);
+    }
+
     public void AddCoins(int amount)
     {
         coins += amount;
