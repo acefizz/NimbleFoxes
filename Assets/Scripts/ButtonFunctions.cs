@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class ButtonFunctions : MonoBehaviour
 {
-    bool upgradeMenuOpen = false;
+    //bool upgradeMenuOpen = false;
     public void ResumeGame()
     {
         //Unpause the game
