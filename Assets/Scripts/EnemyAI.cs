@@ -11,7 +11,7 @@ public class EnemyAI : MonoBehaviour, IDamage
   [SerializeField] NavMeshAgent agent;
 
   [Header("---Enemy Stats---")]
-  [SerializeField] int HP;
+  [SerializeField] float HP;
   [SerializeField] int playerFaceSpeed;
   [SerializeField] int sightAngle;
   [SerializeField] Transform headPos;
@@ -25,7 +25,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] Image enemyHPBar;
     [SerializeField] GameObject enemyUI;
 
-    int HPorg;
+    float HPorg;
   bool isShooting;
   bool playerInRange;
   Vector3 playerDirection;
@@ -34,7 +34,7 @@ public class EnemyAI : MonoBehaviour, IDamage
   // Start is called before the first frame update
   void Start()
   {
-    HPorg = HP;
+        HPorg = HP;
         UpdateEnemyHPBar();
         GameManager.instance.UpdateEnemyCount(1);
   }
@@ -121,9 +121,9 @@ public class EnemyAI : MonoBehaviour, IDamage
         enemyHPBar.fillAmount = (float)HP / (float)HPorg;
 
     }
-    public void takeDamage(int dmg)
+    public void takeDamage(float dmg)
   {
-    HP -= dmg;
+         HP -= dmg;
         UpdateEnemyHPBar();
         StartCoroutine(ShowHP());
         agent.SetDestination(GameManager.instance.player.transform.position);
@@ -131,7 +131,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     if (HP <= 0)
     {
 
-      GameManager.instance.playerScript.AddCoins(HPorg);
+      GameManager.instance.playerScript.AddCoins((int)HPorg);
       GameManager.instance.UpdateEnemyCount(-1);
       Destroy(gameObject);
     }

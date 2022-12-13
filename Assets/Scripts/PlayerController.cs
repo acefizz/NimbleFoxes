@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     [Header("---| Gun Stats |---")]
     [SerializeField] List<GunSetup> gunList = new List<GunSetup>();
     [SerializeField] GameObject gunModel;
-    [SerializeField] int shotDamage;
+    [SerializeField] float shotDamage;
     [SerializeField] float shotRate;
     [SerializeField] int shotDist;
 
@@ -241,7 +241,7 @@ public class PlayerController : MonoBehaviour
         return playerSpeed;
     }
 
-    public int GetDamage()
+    public float GetDamage()
     {
         return shotDamage;
     }
