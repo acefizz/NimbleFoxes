@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     [Header("___| Components |___")]
     [SerializeField] CharacterController controller;
+    [SerializeField] int pushbackTime;
     [SerializeField] Renderer modelBody;
     [SerializeField] Renderer modelHead;
 
@@ -35,6 +36,7 @@ public class PlayerController : MonoBehaviour
     Vector3 move;
     bool isShooting;
     bool isSprinting;
+    Vector3 pushback;
 
     public bool isDead;
 
@@ -49,6 +51,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!GameManager.instance.isPaused)
         {
+         pushback = Vector3.Lerp(pushback, Vector3.zero, Time.deltaTime * pushbackTime);   
             Movement();
             StartCoroutine(Shoot());
         }
@@ -73,7 +76,7 @@ public class PlayerController : MonoBehaviour
         }
 
         playerVelocity.y -= gravity * Time.deltaTime;
-        controller.Move(playerVelocity * Time.deltaTime);
+        controller.Move((playerVelocity + pushback) * Time.deltaTime);
     }
     IEnumerator Shoot()
     {
@@ -153,6 +156,10 @@ public class PlayerController : MonoBehaviour
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gun.GunModel.GetComponent<MeshRenderer>().sharedMaterial;
 
         gunList.Add(gun);
+    }
+    public void PushbackInput(Vector3 direction)
+    {
+        pushback = direction;
     }
 
     public void AddCoins(int amount)

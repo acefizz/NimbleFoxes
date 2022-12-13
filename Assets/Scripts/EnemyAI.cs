@@ -9,6 +9,7 @@ public class EnemyAI : MonoBehaviour, IDamage
   [Header("---Components--")]
   [SerializeField] Renderer model;
   [SerializeField] NavMeshAgent agent;
+  [SerializeField] GameObject enemyDrop;
 
   [Header("---Enemy Stats---")]
   [SerializeField] int HP;
@@ -121,7 +122,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         enemyHPBar.fillAmount = (float)HP / (float)HPorg;
 
     }
-    public void takeDamage(int dmg)
+  public void takeDamage(int dmg)
   {
     HP -= dmg;
         UpdateEnemyHPBar();
@@ -130,6 +131,10 @@ public class EnemyAI : MonoBehaviour, IDamage
     StartCoroutine(flashDamage());
     if (HP <= 0)
     {
+      if(enemyDrop != null)
+      {
+         Instantiate(enemyDrop, shootPos.position, transform.rotation);
+      }
 
       GameManager.instance.playerScript.AddCoins(HPorg);
       GameManager.instance.UpdateEnemyCount(-1);
