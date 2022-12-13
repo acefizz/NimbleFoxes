@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("---| Audio |---")]
     [SerializeField] AudioSource aud;
-    [SerializeField] AudioSource gunShot;
+    [SerializeField] AudioClip gunShot;
     [Range(0,1)] [SerializeField] float gunShotVol;
 
 
@@ -59,8 +59,8 @@ public class PlayerController : MonoBehaviour
             Movement();
             if (gunList.Count > 0)
             {
+                gunSelect();
                 StartCoroutine(Shoot());
-
             }
         }
         
@@ -167,18 +167,31 @@ public class PlayerController : MonoBehaviour
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gun.GunModel.GetComponent<MeshRenderer>().sharedMaterial;
 
         gunList.Add(gun);
+        selectedGun = gunList.Count -1;
     }
     void gunSelect() 
     {
         if (Input.GetAxis("Mouse ScrollWheel") > 0 && selectedGun < gunList.Count -1)
         {
             selectedGun++;
+            changeGun();
         }
         else if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectedGun > 0)
         {
             selectedGun--;
+            changeGun();
         }
     }
+    void changeGun() 
+    {
+        shotDamage = gunList[selectedGun].shotDamage;
+        shotRate = gunList[selectedGun].shotRate;
+        shotDist = gunList[selectedGun].shotDist;
+
+        gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[selectedGun].GunModel.GetComponent<MeshFilter>().sharedMesh;
+        gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[selectedGun].GunModel.GetComponent<MeshRenderer>().sharedMaterial;
+    }
+
     public void AddCoins(int amount)
     {
         coins += amount;
