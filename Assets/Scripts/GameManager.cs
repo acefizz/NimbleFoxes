@@ -17,10 +17,11 @@ public class GameManager : MonoBehaviour
 
     public GameObject reticle;
 
-    internal bool isPaused = false;
+    internal bool isPaused = true;
     float timeScaleOriginal;
 
     [Header("--- UI Menus ---")]
+    public GameObject welcomeMenu;
     public GameObject pauseMenu;
     public GameObject winMenu;
     public GameObject loseMenu;
@@ -45,12 +46,13 @@ public class GameManager : MonoBehaviour
     public int enemyCount = 0;
 
     //An enum to enforce menu types.
-    public enum MenuType { Pause, Win, Lose, Upgrade, PlayerDamageFlash, CloseAll }
+    public enum MenuType { WelcomeMenu, Pause, Win, Lose, Upgrade, PlayerDamageFlash, CloseAll }
 
     private void Awake()
     {
         if (instance == null)
             instance = this;
+
 
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
@@ -58,6 +60,12 @@ public class GameManager : MonoBehaviour
         playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
 
         timeScaleOriginal = Time.timeScale;
+
+    }
+
+    void Start()
+    {
+        ShowMenu(MenuType.WelcomeMenu, true);
     }
 
     private void Update()
@@ -100,6 +108,9 @@ public class GameManager : MonoBehaviour
 
         switch (menu)
         {
+            case MenuType.WelcomeMenu:
+                welcomeMenu.SetActive(activeState);
+                break;
             case MenuType.Pause:
                 pauseMenu.SetActive(activeState);
                 upgradeMenu.SetActive(false);
@@ -124,6 +135,7 @@ public class GameManager : MonoBehaviour
                 loseMenu.SetActive(false);
                 upgradeMenu.SetActive(false);
                 playerFlashDamage.SetActive(false);
+                welcomeMenu.SetActive(false);
                 isPaused = false;
                 break;
             default:
