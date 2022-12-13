@@ -10,4 +10,5 @@ public class GunSetup : ScriptableObject
     public int shotDist;
 
     public GameObject GunModel;
+    public AudioClip gunShot;
 }

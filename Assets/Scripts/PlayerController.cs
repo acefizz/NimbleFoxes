@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour
     Color retOrigColor;
     int timesJumped;
     int HPOrig;
+    int selectedGun;
     private Vector3 playerVelocity;
     Vector3 move;
     bool isShooting;
@@ -56,8 +57,13 @@ public class PlayerController : MonoBehaviour
         if (!GameManager.instance.isPaused)
         {
             Movement();
-            StartCoroutine(Shoot());
+            if (gunList.Count > 0)
+            {
+                StartCoroutine(Shoot());
+
+            }
         }
+        
         GameManager.instance.reticle.GetComponent<Image>().color = AimonEnemy() ? Color.green : Color.red;
     }
     void Movement()
@@ -95,6 +101,8 @@ public class PlayerController : MonoBehaviour
                     hit.collider.GetComponent<IDamage>().takeDamage(shotDamage);
                 }
             }
+            aud.PlayOneShot(gunList[selectedGun].gunShot, gunShotVol);
+
             yield return new WaitForSeconds(shotRate);
             isShooting = false;
         }
@@ -160,7 +168,17 @@ public class PlayerController : MonoBehaviour
 
         gunList.Add(gun);
     }
-
+    void gunSelect() 
+    {
+        if (Input.GetAxis("Mouse ScrollWheel") > 0 && selectedGun < gunList.Count -1)
+        {
+            selectedGun++;
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectedGun > 0)
+        {
+            selectedGun--;
+        }
+    }
     public void AddCoins(int amount)
     {
         coins += amount;
