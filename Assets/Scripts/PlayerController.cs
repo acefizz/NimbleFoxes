@@ -32,7 +32,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] AudioSource aud;
     [SerializeField] AudioClip gunShot;
     [Range(0,1)] [SerializeField] float gunShotVol;
-
+    [SerializeField] AudioClip[] playerHurt;
+    [Range (0,1)] [SerializeField] float playerHurtVol;
+    [SerializeField] AudioClip[] playerJump;
+    [Range(0, 1)][SerializeField] float playerJumpVol;
+    [SerializeField] AudioClip[] playerSteps;
+    [Range(0, 1)][SerializeField] float playerStepsVol;
 
     Color retOrigColor;
     int timesJumped;
@@ -42,7 +47,7 @@ public class PlayerController : MonoBehaviour
     Vector3 move;
     bool isShooting;
     bool isSprinting;
-
+    bool stepPlaying;
     public bool isDead;
 
     void Start()
@@ -57,6 +62,11 @@ public class PlayerController : MonoBehaviour
         if (!GameManager.instance.isPaused)
         {
             Movement();
+            if (!stepPlaying && move.magnitude > 0.5f && controller.isGrounded)
+            {
+                StartCoroutine(playSteps());
+            }
+            
             if (gunList.Count > 0)
             {
                 gunSelect();
@@ -82,6 +92,7 @@ public class PlayerController : MonoBehaviour
         {
             timesJumped++;
             playerVelocity.y = jumpHeight;
+            aud.PlayOneShot(playerJump[UnityEngine.Random.Range(0, playerJump.Length)], playerJumpVol);
         }
 
         playerVelocity.y -= gravity * Time.deltaTime;
@@ -116,6 +127,7 @@ public class PlayerController : MonoBehaviour
     public void takeDamage(int dmg)
     {
         HP -= dmg;
+        aud.PlayOneShot(playerHurt[UnityEngine.Random.Range(0, playerHurt.Length)], playerHurtVol);
         UpdatePlayerHPBar();
         StartCoroutine(PlayerDamageFlash());
         if (HP <= 0)
@@ -190,6 +202,13 @@ public class PlayerController : MonoBehaviour
 
         gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[selectedGun].GunModel.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[selectedGun].GunModel.GetComponent<MeshRenderer>().sharedMaterial;
+    }
+    IEnumerator playSteps()
+    { 
+        stepPlaying = true;
+        aud.PlayOneShot(playerSteps[UnityEngine.Random.Range(0, playerSteps.Length)], playerStepsVol);
+        yield return new WaitForSeconds(0.5f);
+        stepPlaying = false;
     }
 
     public void AddCoins(int amount)
