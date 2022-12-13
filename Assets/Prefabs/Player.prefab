@@ -391,6 +391,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ffd1d95e40766374da6fa96f127e8d1f, type: 3}
   - {fileID: 8300000, guid: 9a54c0a5b64168549a14b311568d222e, type: 3}
   playerJumpVol: 0.5
+  playerSteps:
+  - {fileID: 8300000, guid: 566b4145ed0130f4392386f799410656, type: 3}
+  - {fileID: 8300000, guid: 91ca7055541578d4a856c7708fe0cebb, type: 3}
+  - {fileID: 8300000, guid: 53b8ba6435c5ff8489b5f5d687876fed, type: 3}
+  playerStepsVol: 0.1
   isDead: 0
 --- !u!143 &4533570552687267968
 CharacterController:
