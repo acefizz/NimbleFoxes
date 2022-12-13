@@ -570,7 +570,7 @@ MonoBehaviour:
   pushbackAmount: 5
   push: 1
   hitEffect: {fileID: 4851072235279449141, guid: c506b8bb05106bf4ab7fedd1e7b63f3b, type: 3}
-  action: {fileID: 565561156}
+  source: {fileID: 0}
 --- !u!4 &1131593411
 Transform:
   m_ObjectHideFlags: 0
