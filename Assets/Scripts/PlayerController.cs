@@ -28,6 +28,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float shotRate;
     [SerializeField] int shotDist;
 
+    [Header("---| Audio |---")]
+    [SerializeField] AudioSource aud;
+    [SerializeField] AudioSource gunShot;
+    [Range(0,1)] [SerializeField] float gunShotVol;
+
+
     Color retOrigColor;
     int timesJumped;
     int HPOrig;
