@@ -68,7 +68,7 @@ public class EnemyAI : MonoBehaviour, IDamage
             {
                 agent.SetDestination(GameManager.instance.player.transform.position);
 
-                if (!isShooting)
+                if (!isShooting && HP > 0)
                 {
                     StartCoroutine(shoot());
                 }
@@ -147,7 +147,9 @@ public class EnemyAI : MonoBehaviour, IDamage
         StartCoroutine(flashDamage());
         if (HP <= 0)
         {
-            agent.SetDestination(agent.transform.position);
+            agent.enabled = false;
+            agent.GetComponent<CapsuleCollider>().enabled = false;
+            isShooting = false;
             if (enemyDrop != null)
             {
                 Instantiate(enemyDrop, shootPos.position, transform.rotation);
@@ -162,7 +164,11 @@ public class EnemyAI : MonoBehaviour, IDamage
     IEnumerator Death()
     {
         animator.SetTrigger("Death");
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(3.0f);
+        if (GameManager.instance.enemyCount <= 0)
+        {
+            GameManager.instance.ShowMenu(GameManager.MenuType.Win, true);
+        }
         Destroy(gameObject);
     }
 }
