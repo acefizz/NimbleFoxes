@@ -255,8 +255,8 @@ public class PlayerController : MonoBehaviour
         return playerSpeed;
     }
 
-    public int GetDamage()
+    public float GetDamage()
     {
-        return (int)(shotDamage + extraDmg);
+        return (shotDamage + extraDmg);
     }
 }
