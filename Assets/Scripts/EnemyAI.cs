@@ -127,6 +127,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     }
     public void takeDamage(float dmg)
     {
+       
         HP -= dmg;
         UpdateEnemyHPBar();
         StartCoroutine(ShowHP());
@@ -142,13 +143,14 @@ public class EnemyAI : MonoBehaviour, IDamage
             StartCoroutine(Death());
             GameManager.instance.playerScript.AddCoins((int)HPorg);
             GameManager.instance.UpdateEnemyCount(-1);
-            
+           
         }
+
     }
     IEnumerator Death()
     {
         animator.SetTrigger("Death");
-        yield return new WaitForSeconds(3.0f);
+        yield return new WaitForSeconds(2.0f);
         Destroy(gameObject);
     }
 }

@@ -116,7 +116,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (hit.collider.GetComponent<IDamage>() != null)
                 {
-                    hit.collider.GetComponent<IDamage>().takeDamage((int)(shotDamage + extraDmg));
+                    hit.collider.GetComponent<IDamage>().takeDamage((shotDamage + extraDmg));
                 }
             }
             aud.PlayOneShot(gunList[selectedGun].gunShot, gunShotVol);
@@ -191,6 +191,7 @@ public class PlayerController : MonoBehaviour
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gun.GunModel.GetComponent<MeshRenderer>().sharedMaterial;
 
         gunList.Add(gun);
+        selectedGun = gunList.Count - 1;
     }
     public void PushbackInput(Vector3 direction)
     {
