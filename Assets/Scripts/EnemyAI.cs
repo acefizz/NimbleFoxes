@@ -68,7 +68,7 @@ public class EnemyAI : MonoBehaviour, IDamage
             {
                 agent.SetDestination(GameManager.instance.player.transform.position);
 
-                if (!isShooting)
+                if (!isShooting && HP > 0)
                 {
                     StartCoroutine(shoot());
                 }
@@ -105,6 +105,18 @@ public class EnemyAI : MonoBehaviour, IDamage
         isShooting = true;
         animator.SetTrigger("Shoot");
         Instantiate(bullet, shootPos.position, transform.rotation);
+        if (bullet.GetComponent<NavMeshAgent>() != null)
+        {
+            NavMeshHit hit;
+            if (NavMesh.SamplePosition(shootPos.position, out hit, 10f, NavMesh.AllAreas))
+            {
+                Instantiate(bullet, hit.position, transform.rotation);
+            }
+        }
+        else
+        {
+            Instantiate(bullet, shootPos.position, transform.rotation);
+        }
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
     }
@@ -127,7 +139,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     }
     public void takeDamage(float dmg)
     {
-       
+
         HP -= dmg;
         UpdateEnemyHPBar();
         StartCoroutine(ShowHP());
@@ -135,7 +147,9 @@ public class EnemyAI : MonoBehaviour, IDamage
         StartCoroutine(flashDamage());
         if (HP <= 0)
         {
-            agent.SetDestination(agent.transform.position);
+            agent.enabled = false;
+            agent.GetComponent<CapsuleCollider>().enabled = false;
+            isShooting = false;
             if (enemyDrop != null)
             {
                 Instantiate(enemyDrop, shootPos.position, transform.rotation);
@@ -143,14 +157,18 @@ public class EnemyAI : MonoBehaviour, IDamage
             StartCoroutine(Death());
             GameManager.instance.playerScript.AddCoins((int)HPorg);
             GameManager.instance.UpdateEnemyCount(-1);
-           
+
         }
 
     }
     IEnumerator Death()
     {
         animator.SetTrigger("Death");
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(3.0f);
+        if (GameManager.instance.enemyCount <= 0)
+        {
+            GameManager.instance.ShowMenu(GameManager.MenuType.Win, true);
+        }
         Destroy(gameObject);
     }
 }

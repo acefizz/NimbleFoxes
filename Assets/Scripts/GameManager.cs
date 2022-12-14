@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     [Range(1, 3)] public int speedCost = 1;
 
-    public int enemyCount = 0;
+    public int enemyCount;
 
     //An enum to enforce menu types.
     public enum MenuType { WelcomeMenu, Pause, Win, Lose, Upgrade, PlayerDamageFlash, CloseAll }
@@ -148,10 +148,6 @@ public class GameManager : MonoBehaviour
     {
         enemyCount += amount;
         enemiesLeft.text = enemyCount.ToString("F0");
-        if (enemyCount <= 0)
-        {
-            ShowMenu(MenuType.Win, true);
-        }
     }
 
 }
