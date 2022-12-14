@@ -134,21 +134,26 @@ public class EnemyAI : MonoBehaviour, IDamage
         StartCoroutine(flashDamage());
         if (HP <= 0)
         {
-            agent.SetDestination(agent.transform.position);
+            agent.enabled = false;
+            agent.GetComponent<CapsuleCollider>().enabled = false;
             if (enemyDrop != null)
             {
                 Instantiate(enemyDrop, shootPos.position, transform.rotation);
             }
-            StartCoroutine(Death());
-            GameManager.instance.playerScript.AddCoins(HPorg);
-            GameManager.instance.UpdateEnemyCount(-1);
             
+            //GameManager.instance.playerScript.AddCoins(HPorg);
+            GameManager.instance.UpdateEnemyCount(-1);
+            StartCoroutine(Death());
         }
     }
     IEnumerator Death()
     {
         animator.SetTrigger("Death");
         yield return new WaitForSeconds(3.0f);
+        if (GameManager.instance.enemyCount <= 0)
+        {
+            GameManager.instance.ShowMenu(GameManager.MenuType.Win, true);
+        }
         Destroy(gameObject);
     }
 }
