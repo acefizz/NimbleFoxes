@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
     [Header("---| Gun Stats |---")]
     [SerializeField] List<GunSetup> gunList = new List<GunSetup>();
     [SerializeField] GameObject gunModel;
-    [SerializeField] int shotDamage;
+    [SerializeField] float shotDamage;
     [SerializeField] float shotRate;
     [SerializeField] int shotDist;
 
@@ -43,10 +43,12 @@ public class PlayerController : MonoBehaviour
     Color retOrigColor;
     int timesJumped;
     int HPOrig;
+    int selectedGun;
     private Vector3 playerVelocity;
     Vector3 move;
     bool isShooting;
     bool isSprinting;
+    bool stepPlaying;
 
     int extraDmg;
 
@@ -66,9 +68,18 @@ public class PlayerController : MonoBehaviour
     {
         if (!GameManager.instance.isPaused)
         {
-         pushback = Vector3.Lerp(pushback, Vector3.zero, Time.deltaTime * pushbackTime);   
+            pushback = Vector3.Lerp(pushback, Vector3.zero, Time.deltaTime * pushbackTime);   
             Movement();
-            StartCoroutine(Shoot());
+            if (!stepPlaying && move.magnitude > 0.5f && controller.isGrounded)
+            {
+                StartCoroutine(playSteps());
+            }
+
+            if (gunList.Count > 0)
+            {
+                gunSelect();
+                StartCoroutine(Shoot());
+            }
         }
         GameManager.instance.reticle.GetComponent<Image>().color = AimonEnemy() ? Color.green : Color.red;
     }
@@ -88,6 +99,7 @@ public class PlayerController : MonoBehaviour
         {
             timesJumped++;
             playerVelocity.y = jumpHeight;
+            aud.PlayOneShot(playerJump[UnityEngine.Random.Range(0, playerJump.Length)], playerJumpVol);
         }
 
         playerVelocity.y -= gravity * Time.deltaTime;
@@ -104,9 +116,11 @@ public class PlayerController : MonoBehaviour
             {
                 if (hit.collider.GetComponent<IDamage>() != null)
                 {
-                    hit.collider.GetComponent<IDamage>().takeDamage(shotDamage + extraDmg);
+                    hit.collider.GetComponent<IDamage>().takeDamage((int)(shotDamage + extraDmg));
                 }
             }
+            aud.PlayOneShot(gunList[selectedGun].gunShot, gunShotVol);
+
             yield return new WaitForSeconds(shotRate);
             isShooting = false;
         }
@@ -120,6 +134,7 @@ public class PlayerController : MonoBehaviour
     public void takeDamage(int dmg)
     {
         HP -= dmg;
+        aud.PlayOneShot(playerHurt[UnityEngine.Random.Range(0, playerHurt.Length)], playerHurtVol);
         UpdatePlayerHPBar();
         StartCoroutine(PlayerDamageFlash());
         if (HP <= 0)
@@ -181,7 +196,35 @@ public class PlayerController : MonoBehaviour
     {
         pushback = direction;
     }
+    void gunSelect()
+    {
+        if (Input.GetAxis("Mouse ScrollWheel") > 0 && selectedGun < gunList.Count - 1)
+        {
+            selectedGun++;
+            changeGun();
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectedGun > 0)
+        {
+            selectedGun--;
+            changeGun();
+        }
+    }
+    void changeGun()
+    {
+        shotDamage = gunList[selectedGun].shotDamage;
+        shotRate = gunList[selectedGun].shotRate;
+        shotDist = gunList[selectedGun].shotDist;
 
+        gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[selectedGun].GunModel.GetComponent<MeshFilter>().sharedMesh;
+        gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[selectedGun].GunModel.GetComponent<MeshRenderer>().sharedMaterial;
+    }
+    IEnumerator playSteps()
+    {
+        stepPlaying = true;
+        aud.PlayOneShot(playerSteps[UnityEngine.Random.Range(0, playerSteps.Length)], playerStepsVol);
+        yield return new WaitForSeconds(0.5f);
+        stepPlaying = false;
+    }
     public void AddCoins(int amount)
     {
         coins += amount;
@@ -214,6 +257,6 @@ public class PlayerController : MonoBehaviour
 
     public int GetDamage()
     {
-        return shotDamage+extraDmg;
+        return (int)(shotDamage + extraDmg);
     }
 }

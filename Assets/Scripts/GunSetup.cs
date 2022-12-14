@@ -6,8 +6,9 @@ using UnityEngine;
 public class GunSetup : ScriptableObject
 {
     public float shotRate;
-    public int shotDamage;
+    public float shotDamage;
     public int shotDist;
 
     public GameObject GunModel;
+    public AudioClip gunShot;
 }
