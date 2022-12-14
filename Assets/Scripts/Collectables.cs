@@ -40,7 +40,7 @@ public class Collectables : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            audioSource.PlayOneShot(upgradeClip);
+            
             GameManager.instance.playerScript.AddHp(health);
             GameManager.instance.playerScript.AddJumps(jump);
             GameManager.instance.playerScript.AddCoins(coin);
@@ -53,7 +53,7 @@ public class Collectables : MonoBehaviour
     }
     IEnumerator ShowCollections()
     {
-        
+        audioSource.PlayOneShot(upgradeClip);
         UI.SetActive(true);
 
         if (health > 0)

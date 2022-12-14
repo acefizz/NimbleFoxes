@@ -68,7 +68,7 @@ public class EnemyAI : MonoBehaviour, IDamage
             {
                 agent.SetDestination(GameManager.instance.player.transform.position);
 
-                if (!isShooting)
+                if (!isShooting && HP > 0)
                 {
                     StartCoroutine(shoot());
                 }
@@ -136,12 +136,12 @@ public class EnemyAI : MonoBehaviour, IDamage
         {
             agent.enabled = false;
             agent.GetComponent<CapsuleCollider>().enabled = false;
+            isShooting = false;
             if (enemyDrop != null)
             {
                 Instantiate(enemyDrop, shootPos.position, transform.rotation);
             }
             
-            //GameManager.instance.playerScript.AddCoins(HPorg);
             GameManager.instance.UpdateEnemyCount(-1);
             StartCoroutine(Death());
         }
