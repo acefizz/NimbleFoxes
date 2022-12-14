@@ -566,6 +566,7 @@ GameObject:
   - component: {fileID: 1649030559209144946}
   - component: {fileID: 2257290155047410508}
   - component: {fileID: 5262237498740662756}
+  - component: {fileID: 916396995}
   m_Layer: 7
   m_Name: EnemySoldier
   m_TagString: Enemy
@@ -605,11 +606,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 4307893916742329762}
   agent: {fileID: 1649030559209144946}
+  enemyDrop: {fileID: 0}
+  animator: {fileID: 916396995}
   HP: 5
   playerFaceSpeed: 3
   sightAngle: 90
   headPos: {fileID: 4618993455375799116}
-  shootRate: 1
+  shootRate: 0.5
   bullet: {fileID: 6860959869791283384, guid: 783fd3890e869cb4489f69a3f44cedef, type: 3}
   shootPos: {fileID: 6668242728300228155}
   enemyHPBar: {fileID: 962173869}
@@ -663,6 +666,26 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 20
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &916396995
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4618993455375370268}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 7b36a186c6950424394704a9292a7114, type: 3}
+  m_Controller: {fileID: 9100000, guid: 4b0ad5f2b97f02746970d21970070b87, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4618993455375370270
 GameObject:
   m_ObjectHideFlags: 0
@@ -1429,7 +1452,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5871428387272448701}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.164, y: 0.44, z: 0.082}
+  m_LocalPosition: {x: -0.866, y: 0.058, z: 0.112}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -36,7 +36,11 @@ public class PlayerController : MonoBehaviour
     Vector3 move;
     bool isShooting;
     bool isSprinting;
+
+    int extraDmg;
+
     Vector3 pushback;
+
 
     public bool isDead;
 
@@ -89,7 +93,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (hit.collider.GetComponent<IDamage>() != null)
                 {
-                    hit.collider.GetComponent<IDamage>().takeDamage(shotDamage);
+                    hit.collider.GetComponent<IDamage>().takeDamage(shotDamage + extraDmg);
                 }
             }
             yield return new WaitForSeconds(shotRate);
@@ -123,6 +127,11 @@ public class PlayerController : MonoBehaviour
     public void ResetHP()
     {
         HP = HPOrig;
+        UpdatePlayerHPBar();
+    }
+    public void AddHp(int hp)
+    {
+        HP += hp;
         UpdatePlayerHPBar();
     }
 
@@ -179,7 +188,7 @@ public class PlayerController : MonoBehaviour
 
     public void AddDamage(int amount)
     {
-        shotDamage += amount;
+        extraDmg += amount;
     }
 
     public int GetMaxJumps()
@@ -194,6 +203,6 @@ public class PlayerController : MonoBehaviour
 
     public int GetDamage()
     {
-        return shotDamage;
+        return shotDamage+extraDmg;
     }
 }
