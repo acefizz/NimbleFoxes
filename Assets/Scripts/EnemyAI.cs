@@ -98,13 +98,26 @@ public class EnemyAI : MonoBehaviour, IDamage
       playerInRange = false;
     }
   }
-  IEnumerator shoot()
-  {
-    isShooting = true;
-    Instantiate(bullet, shootPos.position, transform.rotation);
-    yield return new WaitForSeconds(shootRate);
-    isShooting = false;
-  }
+    IEnumerator shoot()
+    {
+        isShooting = true;
+
+        if (bullet.GetComponent<NavMeshAgent>() != null)
+        {
+            NavMeshHit hit;
+            if (NavMesh.SamplePosition(shootPos.position, out hit, 10f, NavMesh.AllAreas))
+            {
+                Instantiate(bullet, hit.position, transform.rotation);
+            }
+        }
+        else
+        {
+            Instantiate(bullet, shootPos.position, transform.rotation);
+        }
+
+        yield return new WaitForSeconds(shootRate);
+        isShooting = false;
+    }
   IEnumerator flashDamage()
   {
     model.material.color = Color.red;

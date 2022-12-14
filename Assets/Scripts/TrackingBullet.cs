@@ -1,28 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class Bullet : MonoBehaviour
+public class TrackingBullet : MonoBehaviour
 {
-    [SerializeField] Rigidbody rb;
+    [Header("---Components---")]
+    [SerializeField] NavMeshAgent agent;
 
+    [Header("---Bullet Stats---")]
     [SerializeField] int damage;
     [SerializeField] int speed;
     [SerializeField] int timer;
 
-
     // Start is called before the first frame update
     void Start()
     {
-        rb.velocity = transform.forward * speed;
-        Destroy(gameObject, timer);
+        NavMeshHit hit;
+        if(NavMesh.SamplePosition(transform.position, out hit, 10f, NavMesh.AllAreas))
+        {
+           transform.parent.transform.position = hit.position;
+        }
+
+        agent.speed = speed;
+        Destroy(transform.parent.gameObject, timer);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        agent.SetDestination(GameManager.instance.player.transform.position);
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -34,9 +43,9 @@ public class Bullet : MonoBehaviour
             other.GetComponent<IDamage>().takeDamage(damage);
         }
 
-        if (!other.isTrigger)
+        if (!other.CompareTag("Explosion"))
         {
-            Destroy(gameObject);
+            Destroy(transform.parent.gameObject);
         }
     }
 }
