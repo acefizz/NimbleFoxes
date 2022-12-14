@@ -606,12 +606,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 4307893916742329762}
   agent: {fileID: 1649030559209144946}
-  enemyDrop: {fileID: 0}
+  enemyDrop: {fileID: 8409106420004003914, guid: ae6c180e5bd24714b9a9d5b40cd0625f, type: 3}
   animator: {fileID: 916396995}
   HP: 5
   playerFaceSpeed: 3
   sightAngle: 90
   headPos: {fileID: 4618993455375799116}
+  roamDist: 10
   shootRate: 0.5
   bullet: {fileID: 6860959869791283384, guid: 783fd3890e869cb4489f69a3f44cedef, type: 3}
   shootPos: {fileID: 6668242728300228155}
