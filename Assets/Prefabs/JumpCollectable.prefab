@@ -193,6 +193,8 @@ MonoBehaviour:
   coin: 0
   audioSource: {fileID: 7185441112138508587}
   upgradeClip: {fileID: 8300000, guid: 0e475ef0a6289224f9cd24a823718a23, type: 3}
+  speed: 1
+  height: 0.5
 --- !u!33 &7185441112138508590
 MeshFilter:
   m_ObjectHideFlags: 0

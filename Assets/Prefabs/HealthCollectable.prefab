@@ -574,7 +574,7 @@ MonoBehaviour:
   healthText: {fileID: 6578485334586706197}
   jumpText: {fileID: 8528063216167835563}
   coinText: {fileID: 7011190540976493784}
-  health: 1
+  health: 2
   jump: 0
   coin: 0
   audioSource: {fileID: 7954165579329011591}
