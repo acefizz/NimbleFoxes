@@ -607,7 +607,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 4307893916742329762}
   agent: {fileID: 1649030559209144946}
-  enemyDrop: {fileID: 8409106420004003914, guid: ae6c180e5bd24714b9a9d5b40cd0625f, type: 3}
+  enemyDrop: {fileID: 0}
   animator: {fileID: 1964615740306109885}
   HP: 5
   playerFaceSpeed: 3
@@ -693,7 +693,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4618993455375370268}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
+  m_Avatar: {fileID: 9000000, guid: 7b36a186c6950424394704a9292a7114, type: 3}
   m_Controller: {fileID: 9100000, guid: 4b0ad5f2b97f02746970d21970070b87, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
