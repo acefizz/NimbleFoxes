@@ -6,16 +6,16 @@ public class Barrel : MonoBehaviour, IDamage
 {
     [SerializeField] ExplosionImplosion explosion;
     [SerializeField] MeshCollider collider;
-    [SerializeField] int health;
+    [SerializeField] float health;
 
     int maxhealth;
     // Start is called before the first frame update
     void Start()
     {
-        maxhealth = health;
+        maxhealth = (int)health;
     }
 
-    public void takeDamage(int dmg)
+    public void takeDamage(float dmg)
     {
         health -= dmg;
 
