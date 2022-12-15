@@ -16,12 +16,6 @@ public class TrackingBullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        NavMeshHit hit;
-        if(NavMesh.SamplePosition(transform.position, out hit, 10f, NavMesh.AllAreas))
-        {
-           transform.parent.transform.position = hit.position;
-        }
-
         agent.speed = speed;
         Destroy(transform.parent.gameObject, timer);
     }

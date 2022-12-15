@@ -98,9 +98,12 @@ public class EnemyAI : MonoBehaviour, IDamage
         NavMeshHit hit;
         NavMesh.SamplePosition(new Vector3(randDir.x, 0, randDir.z), out hit, 1, 1);
         NavMeshPath path = new NavMeshPath();
+        //Check if hit is valid
         if(hit.position != null)
+        {
             agent.CalculatePath(hit.position, path);
-        agent.SetPath(path);
+            agent.SetPath(path);
+        }
     }
 
     void facePlayer()
@@ -127,7 +130,6 @@ public class EnemyAI : MonoBehaviour, IDamage
     {
         isShooting = true;
         animator.SetTrigger("Shoot");
-        Instantiate(bullet, shootPos.position, transform.rotation);
         if (bullet.GetComponent<NavMeshAgent>() != null)
         {
             NavMeshHit hit;
@@ -162,25 +164,26 @@ public class EnemyAI : MonoBehaviour, IDamage
     }
     public void takeDamage(float dmg)
     {
-
-        HP -= dmg;
-        UpdateEnemyHPBar();
-        StartCoroutine(ShowHP());
-        agent.SetDestination(GameManager.instance.player.transform.position);
-        StartCoroutine(flashDamage());
-        if (HP <= 0)
+        if (!isDying)
         {
-            agent.isStopped = true;
-            isDying = true;
-            isShooting = false;
-            if (enemyDrop != null)
+            HP -= dmg;
+            UpdateEnemyHPBar();
+            StartCoroutine(ShowHP());
+            agent.SetDestination(GameManager.instance.player.transform.position);
+            StartCoroutine(flashDamage());
+            if (HP <= 0)
             {
-                Instantiate(enemyDrop, shootPos.position, transform.rotation);
-            }
-            StartCoroutine(Death());
-            GameManager.instance.playerScript.AddCoins((int)HPorg);
-            GameManager.instance.UpdateEnemyCount(-1);
+                agent.isStopped = true;
+                isDying = true;
+                isShooting = false;
+                if (enemyDrop != null)
+                {
+                    Instantiate(enemyDrop, shootPos.position, transform.rotation);
+                }
+                StartCoroutine(Death());
+                GameManager.instance.UpdateEnemyCount(-1);
 
+            }
         }
 
     }

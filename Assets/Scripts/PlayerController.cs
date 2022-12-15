@@ -173,6 +173,7 @@ public class PlayerController : MonoBehaviour
         }
         return false;
     }
+
     public void UpdatePlayerHPBar()
     {
         GameManager.instance.playerHpBar.fillAmount = (float)HP / (float)HPOrig;
@@ -181,6 +182,7 @@ public class PlayerController : MonoBehaviour
         else if (HP <= HPOrig / 2)
             GameManager.instance.playerHpBar.color = Color.red;
     }
+
     public void GunPickup(GunSetup gun)
     {
         shotDamage = gun.shotDamage;
@@ -193,6 +195,7 @@ public class PlayerController : MonoBehaviour
         gunList.Add(gun);
         selectedGun = gunList.Count - 1;
     }
+
     public void PushbackInput(Vector3 direction)
     {
         pushback = direction;

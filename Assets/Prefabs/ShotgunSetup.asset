@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ShotgunSetup
   m_EditorClassIdentifier: 
   shotRate: 1.5
-  shotDamage: 2.8
+  shotDamage: 3
   shotDist: 25
   GunModel: {fileID: 6568983722982623154, guid: 5a974021979d1aa468d57207a3aa7e6a, type: 3}
   gunShot: {fileID: 8300000, guid: c656eacd829f9dd43a451e3721413bad, type: 3}
