@@ -422,6 +422,7 @@ MonoBehaviour:
   shotDamage: 0
   shotRate: 0
   shotDist: 0
+  hitEffect: {fileID: 0}
   aud: {fileID: 8335207976358769998}
   gunShot: {fileID: 0}
   gunShotVol: 0.337
@@ -448,7 +449,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 53b8ba6435c5ff8489b5f5d687876fed, type: 3}
   - {fileID: 8300000, guid: 16af081c18eba7c40bdb7c4a064fded1, type: 3}
   - {fileID: 8300000, guid: a4e3c78fa218677459eb078d2b0101ad, type: 3}
-  playerStepsVol: 0
+  playerStepsVol: 0.3
   isDead: 0
 --- !u!143 &4533570552687267968
 CharacterController:
