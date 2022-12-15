@@ -12,7 +12,7 @@ public class Barrel : MonoBehaviour, IDamage
     // Start is called before the first frame update
     void Start()
     {
-        maxhealth = health;
+        maxhealth = (int)health;
     }
 
     public void takeDamage(float dmg)
