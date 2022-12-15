@@ -17,6 +17,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] int playerFaceSpeed;
     [SerializeField] int sightAngle;
     [SerializeField] Transform headPos;
+    [SerializeField] int roamDist;
 
     [Header("---Enemy Gun Stats")]
     [SerializeField] float shootRate;
@@ -27,16 +28,22 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] Image enemyHPBar;
     [SerializeField] GameObject enemyUI;
 
+
+    bool isDying = false;
     float HPorg;
     bool isShooting;
     bool playerInRange;
     Vector3 playerDirection;
     float angleToPlayer;
+    float stoppingDistOrig;
+    Vector3 startPos;
 
     // Start is called before the first frame update
     void Start()
     {
         HPorg = HP;
+        startPos = transform.position;
+        stoppingDistOrig = agent.stoppingDistance;
         UpdateEnemyHPBar();
         GameManager.instance.UpdateEnemyCount(1);
     }
@@ -45,13 +52,16 @@ public class EnemyAI : MonoBehaviour, IDamage
     void Update()
     {
         animator.SetFloat("Speed", agent.velocity.normalized.magnitude);
-        if (playerInRange)
+        if (playerInRange && !isDying)
         {
             canSeePlayer();
+            if(!isShooting) { StartCoroutine(shoot()); }
+            
         }
-
-
-
+        else if (agent.remainingDistance < 0.1f && agent.destination != GameManager.instance.player.transform.position && !isDying)
+        {
+            Roam();
+        }
     }
     void canSeePlayer()
     {
@@ -80,6 +90,19 @@ public class EnemyAI : MonoBehaviour, IDamage
         }
 
     }
+    void Roam()
+    {
+        agent.stoppingDistance = 0;
+        Vector3 randDir = Random.insideUnitSphere * roamDist;
+        randDir += startPos;
+        NavMeshHit hit;
+        NavMesh.SamplePosition(new Vector3(randDir.x, 0, randDir.z), out hit, 1, 1);
+        NavMeshPath path = new NavMeshPath();
+        if(hit.position != null)
+            agent.CalculatePath(hit.position, path);
+        agent.SetPath(path);
+    }
+
     void facePlayer()
     {
         playerDirection.y = 0;
@@ -147,8 +170,8 @@ public class EnemyAI : MonoBehaviour, IDamage
         StartCoroutine(flashDamage());
         if (HP <= 0)
         {
-            agent.enabled = false;
-            agent.GetComponent<CapsuleCollider>().enabled = false;
+            agent.isStopped = true;
+            isDying = true;
             isShooting = false;
             if (enemyDrop != null)
             {
