@@ -24,11 +24,6 @@ public class Collectables : MonoBehaviour
     public float speed;
     public float height;
 
-    private void Start()
-    {
-
-    }
-
     private void Update()
     {
         Vector3 position = transform.position;
