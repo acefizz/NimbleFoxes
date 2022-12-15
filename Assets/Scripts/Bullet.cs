@@ -29,6 +29,14 @@ public class Bullet : MonoBehaviour
         {
             GameManager.instance.playerScript.takeDamage(damage);
         }
-        Destroy(gameObject);
+        else if (other.CompareTag("Barrel"))
+        {
+            other.GetComponent<IDamage>().takeDamage(damage);
+        }
+
+        if (!other.isTrigger)
+        {
+            Destroy(gameObject);
+        }
     }
 }

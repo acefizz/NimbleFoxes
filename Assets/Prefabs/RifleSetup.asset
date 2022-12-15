@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ad94a9ebb8e28f43b88a17c5a174fa8, type: 3}
   m_Name: RifleSetup
   m_EditorClassIdentifier: 
-  shotRate: 1
-  shotDamage: 1
+  shotRate: 0.13
+  shotDamage: 0.65
   shotDist: 100
   GunModel: {fileID: 2467925974433038485, guid: b658ffb3bae43e34c9b89b282bc195fe, type: 3}
+  gunShot: {fileID: 8300000, guid: 1f306bd7cebdbee46a3ee7a75ac15a71, type: 3}
