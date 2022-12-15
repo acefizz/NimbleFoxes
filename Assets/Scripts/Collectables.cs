@@ -20,9 +20,9 @@ public class Collectables : MonoBehaviour
     [SerializeField] AudioSource audioSource;
     [SerializeField] AudioClip upgradeClip;
 
-    //[Header("___| Effect Settings |___")]
-    //public float speed;
-    //public float height;
+    [Header("___| Effect Settings |___")]
+    public float speed;
+    public float height;
 
     private void Start()
     {
@@ -31,9 +31,9 @@ public class Collectables : MonoBehaviour
 
     private void Update()
     {
-        //Vector3 position = transform.position;
-        //float newY = Mathf.Sin(Time.time * speed);
-        //transform.position = new Vector3(position.x, newY, position.z) * height;
+        Vector3 position = transform.position;
+        float newY = Mathf.Sin(Time.time * speed);
+        transform.position = new Vector3(position.x, Mathf.Abs(newY) * height + 1f, position.z) ;
     }
 
     private void OnTriggerEnter(Collider other)

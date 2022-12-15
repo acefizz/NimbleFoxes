@@ -29,6 +29,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] GameObject enemyUI;
 
     int HPorg;
+    bool isDying = false;
     bool isShooting;
     bool playerInRange;
     Vector3 playerDirection;
@@ -50,13 +51,13 @@ public class EnemyAI : MonoBehaviour, IDamage
     void Update()
     {
         animator.SetFloat("Speed", agent.velocity.normalized.magnitude);
-        if (playerInRange)
+        if (playerInRange && !isDying)
         {
             canSeePlayer();
             if(!isShooting) { StartCoroutine(shoot()); }
             
         }
-        else if (agent.remainingDistance < 0.1f && agent.destination != GameManager.instance.player.transform.position)
+        else if (agent.remainingDistance < 0.1f && agent.destination != GameManager.instance.player.transform.position && !isDying)
         {
             Roam();
         }
@@ -155,8 +156,8 @@ public class EnemyAI : MonoBehaviour, IDamage
         StartCoroutine(flashDamage());
         if (HP <= 0)
         {
-            agent.enabled = false;
-            agent.GetComponent<CapsuleCollider>().enabled = false;
+            agent.isStopped = true;
+            isDying = true;
             isShooting = false;
             if (enemyDrop != null)
             {
