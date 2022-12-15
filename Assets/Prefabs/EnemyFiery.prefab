@@ -630,14 +630,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 6151109364373684003}
   agent: {fileID: 6795569815450046379}
-  enemyDrop: {fileID: 0}
+  enemyDrop: {fileID: 1398159156579844429, guid: 3df6b2a861dac9747bcde958e71d93f0, type: 3}
   animator: {fileID: 6190335025682737071}
   HP: 10
   playerFaceSpeed: 3
   sightAngle: 60
   headPos: {fileID: 6103964006413354983}
+  roamDist: 0
   shootRate: 0.5
-  bullet: {fileID: 6860959869791283384, guid: 783fd3890e869cb4489f69a3f44cedef, type: 3}
+  bullet: {fileID: 1398159156579844429, guid: 3df6b2a861dac9747bcde958e71d93f0, type: 3}
   shootPos: {fileID: 8465031711615542638}
   enemyHPBar: {fileID: 2704411782146666410}
   enemyUI: {fileID: 2468724931125602517}
