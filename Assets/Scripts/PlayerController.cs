@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float shotDamage;
     [SerializeField] float shotRate;
     [SerializeField] int shotDist;
+    [SerializeField] GameObject hitEffect;
 
     [Header("---| Audio |---")]
     [SerializeField] AudioSource aud;
@@ -118,6 +119,7 @@ public class PlayerController : MonoBehaviour
                 {
                     hit.collider.GetComponent<IDamage>().takeDamage((shotDamage + extraDmg));
                 }
+                Instantiate(hitEffect, hit.point, hitEffect.transform.rotation);
             }
             aud.PlayOneShot(gunList[selectedGun].gunShot, gunShotVol);
 
