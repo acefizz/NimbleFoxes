@@ -58,9 +58,9 @@ public class Collectables : MonoBehaviour
 
         if (health > 0)
             healthText.text = "+" + health + " health";
-        if (jump > 0)
+         if (jump > 0)
             jumpText.text = "+" + jump + " jumps";
-        if (coin > 0)
+         if (coin > 0)
             coinText.text = "+" + coin + " coins";
 
 

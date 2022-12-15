@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad94a9ebb8e28f43b88a17c5a174fa8, type: 3}
+  m_Name: PistolSetup
+  m_EditorClassIdentifier: 
+  shotRate: 0.83
+  shotDamage: 0.85
+  shotDist: 25
+  GunModel: {fileID: 5043873141336150979, guid: f0db8dfe5ef8cad40b07cc32889eaa19, type: 3}
+  gunShot: {fileID: 8300000, guid: 195d8474e450d8d4d92d4f6bf7623d67, type: 3}
