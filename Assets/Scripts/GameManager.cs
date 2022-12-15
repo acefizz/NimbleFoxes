@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
         jumpCount.text = "Jumps : " + playerScript.GetMaxJumps();
         damageCount.text = "Damage : " + playerScript.GetDamage();
         speedCount.text = "Speed : " + playerScript.GetSpeed();
-        playerCoins.text = playerScript.coins.ToString() + " out of " + jumpCost.ToString() + " coins";
+        playerCoins.text = "Coins: " + playerScript.coins.ToString();
     }
 
     /// <summary>
