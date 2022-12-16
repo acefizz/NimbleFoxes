@@ -66,11 +66,12 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         ShowMenu(MenuType.WelcomeMenu, true);
+        //Cursor.visible = true;
     }
 
     private void Update()
     {
-        if (Input.GetButtonDown("Cancel")  && !playerScript.isDead)
+        if (Input.GetButtonDown("Cancel") && !playerScript.isDead)
         {
             isPaused = !isPaused;
             if (isPaused)

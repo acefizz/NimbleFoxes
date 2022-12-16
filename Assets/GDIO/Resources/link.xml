@@ -1,0 +1,7 @@
+<linker>
+    <assembly fullname="gdio.unity_agent.HierarchyPathObjectResolver" preserve="all"/>
+    <assembly fullname="HierarchyPathObjectResolver.dll" preserve="all" />
+	<assembly fullname="MessagePack" preserve="all">
+		<type fullname="*" preserve="all"/> 		 		 		
+	</assembly>		   
+</linker>

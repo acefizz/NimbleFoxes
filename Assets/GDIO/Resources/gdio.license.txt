@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<license>
+  <licensee>GameDriver</licensee>
+  <licenseid>GameDriver Development License</licenseid>
+  <hostid>*</hostid>
+  <platforms>
+    <platform>Windows</platform>
+    <platform>macOS</platform>
+    <platform>iOS</platform>
+  </platforms>
+  <addins>
+    <addin>VisualStudio</addin>
+    <addin>VisualStudioMac</addin>
+  </addins>
+  <start_date>2022-05-20</start_date>
+  <expiration_date>2022-12-31</expiration_date>
+  <signature>1E3D5868BD11D2F990C5043F96E622F0AFDBBB7071DDF4436FBD8BAF2E23D195906EF4FA5FEECEEC8F35D6746EB5C9ECD7054F4BB5C59A75E510819CCE5FA50F</signature>
+</license>
