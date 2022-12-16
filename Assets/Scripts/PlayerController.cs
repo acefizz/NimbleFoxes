@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         HPOrig = HP;
-        SetPlayerPos();
+        //SetPlayerPos();
         ResetHP();
     }
 
@@ -145,12 +145,15 @@ public class PlayerController : MonoBehaviour
             GameManager.instance.ShowMenu(GameManager.MenuType.Lose, true);
         }
     }
+
+    /*
     public void SetPlayerPos()
     {
         controller.enabled = false;
         transform.position = GameManager.instance.playerSpawnPos.transform.position;
         controller.enabled = true;
     }
+    */
 
     public void ResetHP()
     {
