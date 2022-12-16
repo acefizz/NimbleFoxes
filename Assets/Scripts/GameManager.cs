@@ -10,14 +10,14 @@ public class GameManager : MonoBehaviour
     [Header("Player")]
     public GameObject player;
     public PlayerController playerScript;
-    public GameObject playerSpawnPos;
+    // public GameObject playerSpawnPos;
     public GameObject playerFlashDamage;
     public Image playerHpBar;
     
 
     public GameObject reticle;
 
-    internal bool isPaused = true;
+    internal bool isPaused = false;
     float timeScaleOriginal;
 
     [Header("--- UI Menus ---")]
@@ -54,10 +54,14 @@ public class GameManager : MonoBehaviour
             instance = this;
 
 
-        player = GameObject.FindGameObjectWithTag("Player");
-        playerScript = player.GetComponent<PlayerController>();
+        //player = GameObject.FindGameObjectWithTag("Player");
+        
+        if (!player )
+            Debug.LogError("Player not found in scene or tagged as Player or named Player");
 
-        playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
+        //playerScript = player.GetComponent<PlayerController>();
+
+        //playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
 
         timeScaleOriginal = Time.timeScale;
 
@@ -70,7 +74,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Cancel")  && !playerScript.isDead)
+        if (Input.GetButtonDown("Cancel") && !playerScript.isDead)
         {
             isPaused = !isPaused;
             if (isPaused)
@@ -80,6 +84,13 @@ public class GameManager : MonoBehaviour
         }
         if (isPaused)
             DoStats();
+
+        if (!player || !playerScript)
+        {
+            Debug.Log("Still not found, searching again");
+            player = GameObject.FindGameObjectWithTag("Player");
+            playerScript = player.GetComponent<PlayerController>();
+        }
     }
 
     private void DoStats()
