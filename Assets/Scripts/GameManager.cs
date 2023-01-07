@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public GameObject playerFlashDamage;
     public Image playerHpBar;
     
+    
 
     public GameObject reticle;
 
@@ -26,6 +27,17 @@ public class GameManager : MonoBehaviour
     public GameObject winMenu;
     public GameObject loseMenu;
     public GameObject upgradeMenu;
+
+    [Header("--- UI Pickups ---")]
+    public GameObject Pickups;
+    [SerializeField] TextMeshProUGUI healthText;
+    public string healthDisplay;
+    [SerializeField] TextMeshProUGUI coinText;
+    public string coinDisplay;
+    [SerializeField] TextMeshProUGUI weaponText;
+    public string weaponDisplay;
+    [SerializeField] TextMeshProUGUI abiltyText;
+    public string abiltyDisplay;
 
     [Header("--- UI Upgrade Text ---")]
     //textmeshpro
@@ -62,6 +74,7 @@ public class GameManager : MonoBehaviour
         //playerScript = player.GetComponent<PlayerController>();
 
         //playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
+        
 
         timeScaleOriginal = Time.timeScale;
 
@@ -70,10 +83,16 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         ShowMenu(MenuType.WelcomeMenu, true);
+        
     }
 
     private void Update()
     {
+        healthText.text = healthDisplay;
+        coinText.text = coinDisplay;
+        weaponText.text = weaponDisplay;
+        abiltyText.text = abiltyDisplay;
+
         if (Input.GetButtonDown("Cancel") && !playerScript.isDead)
         {
             isPaused = !isPaused;

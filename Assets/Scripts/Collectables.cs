@@ -6,15 +6,14 @@ using UnityEngine;
 
 public class Collectables : MonoBehaviour
 {
-    [Header("___| Display Settings |___")]
-    [SerializeField] GameObject UI;
-    [SerializeField] TextMeshProUGUI healthText;
-    [SerializeField] TextMeshProUGUI jumpText;
-    [SerializeField] TextMeshProUGUI coinText;
+    [Header("___| Settings |___")]
 
     public int health;
-    public int jump;
     public int coin;
+    public bool weapon;
+    public string weaponName;
+    public bool ability;
+    public string abilityName;
 
     [Header("___| Audio Settings |___")]
     [SerializeField] AudioSource audioSource;
@@ -37,7 +36,6 @@ public class Collectables : MonoBehaviour
         {
             
             GameManager.instance.playerScript.AddHp(health);
-            GameManager.instance.playerScript.AddJumps(jump);
             GameManager.instance.playerScript.AddCoins(coin);
             
             gameObject.GetComponent<MeshRenderer>().enabled = false;
@@ -49,18 +47,20 @@ public class Collectables : MonoBehaviour
     IEnumerator ShowCollections()
     {
         audioSource.PlayOneShot(upgradeClip);
-        UI.SetActive(true);
+        GameManager.instance.Pickups.SetActive(true);
 
         if (health > 0)
-            healthText.text = "+" + health + " health";
-         if (jump > 0)
-            jumpText.text = "+" + jump + " jumps";
-         if (coin > 0)
-            coinText.text = "+" + coin + " coins";
+            GameManager.instance.healthDisplay = $"+ {health} health added";
+        if (coin > 0)
+            GameManager.instance.coinDisplay = $"+ {coin} coin(s) added";
+        if (weapon)
+            GameManager.instance.weaponDisplay = $"{weaponName} added";
+        if (ability)
+            GameManager.instance.abiltyDisplay = $"{abilityName} added";
 
 
         yield return new WaitForSeconds(3.0f);
-        UI.SetActive(false);
+        GameManager.instance.Pickups.SetActive(false);
         Destroy(gameObject);
     }
 }

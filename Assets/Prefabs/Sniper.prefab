@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8534324237720484931}
+  - component: {fileID: 1928702541108870511}
   - component: {fileID: 2522319987893326917}
   - component: {fileID: 4746751367574123494}
   - component: {fileID: 7366532681704277804}
@@ -36,6 +37,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1928702541108870511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9024037184162080505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb91619ba38f9d94587f43859ac6dfa2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  coin: 0
+  weapon: 1
+  weaponName: Sniper
+  ability: 0
+  abilityName: 
+  audioSource: {fileID: 0}
+  upgradeClip: {fileID: 0}
+  speed: 0
+  height: 0
 --- !u!114 &2522319987893326917
 MonoBehaviour:
   m_ObjectHideFlags: 0
