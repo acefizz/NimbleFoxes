@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -27,9 +28,11 @@ public class EnemyAI : MonoBehaviour, IDamage
     [Header("___| Enemy UI |___")]
     [SerializeField] Image enemyHPBar;
     [SerializeField] GameObject enemyUI;
+    [SerializeField] TextMeshProUGUI bossNameText;
+    public string bossName;
 
 
-    bool isDying = false;
+    bool isDying;
     float HPorg;
     bool isShooting;
     bool playerInRange;
@@ -37,10 +40,12 @@ public class EnemyAI : MonoBehaviour, IDamage
     float angleToPlayer;
     float stoppingDistOrig;
     Vector3 startPos;
+    
 
     // Start is called before the first frame update
     void Start()
     {
+        isDying = false;
         HPorg = HP;
         startPos = transform.position;
         stoppingDistOrig = agent.stoppingDistance;
@@ -62,6 +67,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         {
             Roam();
         }
+        UpdateEnemyHPBar();
     }
     void canSeePlayer()
     {
@@ -165,26 +171,32 @@ public class EnemyAI : MonoBehaviour, IDamage
     }
     public void takeDamage(float dmg)
     {
-        if (!isDying)
+        HP -= dmg;
+        UpdateEnemyHPBar();
+        if (CompareTag("Boss"))
         {
-            HP -= dmg;
-            UpdateEnemyHPBar();
+            enemyUI.SetActive(true);
+            bossNameText.text = bossName;
+        }
+        else
+        {
             StartCoroutine(ShowHP());
-            agent.SetDestination(GameManager.instance.player.transform.position);
-            StartCoroutine(flashDamage());
-            if (HP <= 0)
+        }
+        agent.SetDestination(GameManager.instance.player.transform.position);
+        StartCoroutine(flashDamage());
+        if (HP <= 0)
+        {
+            enemyUI.SetActive(false);
+            agent.isStopped = true;
+            isDying = true;
+            isShooting = false;
+            if (enemyDrop != null)
             {
-                agent.isStopped = true;
-                isDying = true;
-                isShooting = false;
-                if (enemyDrop != null)
-                {
-                    Instantiate(enemyDrop, shootPos.position, transform.rotation);
-                }
-                StartCoroutine(Death());
-                GameManager.instance.UpdateEnemyCount(-1);
-
+                Instantiate(enemyDrop, shootPos.position, transform.rotation);
             }
+            StartCoroutine(Death());
+            GameManager.instance.UpdateEnemyCount(-1);
+
         }
 
     }

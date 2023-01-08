@@ -18,6 +18,7 @@ public class Collectables : MonoBehaviour
     [Header("___| Audio Settings |___")]
     [SerializeField] AudioSource audioSource;
     [SerializeField] AudioClip upgradeClip;
+    [Range(0, 1)][SerializeField] float effectVol;
 
     [Header("___| Effect Settings |___")]
     public float speed;
@@ -37,18 +38,16 @@ public class Collectables : MonoBehaviour
             
             GameManager.instance.playerScript.AddHp(health);
             GameManager.instance.playerScript.AddCoins(coin);
-            
-            gameObject.GetComponent<MeshRenderer>().enabled = false;
-
+            if (upgradeClip != null)
+                audioSource.PlayOneShot(upgradeClip, effectVol);
             StartCoroutine(ShowCollections());
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+            gameObject.GetComponent<Collider>().enabled = false;
         }
         
     }
     IEnumerator ShowCollections()
     {
-        audioSource.PlayOneShot(upgradeClip);
-        GameManager.instance.Pickups.SetActive(true);
-
         if (health > 0)
             GameManager.instance.healthDisplay = $"+ {health} health added";
         if (coin > 0)
@@ -60,7 +59,13 @@ public class Collectables : MonoBehaviour
 
 
         yield return new WaitForSeconds(3.0f);
-        GameManager.instance.Pickups.SetActive(false);
+        GameManager.instance.healthDisplay = "";
+        GameManager.instance.coinDisplay = "";
+        GameManager.instance.weaponDisplay = "";
+        GameManager.instance.abiltyDisplay = "";
+
+
+
         Destroy(gameObject);
     }
 }
