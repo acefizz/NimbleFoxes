@@ -412,9 +412,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2506725402876148601, guid: 9779f6e10a0a3cd4babf5f90bcd756c8, type: 3}
+      propertyPath: pullSpeed
+      value: 0.178
+      objectReference: {fileID: 0}
+    - target: {fileID: 2506725402876148601, guid: 9779f6e10a0a3cd4babf5f90bcd756c8, type: 3}
+      propertyPath: pullDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2506725402876148601, guid: 9779f6e10a0a3cd4babf5f90bcd756c8, type: 3}
+      propertyPath: pushbackAmount
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2642166720542923538, guid: 9779f6e10a0a3cd4babf5f90bcd756c8, type: 3}
       propertyPath: m_Name
       value: CoinCollectable
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972790047882378977, guid: 9779f6e10a0a3cd4babf5f90bcd756c8, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7745100434438890521, guid: 9779f6e10a0a3cd4babf5f90bcd756c8, type: 3}
       propertyPath: m_RootOrder
@@ -422,7 +438,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7745100434438890521, guid: 9779f6e10a0a3cd4babf5f90bcd756c8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.9288163
+      value: 20.45
       objectReference: {fileID: 0}
     - target: {fileID: 7745100434438890521, guid: 9779f6e10a0a3cd4babf5f90bcd756c8, type: 3}
       propertyPath: m_LocalPosition.y

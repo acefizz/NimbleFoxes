@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -14,6 +15,8 @@ public class Collectables : MonoBehaviour
     public string weaponName;
     public bool ability;
     public string abilityName;
+    [Range(0, 1)][SerializeField] float pullSpeed;
+    public float pullDistance;
 
     [Header("___| Audio Settings |___")]
     [SerializeField] AudioSource audioSource;
@@ -29,13 +32,16 @@ public class Collectables : MonoBehaviour
         Vector3 position = transform.position;
         float newY = Mathf.Sin(Time.time * speed);
         transform.position = new Vector3(position.x, Mathf.Abs(newY) * height + 1f, position.z) ;
+
+        float tempDist = Vector3.Distance(transform.position, GameManager.instance.player.transform.position);
+        if (tempDist <= pullDistance)
+            transform.position = Vector3.Lerp(transform.position, GameManager.instance.player.transform.position, pullSpeed);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            
             GameManager.instance.playerScript.AddHp(health);
             GameManager.instance.playerScript.AddCoins(coin);
             if (upgradeClip != null)
