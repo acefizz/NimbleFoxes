@@ -12,9 +12,9 @@ public class Collectables : MonoBehaviour
     public int health;
     public int coin;
     public bool weapon;
-    public string weaponName;
+    string weaponName;
     public bool ability;
-    public string abilityName;
+    string abilityName;
     [Range(0, 1)][SerializeField] float pullSpeed;
     public float pullDistance;
 
@@ -33,9 +33,12 @@ public class Collectables : MonoBehaviour
         float newY = Mathf.Sin(Time.time * speed);
         transform.position = new Vector3(position.x, Mathf.Abs(newY) * height + 1f, position.z) ;
 
-        float tempDist = Vector3.Distance(transform.position, GameManager.instance.player.transform.position);
-        if (tempDist <= pullDistance)
-            transform.position = Vector3.Lerp(transform.position, GameManager.instance.player.transform.position, pullSpeed);
+        if(pullDistance > 0)
+        {
+            float tempDist = Vector3.Distance(transform.position, GameManager.instance.player.transform.position);
+            if (tempDist <= pullDistance)
+                transform.position = Vector3.Lerp(transform.position, GameManager.instance.player.transform.position, pullSpeed);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -49,6 +52,11 @@ public class Collectables : MonoBehaviour
             StartCoroutine(ShowCollections());
             gameObject.GetComponent<MeshRenderer>().enabled = false;
             gameObject.GetComponent<Collider>().enabled = false;
+
+            if (weapon)
+                weaponName = GameManager.instance.playerScript.gunName;
+            if (ability) { }
+                //TODO: ability name needs read from object
         }
         
     }

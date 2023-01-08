@@ -15,5 +15,6 @@ MonoBehaviour:
   shotRate: 0.13
   shotDamage: 0.65
   shotDist: 100
+  gunName: Assault Rifle
   GunModel: {fileID: 2467925974433038485, guid: b658ffb3bae43e34c9b89b282bc195fe, type: 3}
   gunShot: {fileID: 8300000, guid: 1f306bd7cebdbee46a3ee7a75ac15a71, type: 3}

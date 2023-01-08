@@ -4,6 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+//TODO: When the player picks up / changes abilities, SetAbilitiesIcon should be used, there is another TODO in Collectables where the game object for the ability needs to be read.
+
+
 public class PlayerController : MonoBehaviour
 {
     [Header("___| Components |___")]
@@ -29,6 +33,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float shotRate;
     [SerializeField] int shotDist;
     [SerializeField] GameObject hitEffect;
+    public string gunName;
+    public string abilityName;
 
     [Header("---| Audio |---")]
     [SerializeField] AudioSource aud;
@@ -193,13 +199,17 @@ public class PlayerController : MonoBehaviour
         shotDamage = gun.shotDamage;
         shotRate = gun.shotRate;
         shotDist = gun.shotDist;
+        gunName = gun.gunName;
 
         gunModel.GetComponent<MeshFilter>().sharedMesh = gun.GunModel.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gun.GunModel.GetComponent<MeshRenderer>().sharedMaterial;
 
         gunList.Add(gun);
         selectedGun = gunList.Count - 1;
+
+        SetWeaponIcon();
     }
+    
 
     public void PushbackInput(Vector3 direction)
     {
@@ -223,10 +233,14 @@ public class PlayerController : MonoBehaviour
         shotDamage = gunList[selectedGun].shotDamage;
         shotRate = gunList[selectedGun].shotRate;
         shotDist = gunList[selectedGun].shotDist;
+        gunName = gunList[selectedGun].gunName;
 
         gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[selectedGun].GunModel.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[selectedGun].GunModel.GetComponent<MeshRenderer>().sharedMaterial;
+
+        SetWeaponIcon();
     }
+    
     IEnumerator playSteps()
     {
         stepPlaying = true;
@@ -267,5 +281,143 @@ public class PlayerController : MonoBehaviour
     public float GetDamage()
     {
         return (shotDamage + extraDmg);
+    }
+    public void SetWeaponIcon()
+    {
+        for (int i = 0; i < GameManager.instance.gunNames.Length; i++)
+        {
+            if (GameManager.instance.gunNames[i] == gunName)
+            {
+                switch (i)
+                {
+                    case 0:
+                        GameManager.instance.weapon1.SetActive(true);
+                        GameManager.instance.weapon2.SetActive(false);
+                        GameManager.instance.weapon3.SetActive(false);
+                        GameManager.instance.weapon4.SetActive(false);
+                        GameManager.instance.weapon5.SetActive(false);
+                        GameManager.instance.weapon6.SetActive(false);
+                        break;
+                    case 1:
+                        GameManager.instance.weapon1.SetActive(false);
+                        GameManager.instance.weapon2.SetActive(true);
+                        GameManager.instance.weapon3.SetActive(false);
+                        GameManager.instance.weapon4.SetActive(false);
+                        GameManager.instance.weapon5.SetActive(false);
+                        GameManager.instance.weapon6.SetActive(false);
+                        break;
+                    case 2:
+                        GameManager.instance.weapon1.SetActive(false);
+                        GameManager.instance.weapon2.SetActive(false);
+                        GameManager.instance.weapon3.SetActive(true);
+                        GameManager.instance.weapon4.SetActive(false);
+                        GameManager.instance.weapon5.SetActive(false);
+                        GameManager.instance.weapon6.SetActive(false);
+                        break;
+                    case 3:
+                        GameManager.instance.weapon1.SetActive(false);
+                        GameManager.instance.weapon2.SetActive(false);
+                        GameManager.instance.weapon3.SetActive(false);
+                        GameManager.instance.weapon4.SetActive(true);
+                        GameManager.instance.weapon5.SetActive(false);
+                        GameManager.instance.weapon6.SetActive(false);
+                        break;
+                    case 4:
+                        GameManager.instance.weapon1.SetActive(false);
+                        GameManager.instance.weapon2.SetActive(false);
+                        GameManager.instance.weapon3.SetActive(false);
+                        GameManager.instance.weapon4.SetActive(false);
+                        GameManager.instance.weapon5.SetActive(true);
+                        GameManager.instance.weapon6.SetActive(false);
+                        break;
+                    case 5:
+                        GameManager.instance.weapon1.SetActive(false);
+                        GameManager.instance.weapon2.SetActive(false);
+                        GameManager.instance.weapon3.SetActive(false);
+                        GameManager.instance.weapon4.SetActive(false);
+                        GameManager.instance.weapon5.SetActive(false);
+                        GameManager.instance.weapon6.SetActive(true);
+                        break;
+                    default:
+                        GameManager.instance.weapon1.SetActive(false);
+                        GameManager.instance.weapon2.SetActive(false);
+                        GameManager.instance.weapon3.SetActive(false);
+                        GameManager.instance.weapon4.SetActive(false);
+                        GameManager.instance.weapon5.SetActive(false);
+                        GameManager.instance.weapon6.SetActive(false);
+                        break;
+                }
+                break;
+            }
+        }
+    }
+    public void SetAbilityIcon()
+    {
+        for (int i = 0; i < GameManager.instance.abilityNames.Length; i++)
+        {
+            if (GameManager.instance.abilityNames[i] == gunName)
+            {
+                switch (i)
+                {
+                    case 0:
+                        GameManager.instance.ability1.SetActive(true);
+                        GameManager.instance.ability2.SetActive(false);
+                        GameManager.instance.ability3.SetActive(false);
+                        GameManager.instance.ability4.SetActive(false);
+                        GameManager.instance.ability5.SetActive(false);
+                        GameManager.instance.ability6.SetActive(false);
+                        break;
+                    case 1:
+                        GameManager.instance.ability1.SetActive(false);
+                        GameManager.instance.ability2.SetActive(true);
+                        GameManager.instance.ability3.SetActive(false);
+                        GameManager.instance.ability4.SetActive(false);
+                        GameManager.instance.ability5.SetActive(false);
+                        GameManager.instance.ability6.SetActive(false);
+                        break;
+                    case 2:
+                        GameManager.instance.ability1.SetActive(false);
+                        GameManager.instance.ability2.SetActive(false);
+                        GameManager.instance.ability3.SetActive(true);
+                        GameManager.instance.ability4.SetActive(false);
+                        GameManager.instance.ability5.SetActive(false);
+                        GameManager.instance.ability6.SetActive(false);
+                        break;
+                    case 3:
+                        GameManager.instance.ability1.SetActive(false);
+                        GameManager.instance.ability2.SetActive(false);
+                        GameManager.instance.ability3.SetActive(false);
+                        GameManager.instance.ability4.SetActive(true);
+                        GameManager.instance.ability5.SetActive(false);
+                        GameManager.instance.ability6.SetActive(false);
+                        break;
+                    case 4:
+                        GameManager.instance.ability1.SetActive(false);
+                        GameManager.instance.ability2.SetActive(false);
+                        GameManager.instance.ability3.SetActive(false);
+                        GameManager.instance.ability4.SetActive(false);
+                        GameManager.instance.ability5.SetActive(true);
+                        GameManager.instance.ability6.SetActive(false);
+                        break;
+                    case 5:
+                        GameManager.instance.ability1.SetActive(false);
+                        GameManager.instance.ability2.SetActive(false);
+                        GameManager.instance.ability3.SetActive(false);
+                        GameManager.instance.ability4.SetActive(false);
+                        GameManager.instance.ability5.SetActive(false);
+                        GameManager.instance.ability6.SetActive(true);
+                        break;
+                    default:
+                        GameManager.instance.ability1.SetActive(false);
+                        GameManager.instance.ability2.SetActive(false);
+                        GameManager.instance.ability3.SetActive(false);
+                        GameManager.instance.ability4.SetActive(false);
+                        GameManager.instance.ability5.SetActive(false);
+                        GameManager.instance.ability6.SetActive(false);
+                        break;
+                }
+                break;
+            }
+        }
     }
 }

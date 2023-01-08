@@ -39,6 +39,22 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI abiltyText;
     public string abiltyDisplay;
 
+    [Header("--- Gun Equipped ---")]
+    public GameObject weapon1;
+    public GameObject weapon2;
+    public GameObject weapon3;
+    public GameObject weapon4;
+    public GameObject weapon5;
+    public GameObject weapon6;
+    public string[] gunNames = new string[6];
+    public GameObject ability1;
+    public GameObject ability2;
+    public GameObject ability3;
+    public GameObject ability4;
+    public GameObject ability5;
+    public GameObject ability6;
+    public string[] abilityNames = new string[6];
+
     [Header("--- UI Upgrade Text ---")]
     //textmeshpro
     public TextMeshProUGUI speedCount;
@@ -56,6 +72,8 @@ public class GameManager : MonoBehaviour
     [Range(1, 3)] public int speedCost = 1;
 
     public int enemyCount;
+
+    
 
     //An enum to enforce menu types.
     public enum MenuType { WelcomeMenu, Pause, Win, Lose, Upgrade, PlayerDamageFlash, CloseAll }
@@ -110,6 +128,9 @@ public class GameManager : MonoBehaviour
             player = GameObject.FindGameObjectWithTag("Player");
             playerScript = player.GetComponent<PlayerController>();
         }
+
+        
+        
     }
 
     private void DoStats()
