@@ -8,6 +8,7 @@ public class GunSetup : ScriptableObject
     public float shotRate;
     public float shotDamage;
     public int shotDist;
+    public string gunName;
 
     public GameObject GunModel;
     public AudioClip gunShot;

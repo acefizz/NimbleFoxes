@@ -15,5 +15,6 @@ MonoBehaviour:
   shotRate: 1.5
   shotDamage: 3
   shotDist: 25
+  gunName: Shotgun
   GunModel: {fileID: 6568983722982623154, guid: 5a974021979d1aa468d57207a3aa7e6a, type: 3}
   gunShot: {fileID: 8300000, guid: c656eacd829f9dd43a451e3721413bad, type: 3}

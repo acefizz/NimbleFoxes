@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public GameObject playerFlashDamage;
     public Image playerHpBar;
     
+    
 
     public GameObject reticle;
 
@@ -26,6 +27,33 @@ public class GameManager : MonoBehaviour
     public GameObject winMenu;
     public GameObject loseMenu;
     public GameObject upgradeMenu;
+
+    [Header("--- UI Pickups ---")]
+    public GameObject Pickups;
+    [SerializeField] TextMeshProUGUI healthText;
+    public string healthDisplay;
+    [SerializeField] TextMeshProUGUI coinText;
+    public string coinDisplay;
+    [SerializeField] TextMeshProUGUI weaponText;
+    public string weaponDisplay;
+    [SerializeField] TextMeshProUGUI abiltyText;
+    public string abiltyDisplay;
+
+    [Header("--- Gun Equipped ---")]
+    public GameObject weapon1;
+    public GameObject weapon2;
+    public GameObject weapon3;
+    public GameObject weapon4;
+    public GameObject weapon5;
+    public GameObject weapon6;
+    public string[] gunNames = new string[6];
+    public GameObject ability1;
+    public GameObject ability2;
+    public GameObject ability3;
+    public GameObject ability4;
+    public GameObject ability5;
+    public GameObject ability6;
+    public string[] abilityNames = new string[6];
 
     [Header("--- UI Upgrade Text ---")]
     //textmeshpro
@@ -45,6 +73,8 @@ public class GameManager : MonoBehaviour
 
     public int enemyCount;
 
+    
+
     //An enum to enforce menu types.
     public enum MenuType { WelcomeMenu, Pause, Win, Lose, Upgrade, PlayerDamageFlash, CloseAll }
 
@@ -62,6 +92,7 @@ public class GameManager : MonoBehaviour
         //playerScript = player.GetComponent<PlayerController>();
 
         //playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
+        
 
         timeScaleOriginal = Time.timeScale;
 
@@ -70,10 +101,16 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         ShowMenu(MenuType.WelcomeMenu, true);
+        
     }
 
     private void Update()
     {
+        healthText.text = healthDisplay;
+        coinText.text = coinDisplay;
+        weaponText.text = weaponDisplay;
+        abiltyText.text = abiltyDisplay;
+
         if (Input.GetButtonDown("Cancel") && !playerScript.isDead)
         {
             isPaused = !isPaused;
@@ -91,6 +128,9 @@ public class GameManager : MonoBehaviour
             player = GameObject.FindGameObjectWithTag("Player");
             playerScript = player.GetComponent<PlayerController>();
         }
+
+        
+        
     }
 
     private void DoStats()
