@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,7 +11,7 @@ public class GameManager : MonoBehaviour
     [Header("Player")]
     public GameObject player;
     public PlayerController playerScript;
-    // public GameObject playerSpawnPos;
+    //public GameObject playerSpawnPos;
     public GameObject playerFlashDamage;
     public Image playerHpBar;
     
@@ -39,7 +40,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI abiltyText;
     public string abiltyDisplay;
 
-    [Header("--- Gun Equipped ---")]
+    [Header("--- Icons ---")]
     public GameObject weapon1;
     public GameObject weapon2;
     public GameObject weapon3;
@@ -73,7 +74,16 @@ public class GameManager : MonoBehaviour
 
     public int enemyCount;
 
-    
+    [Header("--- Checkpoint info - Don't change ---")]
+    public Vector3 playerSpawnLocation;
+    public Vector3 checkpoint;
+    public string checkpointName;
+    public int levelCheckpoint;
+    public List<GunSetup> gunCheckpoint;
+    public int gunSelectCheckpoint;
+    //List of Abilities and the current selection
+    public int coinsCheckpoint;
+    //Save the scene as it is (game objects, enemies)
 
     //An enum to enforce menu types.
     public enum MenuType { WelcomeMenu, Pause, Win, Lose, Upgrade, PlayerDamageFlash, CloseAll }
@@ -91,8 +101,7 @@ public class GameManager : MonoBehaviour
 
         //playerScript = player.GetComponent<PlayerController>();
 
-        //playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
-        
+        playerSpawnLocation = playerScript.ReturnStartCheckpoint();
 
         timeScaleOriginal = Time.timeScale;
 

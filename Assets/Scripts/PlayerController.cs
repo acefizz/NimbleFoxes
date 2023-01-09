@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,6 +23,7 @@ public class PlayerController : MonoBehaviour
     [Range(10, 15)][SerializeField] int jumpHeight;
     [Range(15, 50)][SerializeField] int gravity;
     [Range(1, 3)][SerializeField] int maxJumps;
+    [SerializeField] GameObject checkpointToSpawnAt;
 
     [Header("___| Collectables |___")]
     public int coins;
@@ -67,8 +69,10 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         HPOrig = HP;
-        //SetPlayerPos();
+        SetPlayerPos();
         ResetHP();
+        if(gunList.Count > 0)
+            changeGun();
     }
 
     void Update()
@@ -152,14 +156,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    /*
+
     public void SetPlayerPos()
     {
         controller.enabled = false;
-        transform.position = GameManager.instance.playerSpawnPos.transform.position;
+        transform.position = GameManager.instance.playerSpawnLocation;
         controller.enabled = true;
     }
-    */
+
 
     public void ResetHP()
     {
@@ -419,5 +423,17 @@ public class PlayerController : MonoBehaviour
                 break;
             }
         }
+    }
+    public List<GunSetup> ReturnGunList()
+    {
+        return gunList;
+    }
+    public int ReturnSelectedGun()
+    {
+        return selectedGun;
+    }
+    public Vector3 ReturnStartCheckpoint()
+    {
+        return checkpointToSpawnAt.transform.position;
     }
 }
