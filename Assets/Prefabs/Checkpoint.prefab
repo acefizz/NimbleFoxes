@@ -4854,7 +4854,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fc850a7e3705e344bad33e165ae8047, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkpointName: Start
+  checkpointName: 
 --- !u!33 &3569825448048060623
 MeshFilter:
   m_ObjectHideFlags: 0
