@@ -53,21 +53,26 @@ public class BurrowEnemyAI : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
-        Burrow();
+        if (agent.isStopped)
+        {
+            isBurrowing = false;
+        }
+        else
+        {
+            isBurrowing = true;
+        }
 
         if (playerInRange && !isDying)
         {
-            isBurrowing = true;
-
             canSeePlayer();
 
             if(agent.remainingDistance <= agent.stoppingDistance * .5)
             {
                 isBurrowing = true;
             }
-            else if (agent.remainingDistance < agent.stoppingDistance)
+            else if (agent.remainingDistance <= agent.stoppingDistance)
             {
-                isBurrowing = false;
+                StartCoroutine(StopStartAgent());
             }
         }
         else if (agent.remainingDistance < 0.1f && agent.destination != GameManager.instance.player.transform.position && !isDying)
@@ -75,6 +80,7 @@ public class BurrowEnemyAI : MonoBehaviour, IDamage
             Roam();
         }
 
+        Burrow();
         UpdateEnemyHPBar();
     }
 
@@ -224,6 +230,18 @@ public class BurrowEnemyAI : MonoBehaviour, IDamage
         else
         {
             transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(0, 0, 0), Time.deltaTime * burrowSpeed);
+        }
+    }
+
+    IEnumerator StopStartAgent()
+    {
+        if (!agent.isStopped)
+        {
+            agent.isStopped = true;
+
+            yield return new WaitForSeconds(burrowSpeed * 2);
+
+            agent.isStopped = false;
         }
     }
 }
