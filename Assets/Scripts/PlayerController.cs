@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("___| Player Settings |___")]
     [SerializeField] int HP;
+    [Range(1,3)] [SerializeField] int lives;
     [Range(3, 8)][SerializeField] int playerSpeed;
     [Range(10, 15)][SerializeField] int jumpHeight;
     [Range(15, 50)][SerializeField] int gravity;
