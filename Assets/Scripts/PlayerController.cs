@@ -436,4 +436,8 @@ public class PlayerController : MonoBehaviour
     {
         return checkpointToSpawnAt.transform.position;
     }
+    public CharacterController ReturnController()
+    {
+        return controller;
+    }
 }
