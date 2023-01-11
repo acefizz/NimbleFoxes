@@ -13,12 +13,18 @@ public class ButtonFunctions : MonoBehaviour
     {
         Application.Quit();
     }
-    public void RestartGame()
+    public void RestartGame() //TODO: I dont know if this code will work with the loading and respawning
     {
         GameManager.instance.ShowMenu(GameManager.MenuType.CloseAll);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
-
+    public void Respawn()
+    {
+        GameManager.instance.playerScript.ReturnController().enabled = false;
+        GameManager.instance.ShowMenu(GameManager.MenuType.CloseAll);
+        GameManager.instance.playerSpawnLocation = GameManager.instance.checkpoint;
+        GameManager.instance.playerScript.ReturnController().enabled = true;
+    }
     public void UpgradeMenuOpen()
     {
         GameManager.instance.ShowMenu(GameManager.MenuType.Upgrade, true);
@@ -26,6 +32,14 @@ public class ButtonFunctions : MonoBehaviour
     public void UpgradeMenuClose()
     {
         GameManager.instance.ShowMenu(GameManager.MenuType.Pause, true);
+    }
+    public void OptionsOpen()
+    {
+
+    }
+    public void OptionsClose()
+    {
+
     }
 
     public void AddMaxJumps(int amount)
