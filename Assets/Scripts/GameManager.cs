@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     public GameObject winMenu;
     public GameObject loseMenu;
     public GameObject upgradeMenu;
+    public GameObject optionsMenu; //TODO: This menu needs to be able to be opened and closed //Buttons are already set up, the functionality just needs applied
 
     [Header("--- UI Pickups ---")]
     public GameObject Pickups;
@@ -94,12 +95,12 @@ public class GameManager : MonoBehaviour
             instance = this;
 
 
-        //player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
         
         if (!player )
             Debug.LogError("Player not found in scene or tagged as Player or named Player");
 
-        //playerScript = player.GetComponent<PlayerController>();
+        playerScript = player.GetComponent<PlayerController>();
 
         playerSpawnLocation = playerScript.ReturnStartCheckpoint();
 
