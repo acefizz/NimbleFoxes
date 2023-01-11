@@ -95,12 +95,12 @@ public class GameManager : MonoBehaviour
             instance = this;
 
 
-        //player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
         
         if (!player )
             Debug.LogError("Player not found in scene or tagged as Player or named Player");
 
-        //playerScript = player.GetComponent<PlayerController>();
+        playerScript = player.GetComponent<PlayerController>();
 
         playerSpawnLocation = playerScript.ReturnStartCheckpoint();
 
