@@ -11,6 +11,7 @@ public class Collectables : MonoBehaviour
 
     public int health;
     public int coin;
+    public bool jump;
     public bool weapon;
     string weaponName;
     public bool ability;
@@ -52,7 +53,8 @@ public class Collectables : MonoBehaviour
             StartCoroutine(ShowCollections());
             gameObject.GetComponent<MeshRenderer>().enabled = false;
             gameObject.GetComponent<Collider>().enabled = false;
-
+            if (jump)
+                GameManager.instance.playerScript.AddJumps(1);
             if (weapon)
                 weaponName = GameManager.instance.playerScript.gunName;
             if (ability) { }
