@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     public GameObject winMenu;
     public GameObject loseMenu;
     public GameObject upgradeMenu;
+    public GameObject optionsMenu; //TODO: This menu needs to be able to be opened and closed //Buttons are already set up, the functionality just needs applied
 
     [Header("--- UI Pickups ---")]
     public GameObject Pickups;

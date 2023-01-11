@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class MainMenuUI : MonoBehaviour
 {
     [SerializeField] GameObject mainMenu;
@@ -13,7 +14,7 @@ public class MainMenuUI : MonoBehaviour
     private void Start()
     {
         //if there is a save present, continue should be enabled and save present should be set to true
-        loadingScreen = new LoadingScreen();
+        
     }
 
     public void Quit()
