@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     [Header("___| Player Settings |___")]
     [SerializeField] int HP;
     [Range(1,3)] [SerializeField] int lives;
+    int livesRemaining;
     [Range(3, 8)][SerializeField] int playerSpeed;
     [Range(10, 15)][SerializeField] int jumpHeight;
     [Range(15, 50)][SerializeField] int gravity;
@@ -77,6 +78,7 @@ public class PlayerController : MonoBehaviour
         if(gunList.Count > 0)
             changeGun();
         startCheckpoint = checkpointToSpawnAt.transform.position;
+        livesRemaining = lives;
     }
 
     void Update()
@@ -156,16 +158,19 @@ public class PlayerController : MonoBehaviour
         if (HP <= 0)
         {
             GameManager.instance.ShowMenu(GameManager.MenuType.Lose, true);
-            if (lives > 0)
+            if (livesRemaining > 0)
             {
-                GameObject.Find("Respawn").GetComponent<Button>().enabled = true;
-                GameObject.Find("Info").GetComponent<TextMeshProUGUI>().text = $"All of your light has been lost, you have {lives} balls of light remaining to revive";
+
+                GameManager.instance.respawnButton.interactable = true;
+                GameManager.instance.SetRespawnText($"All of your light has been lost, you have {livesRemaining} balls of light remaining to revive");
+                livesRemaining--;
+                ResetHP();
             }
             else
             {
                 GameManager.instance.checkpoint = startCheckpoint;
-                GameObject.Find("Respawn").GetComponent<Button>().enabled = false; //this is where the error is saying it is and in bullet on line 31
-                GameObject.Find("Info").GetComponent<TextMeshProUGUI>().text = "You have no light left to revive, you can return to when you came to this world.";
+                GameManager.instance.respawnButton.interactable = false;
+                GameManager.instance.SetRespawnText("You have no light left to revive, you can return to when you came to this world.");
                 isDead = true;
             }
         }

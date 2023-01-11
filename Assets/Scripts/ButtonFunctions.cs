@@ -24,6 +24,7 @@ public class ButtonFunctions : MonoBehaviour
         GameManager.instance.playerScript.ReturnController().enabled = false;
         GameManager.instance.ShowMenu(GameManager.MenuType.CloseAll);
         GameManager.instance.playerSpawnLocation = GameManager.instance.checkpoint;
+        GameManager.instance.player.transform.position = GameManager.instance.playerSpawnLocation;
         GameManager.instance.playerScript.ReturnController().enabled = true;
     }
     public void UpgradeMenuOpen()
@@ -36,11 +37,12 @@ public class ButtonFunctions : MonoBehaviour
     }
     public void OptionsOpen()
     {
-
+        GameManager.instance.ShowMenu(GameManager.MenuType.OptionsMenu, true);
     }
     public void OptionsClose()
     {
-
+        GameManager.instance.ShowMenu(GameManager.MenuType.OptionsMenu, false);
+        GameManager.instance.ShowMenu(GameManager.MenuType.Pause, true);
     }
 
     public void AddMaxJumps(int amount)
