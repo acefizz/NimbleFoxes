@@ -461,7 +461,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6100859939053985107}
-  - component: {fileID: 145877360106880238}
+  - component: {fileID: 8948007427822877392}
   - component: {fileID: 6190335025682737071}
   - component: {fileID: 5015146090631419482}
   - component: {fileID: 8963700752880972665}
@@ -503,7 +503,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &145877360106880238
+--- !u!114 &8948007427822877392
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -512,12 +512,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6106113084848013975}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb01d69f53e1fd04c9e0a322a7593bf1, type: 3}
+  m_Script: {fileID: 11500000, guid: 1bd6cfb599e2c1b41a0c4d8e90003707, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 6151109364373684003}
   agent: {fileID: 6795569815450046379}
-  enemyDrop: {fileID: 6106113084848013975, guid: 35b009ed8a441fe43b8ec3377fe342fd, type: 3}
+  enemyDrop: {fileID: 0}
   animator: {fileID: 6190335025682737071}
   HP: 10
   playerFaceSpeed: 3
@@ -530,7 +530,7 @@ MonoBehaviour:
   enemyHPBar: {fileID: 8596647093126144740}
   enemyUI: {fileID: 3372550971711055328}
   bossNameText: {fileID: 5633812985343174460}
-  bossName: Fiery
+  bossName: Chuck
 --- !u!95 &6190335025682737071
 Animator:
   serializedVersion: 4
