@@ -20,6 +20,7 @@ public class ButtonFunctions : MonoBehaviour
     }
     public void Respawn()
     {
+
         GameManager.instance.playerScript.ReturnController().enabled = false;
         GameManager.instance.ShowMenu(GameManager.MenuType.CloseAll);
         GameManager.instance.playerSpawnLocation = GameManager.instance.checkpoint;

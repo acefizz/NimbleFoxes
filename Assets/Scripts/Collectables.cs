@@ -65,13 +65,13 @@ public class Collectables : MonoBehaviour
     IEnumerator ShowCollections()
     {
         if (health > 0)
-            GameManager.instance.healthDisplay = $"+ {health} health added";
+            GameManager.instance.healthDisplay = "+ " + health +"health added";
         if (coin > 0)
-            GameManager.instance.coinDisplay = $"+ {coin} coin(s) added";
+            GameManager.instance.coinDisplay = "+ " + coin + " coin(s) added";
         if (weapon)
-            GameManager.instance.weaponDisplay = $"{weaponName} added";
+            GameManager.instance.weaponDisplay = GameManager.instance.playerScript.gunName + " added";
         if (ability)
-            GameManager.instance.abiltyDisplay = $"{abilityName} added";
+            GameManager.instance.abiltyDisplay = GameManager.instance.playerScript.abilityName + " added";
 
 
         yield return new WaitForSeconds(3.0f);

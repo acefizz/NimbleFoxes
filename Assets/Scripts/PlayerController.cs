@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,6 +26,7 @@ public class PlayerController : MonoBehaviour
     [Range(15, 50)][SerializeField] int gravity;
     [Range(1, 3)][SerializeField] int maxJumps;
     [SerializeField] GameObject checkpointToSpawnAt;
+    Vector3 startCheckpoint;
 
     [Header("___| Collectables |___")]
     public int coins;
@@ -74,6 +76,7 @@ public class PlayerController : MonoBehaviour
         ResetHP();
         if(gunList.Count > 0)
             changeGun();
+        startCheckpoint = checkpointToSpawnAt.transform.position;
     }
 
     void Update()
@@ -152,12 +155,26 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(PlayerDamageFlash());
         if (HP <= 0)
         {
-            isDead = true;
             GameManager.instance.ShowMenu(GameManager.MenuType.Lose, true);
+            if (lives > 0)
+            {
+                GameObject.Find("Respawn").GetComponent<Button>().enabled = true;
+                GameObject.Find("Info").GetComponent<TextMeshProUGUI>().text = $"All of your light has been lost, you have {lives} balls of light remaining to revive";
+            }
+            else
+            {
+                GameManager.instance.checkpoint = startCheckpoint;
+                GameObject.Find("Respawn").GetComponent<Button>().enabled = false; //this is where the error is saying it is and in bullet on line 31
+                GameObject.Find("Info").GetComponent<TextMeshProUGUI>().text = "You have no light left to revive, you can return to when you came to this world.";
+                isDead = true;
+            }
         }
     }
 
-
+    public int ReturnHP()
+    {
+        return HP;
+    }
     public void SetPlayerPos()
     {
         controller.enabled = false;
@@ -176,7 +193,11 @@ public class PlayerController : MonoBehaviour
         HP += hp;
         UpdatePlayerHPBar();
     }
-
+    public int Lives(int life = 0)
+    {
+        lives += life;
+        return lives;
+    }
     bool AimonEnemy()
     {
         RaycastHit hit;
