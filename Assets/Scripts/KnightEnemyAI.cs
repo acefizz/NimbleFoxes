@@ -4,12 +4,13 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-public class BurrowEnemyAI : MonoBehaviour, IDamage
+public class KnightEnemyAI : MonoBehaviour, IDamage
 {
     [Header("---Components--")]
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] GameObject enemyDrop;
+    [SerializeField] GameObject sword;
     [SerializeField] GameObject parent;
 
     [Header("---Enemy Stats---")]
@@ -18,12 +19,9 @@ public class BurrowEnemyAI : MonoBehaviour, IDamage
     [SerializeField] int sightAngle;
     [SerializeField] Transform headPos;
     [SerializeField] int roamDist;
-    [SerializeField] float burrowSpeed;
 
-    [Header("---Enemy Gun Stats---")]
-    [SerializeField] float shootRate;
-    [SerializeField] GameObject bullet;
-    [SerializeField] Transform shootPos;
+    [Header("---Enemy Weapon Stats---")]
+    [SerializeField] float swingSpeed;
 
     [Header("---Enemy UI---")]
     [SerializeField] Image enemyHPBar;
@@ -31,14 +29,11 @@ public class BurrowEnemyAI : MonoBehaviour, IDamage
 
     bool isDying;
     float HPorg;
-    bool isShooting;
     bool playerInRange;
     Vector3 playerDirection;
     float angleToPlayer;
     float stoppingDistOrig;
     Vector3 startPos;
-    bool isBurrowing;
-
 
     // Start is called before the first frame update
     void Start()
@@ -54,22 +49,9 @@ public class BurrowEnemyAI : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
-        Burrow();
-
         if (playerInRange && !isDying)
         {
-            isBurrowing = true;
-
             canSeePlayer();
-
-            if(agent.remainingDistance <= agent.stoppingDistance * .5)
-            {
-                isBurrowing = true;
-            }
-            else if (agent.remainingDistance < agent.stoppingDistance)
-            {
-                isBurrowing = false;
-            }
         }
         else if (agent.remainingDistance < 0.1f && agent.destination != GameManager.instance.player.transform.position && !isDying)
         {
@@ -84,6 +66,8 @@ public class BurrowEnemyAI : MonoBehaviour, IDamage
         playerDirection = GameManager.instance.player.transform.position - headPos.position;
         angleToPlayer = Vector3.Angle(playerDirection, transform.forward);
 
+        Debug.Log(angleToPlayer);
+
         agent.stoppingDistance = stoppingDistOrig;
 
         RaycastHit hit;
@@ -93,14 +77,14 @@ public class BurrowEnemyAI : MonoBehaviour, IDamage
             {
                 agent.SetDestination(GameManager.instance.player.transform.position);
 
-                if (!isShooting && HP > 0)
+                if (!agent.isStopped && HP > 0 && agent.remainingDistance <= agent.stoppingDistance)
                 {
-                    StartCoroutine(shoot());
+                    StartCoroutine(SwingDown());
                 }
             }
         }
 
-        if (agent.remainingDistance <= agent.stoppingDistance)
+        if (agent.remainingDistance <= agent.stoppingDistance && !agent.isStopped)
         {
             facePlayer();
         }
@@ -128,7 +112,7 @@ public class BurrowEnemyAI : MonoBehaviour, IDamage
     {
         playerDirection.y = 0;
         Quaternion rotation = Quaternion.LookRotation(playerDirection);
-        transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * playerFaceSpeed);
+        parent.transform.rotation = Quaternion.Lerp(parent.transform.rotation, rotation, Time.deltaTime * playerFaceSpeed);
     }
 
     public void OnTriggerEnter(Collider other)
@@ -145,27 +129,6 @@ public class BurrowEnemyAI : MonoBehaviour, IDamage
         {
             playerInRange = false;
         }
-    }
-
-    IEnumerator shoot()
-    {
-        isShooting = true;
-        if (bullet.GetComponent<NavMeshAgent>() != null)
-        {
-            NavMeshHit hit;
-            if (NavMesh.SamplePosition(shootPos.position, out hit, 10f, NavMesh.AllAreas))
-            {
-                Instantiate(bullet, hit.position, transform.rotation);
-            }
-        }
-        else
-        {
-            Instantiate(bullet, shootPos.position, transform.rotation);
-        }
-
-        yield return new WaitForSeconds(shootRate);
-
-        isShooting = false;
     }
 
     IEnumerator flashDamage()
@@ -198,23 +161,22 @@ public class BurrowEnemyAI : MonoBehaviour, IDamage
         StartCoroutine(ShowHP());
         agent.SetDestination(GameManager.instance.player.transform.position);
         StartCoroutine(flashDamage());
-        isBurrowing = true;
 
         if (HP <= 0)
         {
             enemyUI.SetActive(false);
             agent.isStopped = true;
             isDying = true;
-            isShooting = false;
 
             if (enemyDrop != null)
             {
-                Instantiate(enemyDrop, shootPos.position, transform.rotation);
+                Instantiate(enemyDrop, transform.position, transform.rotation);
             }
             StartCoroutine(Death());
             GameManager.instance.UpdateEnemyCount(-1);
         }
     }
+
 
     IEnumerator Death()
     {
@@ -227,15 +189,14 @@ public class BurrowEnemyAI : MonoBehaviour, IDamage
         Destroy(parent);
     }
 
-    public void Burrow()
+    IEnumerator SwingDown()
     {
-        if (isBurrowing)
-        {
-            transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(0, -1, 0), Time.deltaTime * burrowSpeed);
-        }
-        else
-        {
-            transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(0, 0, 0), Time.deltaTime * burrowSpeed);
-        }
+        sword.GetComponent<BoxCollider>().enabled = true;
+        agent.isStopped = true;
+
+        yield return new WaitForSeconds(swingSpeed);
+
+        sword.GetComponent<BoxCollider>().enabled = false;
+        agent.isStopped = false;
     }
 }
