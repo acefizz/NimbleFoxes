@@ -28,6 +28,13 @@ public class SoundManager : MonoBehaviour
         sfxList = FindObjectsOfType<AudioClip>();
         audioSourceList = FindObjectsOfType<AudioSource>();
 
+        if (volume <= 0)
+            volume = 1f;
+        if (musicVolume <= 0)
+            musicVolume = 1f;
+        if (sfxVolume <= 0)
+            sfxVolume = 1f;
+
         musicSlider.value = musicVolume;
         sfxSlider.value = sfxVolume;
         volumeSlider.value = volume;

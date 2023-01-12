@@ -27,7 +27,8 @@ public class Bullet : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            GameManager.instance.playerScript.takeDamage(damage);
+            if (GameManager.instance.playerScript.ReturnHP() > 0)
+                GameManager.instance.playerScript.takeDamage(damage); // this is also where it tells me there is an error im assuming because of the player controller error
         }
         else if (other.CompareTag("Barrel"))
         {
