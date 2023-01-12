@@ -582,7 +582,7 @@ GameObject:
   - component: {fileID: 6795569815450046379}
   - component: {fileID: 5792882592103580724}
   m_Layer: 7
-  m_Name: EnemyFiery
+  m_Name: BulletHell
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -631,7 +631,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 6151109364373684003}
   agent: {fileID: 6795569815450046379}
-  enemyDrop: {fileID: 6106113084848013975, guid: 4e0cb086a7a8d3443a77026ea89aba4e, type: 3}
+  enemyDrop: {fileID: 0}
   animator: {fileID: 6190335025682737071}
   HP: 10
   playerFaceSpeed: 3
