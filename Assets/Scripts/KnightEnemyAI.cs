@@ -10,7 +10,7 @@ public class KnightEnemyAI : MonoBehaviour, IDamage
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] GameObject enemyDrop;
-    [SerializeField] GameObject sword;
+    [SerializeField] GameObject shield;
     [SerializeField] GameObject parent;
 
     [Header("---Enemy Stats---")]
@@ -34,6 +34,8 @@ public class KnightEnemyAI : MonoBehaviour, IDamage
     float angleToPlayer;
     float stoppingDistOrig;
     Vector3 startPos;
+    bool isBashing;
+    Vector3 shieldStartPos;
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +43,7 @@ public class KnightEnemyAI : MonoBehaviour, IDamage
         isDying = false;
         HPorg = HP;
         startPos = transform.position;
+        shieldStartPos = shield.transform.localPosition;
         stoppingDistOrig = agent.stoppingDistance;
         UpdateEnemyHPBar();
         GameManager.instance.UpdateEnemyCount(1);
@@ -49,6 +52,8 @@ public class KnightEnemyAI : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
+        Bash();
+
         if (playerInRange && !isDying)
         {
             canSeePlayer();
@@ -65,8 +70,6 @@ public class KnightEnemyAI : MonoBehaviour, IDamage
     {
         playerDirection = GameManager.instance.player.transform.position - headPos.position;
         angleToPlayer = Vector3.Angle(playerDirection, transform.forward);
-
-        Debug.Log(angleToPlayer);
 
         agent.stoppingDistance = stoppingDistOrig;
 
@@ -191,12 +194,24 @@ public class KnightEnemyAI : MonoBehaviour, IDamage
 
     IEnumerator SwingDown()
     {
-        sword.GetComponent<BoxCollider>().enabled = true;
+        isBashing = true;
         agent.isStopped = true;
 
         yield return new WaitForSeconds(swingSpeed);
 
-        sword.GetComponent<BoxCollider>().enabled = false;
+        isBashing = false;
         agent.isStopped = false;
+    }
+
+    void Bash()
+    {
+        if (isBashing)
+        {
+            shield.transform.localPosition = Vector3.Lerp(shield.transform.localPosition, new Vector3(0, 1.5F, 3), Time.deltaTime * swingSpeed);
+        }
+        else
+        {
+            shield.transform.localPosition = Vector3.Lerp(shield.transform.localPosition, new Vector3(0, 1.5F, .25F), Time.deltaTime * swingSpeed);
+        }
     }
 }

@@ -102,6 +102,7 @@ MonoBehaviour:
   model: {fileID: 525437728656065808}
   agent: {fileID: 525437729493132357}
   enemyDrop: {fileID: 0}
+  parent: {fileID: 525437729493132358}
   HP: 5
   playerFaceSpeed: 5
   sightAngle: 360
