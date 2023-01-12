@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
     float timeScaleOriginal;
 
     [Header("--- UI Menus ---")]
+    [SerializeField] AudioSource menuMusic;
+
     public GameObject welcomeMenu;
     public GameObject pauseMenu;
     public GameObject winMenu;
@@ -82,11 +84,7 @@ public class GameManager : MonoBehaviour
     public Vector3 checkpoint;
     public string checkpointName;
     public int levelCheckpoint;
-    public List<GunSetup> gunCheckpoint;
-    public int gunSelectCheckpoint;
-    //List of Abilities and the current selection
-    public int coinsCheckpoint;
-    //Save the scene as it is (game objects, enemies)
+
 
     //An enum to enforce menu types.
     public enum MenuType { WelcomeMenu, Pause, Win, Lose, Upgrade, PlayerDamageFlash, OptionsMenu, CloseAll }
@@ -141,7 +139,7 @@ public class GameManager : MonoBehaviour
             playerScript = player.GetComponent<PlayerController>();
         }
 
-        
+        //TODO: see if a menu is active and if so, play the clip on attached on game manager
         
     }
 
