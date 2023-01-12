@@ -14,8 +14,6 @@ public class Checkpoint : MonoBehaviour
         GameManager.instance.playerSpawnLocation = GameManager.instance.checkpoint;
         GameManager.instance.checkpointName = checkpointName;
 
-        
-
         //need to write this stuff out to a file so I can read it later to load (continue)
         Destroy(gameObject);
     }
