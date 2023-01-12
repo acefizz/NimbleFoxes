@@ -135,7 +135,8 @@ public class PlayerController : MonoBehaviour
                 {
                     hit.collider.GetComponent<IDamage>().takeDamage((shotDamage + extraDmg));
                 }
-                Instantiate(hitEffect, hit.point, hitEffect.transform.rotation);
+                if(hitEffect)
+                    Instantiate(hitEffect, hit.point, hitEffect.transform.rotation);
             }
             aud.PlayOneShot(gunList[selectedGun].gunShot, gunShotVol);
 
