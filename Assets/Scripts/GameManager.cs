@@ -82,11 +82,7 @@ public class GameManager : MonoBehaviour
     public Vector3 checkpoint;
     public string checkpointName;
     public int levelCheckpoint;
-    public List<GunSetup> gunCheckpoint;
-    public int gunSelectCheckpoint;
-    //List of Abilities and the current selection
-    public int coinsCheckpoint;
-    //Save the scene as it is (game objects, enemies)
+
 
     //An enum to enforce menu types.
     public enum MenuType { WelcomeMenu, Pause, Win, Lose, Upgrade, PlayerDamageFlash, CloseAll }

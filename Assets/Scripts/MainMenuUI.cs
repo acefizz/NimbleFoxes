@@ -7,7 +7,7 @@ public class MainMenuUI : MonoBehaviour
 {
     [SerializeField] GameObject mainMenu;
     [SerializeField] GameObject optionsMenu;
-    LoadingScreen loadingScreen;
+    
 
     //bool savePresent = false;
 
@@ -32,16 +32,13 @@ public class MainMenuUI : MonoBehaviour
         optionsMenu.SetActive(false);
         mainMenu.SetActive(true);
     }
-    public void Apply()
-    {
-
-    }
+    
     public void NewGame()
     {
-        loadingScreen.NewGame();
+        
     }
     public void Continue()
     {
-        loadingScreen.Continue();
+        
     }
 }
