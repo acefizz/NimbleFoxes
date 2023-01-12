@@ -412,7 +412,7 @@ MonoBehaviour:
   modelBody: {fileID: 4533570552699256853}
   modelHead: {fileID: 4533570552689693435}
   HP: 25
-  lives: 0
+  lives: 3
   playerSpeed: 3
   jumpHeight: 15
   gravity: 20
@@ -498,7 +498,7 @@ AudioSource:
   m_GameObject: {fileID: 4533570552687693027}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 3736333018260920128, guid: 07ff31af15591cc4fb63a689701381f9, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
