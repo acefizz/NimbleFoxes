@@ -412,17 +412,21 @@ MonoBehaviour:
   modelBody: {fileID: 4533570552699256853}
   modelHead: {fileID: 4533570552689693435}
   HP: 25
+  lives: 0
   playerSpeed: 3
   jumpHeight: 15
   gravity: 20
   maxJumps: 1
+  checkpointToSpawnAt: {fileID: 0}
   coins: 0
   gunList: []
   gunModel: {fileID: 761319279755175072}
   shotDamage: 0
   shotRate: 0
   shotDist: 0
-  hitEffect: {fileID: 0}
+  hitEffect: {fileID: 1000011945391522, guid: 78b71003e8b357d4bbf89c8b5e5e4f0e, type: 3}
+  gunName: 
+  abilityName: 
   aud: {fileID: 8335207976358769998}
   gunShot: {fileID: 0}
   gunShotVol: 0.337
@@ -494,7 +498,7 @@ AudioSource:
   m_GameObject: {fileID: 4533570552687693027}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 3736333018260920128, guid: 07ff31af15591cc4fb63a689701381f9, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1

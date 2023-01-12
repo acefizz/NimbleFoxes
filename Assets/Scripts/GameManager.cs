@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
     float timeScaleOriginal;
 
     [Header("--- UI Menus ---")]
+    [SerializeField] AudioSource menuMusic;
+
     public GameObject welcomeMenu;
     public GameObject pauseMenu;
     public GameObject winMenu;
@@ -139,7 +141,7 @@ public class GameManager : MonoBehaviour
             playerScript = player.GetComponent<PlayerController>();
         }
 
-        
+        //TODO: see if a menu is active and if so, play the clip on attached on game manager
         
     }
 
