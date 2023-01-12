@@ -20,7 +20,7 @@ public class Checkpoint : MonoBehaviour
         //List of anilities and current selection
         GameManager.instance.coinsCheckpoint = GameManager.instance.playerScript.coins;
         //Save the scene as it is (game objects, enemies)
-
+        
         //need to write this stuff out to a file so I can read it later to load (continue)
         Destroy(gameObject);
     }

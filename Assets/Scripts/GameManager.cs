@@ -14,8 +14,9 @@ public class GameManager : MonoBehaviour
     //public GameObject playerSpawnPos;
     public GameObject playerFlashDamage;
     public Image playerHpBar;
-    
-    
+
+    public Button respawnButton;
+    [SerializeField] TextMeshProUGUI respawnText;
 
     public GameObject reticle;
 
@@ -29,6 +30,7 @@ public class GameManager : MonoBehaviour
     public GameObject loseMenu;
     public GameObject upgradeMenu;
     public GameObject optionsMenu; //TODO: This menu needs to be able to be opened and closed //Buttons are already set up, the functionality just needs applied
+    
 
     [Header("--- UI Pickups ---")]
     public GameObject Pickups;
@@ -87,7 +89,7 @@ public class GameManager : MonoBehaviour
     //Save the scene as it is (game objects, enemies)
 
     //An enum to enforce menu types.
-    public enum MenuType { WelcomeMenu, Pause, Win, Lose, Upgrade, PlayerDamageFlash, CloseAll }
+    public enum MenuType { WelcomeMenu, Pause, Win, Lose, Upgrade, PlayerDamageFlash, OptionsMenu, CloseAll }
 
     private void Awake()
     {
@@ -181,6 +183,7 @@ public class GameManager : MonoBehaviour
                 winMenu.SetActive(activeState);
                 break;
             case MenuType.Lose:
+                pauseMenu.SetActive(false);
                 loseMenu.SetActive(activeState);
                 break;
             case MenuType.Upgrade:
@@ -199,12 +202,19 @@ public class GameManager : MonoBehaviour
                 welcomeMenu.SetActive(false);
                 isPaused = false;
                 break;
+            case MenuType.OptionsMenu:
+                pauseMenu.SetActive(false);
+                optionsMenu.SetActive(activeState);
+                break;
             default:
                 break;
 
         }
     }
-
+    public void SetRespawnText(string text)
+    {
+        respawnText.text = text;
+    }
     public void UpdateEnemyCount(int amount)
     {
         enemyCount += amount;
