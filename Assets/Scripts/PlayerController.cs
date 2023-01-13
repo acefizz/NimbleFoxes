@@ -78,7 +78,7 @@ public class PlayerController : MonoBehaviour
         if(gunList.Count > 0)
             changeGun();
         startCheckpoint = checkpointToSpawnAt.transform.position;
-        livesRemaining = lives;
+        
     }
 
     void Update()
@@ -99,6 +99,7 @@ public class PlayerController : MonoBehaviour
             }
         }
         GameManager.instance.reticle.GetComponent<Image>().color = AimonEnemy() ? Color.green : Color.red;
+        livesRemaining = lives;
     }
     void Movement()
     {
@@ -163,7 +164,7 @@ public class PlayerController : MonoBehaviour
 
                 GameManager.instance.respawnButton.interactable = true;
                 GameManager.instance.SetRespawnText($"All of your light has been lost, you have {livesRemaining} balls of light remaining to revive");
-                livesRemaining--;
+                lives--;
                 ResetHP();
             }
             else
@@ -186,7 +187,11 @@ public class PlayerController : MonoBehaviour
         transform.position = GameManager.instance.playerSpawnLocation;
         controller.enabled = true;
     }
-
+    public void SetHP(int hp)
+    {
+        HP = hp;
+        UpdatePlayerHPBar();
+    }
 
     public void ResetHP()
     {
@@ -202,6 +207,10 @@ public class PlayerController : MonoBehaviour
     {
         lives += life;
         return lives;
+    }
+    public void SetLives(int numLives)
+    {
+        lives = numLives;
     }
     bool AimonEnemy()
     {
@@ -303,10 +312,17 @@ public class PlayerController : MonoBehaviour
     {
         return maxJumps;
     }
-
+    public void SetMaxJumps(int jumps)
+    {
+        maxJumps = jumps;
+    }
     public int GetSpeed()
     {
         return playerSpeed;
+    }
+    public void SetSpeed(int amount)
+    {
+        playerSpeed = amount;
     }
 
     public float GetDamage()
