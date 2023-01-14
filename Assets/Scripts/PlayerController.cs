@@ -41,6 +41,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject hitEffect;
     public string gunName;
     public string abilityName;
+    public int pellets;
+    public float FieldOfView;
 
     [Header("---| Audio |---")]
     [SerializeField] AudioSource aud;
@@ -138,6 +140,22 @@ public class PlayerController : MonoBehaviour
                 if(hitEffect)
                     Instantiate(hitEffect, hit.point, hitEffect.transform.rotation);
             }
+            if (gunList[selectedGun].pellets > 1)
+            {
+                for (int i = 0; i < gunList[selectedGun].pellets; i++)
+                {
+                    if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector3(UnityEngine.Random.Range(0.4f, 0.6f), UnityEngine.Random.Range(0.4f, 0.6f), 0.0f)), out hit, shotDist))
+                    {
+                        if (hit.collider.GetComponent<IDamage>() != null)
+                        {
+                            hit.collider.GetComponent<IDamage>().takeDamage((int)(shotDamage + extraDmg));
+                        }
+                        if (hitEffect)
+                            Instantiate(hitEffect, hit.point, hitEffect.transform.rotation);
+                    }
+                }
+
+            }
             aud.PlayOneShot(gunList[selectedGun].gunShot, gunShotVol);
 
             yield return new WaitForSeconds(shotRate);
@@ -232,6 +250,8 @@ public class PlayerController : MonoBehaviour
         shotRate = gun.shotRate;
         shotDist = gun.shotDist;
         gunName = gun.gunName;
+        FieldOfView = gun.FieldOfView;
+        pellets = gun.pellets;
 
         gunModel.GetComponent<MeshFilter>().sharedMesh = gun.GunModel.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gun.GunModel.GetComponent<MeshRenderer>().sharedMaterial;
@@ -266,6 +286,8 @@ public class PlayerController : MonoBehaviour
         shotRate = gunList[selectedGun].shotRate;
         shotDist = gunList[selectedGun].shotDist;
         gunName = gunList[selectedGun].gunName;
+        FieldOfView = gunList[selectedGun].FieldOfView;
+        pellets = gunList[selectedGun].pellets;
 
         gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[selectedGun].GunModel.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[selectedGun].GunModel.GetComponent<MeshRenderer>().sharedMaterial;

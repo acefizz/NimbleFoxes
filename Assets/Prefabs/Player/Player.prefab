@@ -427,6 +427,8 @@ MonoBehaviour:
   hitEffect: {fileID: 1000011945391522, guid: 78b71003e8b357d4bbf89c8b5e5e4f0e, type: 3}
   gunName: 
   abilityName: 
+  pellets: 0
+  FieldOfView: 60
   aud: {fileID: 8335207976358769998}
   gunShot: {fileID: 0}
   gunShotVol: 0.337
