@@ -62,6 +62,7 @@ public class PlayerController : MonoBehaviour
     bool isShooting;
     bool isSprinting;
     bool stepPlaying;
+    bool firstSpawn = true;
 
     int extraDmg;
 
@@ -73,16 +74,23 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         HPOrig = HP;
-        SetPlayerPos();
         ResetHP();
         if(gunList.Count > 0)
             changeGun();
+
         startCheckpoint = checkpointToSpawnAt.transform.position;
+        SetPlayerPos();
         
     }
 
     void Update()
     {
+        if (firstSpawn)
+        {
+            SetPlayerPos();
+            firstSpawn = false;
+        }
+
         if (!GameManager.instance.isPaused)
         {
             pushback = Vector3.Lerp(pushback, Vector3.zero, Time.deltaTime * pushbackTime);   

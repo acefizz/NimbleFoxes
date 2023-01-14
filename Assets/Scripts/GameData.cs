@@ -23,18 +23,18 @@ public class GameData : MonoBehaviour
 
     int scene;
 
-    public GameData()
-    {
-        HP = GameManager.instance.playerScript.ReturnHP();
-        lives = GameManager.instance.playerScript.Lives();
-        playerSpeed = GameManager.instance.playerScript.GetSpeed();
-        maxJumps = GameManager.instance.playerScript.GetMaxJumps();
-        coins = GameManager.instance.playerScript.coins;
-        spawnLocX = GameManager.instance.playerSpawnLocation.x;
-        spawnLocY = GameManager.instance.playerSpawnLocation.y;
-        spawnLocZ = GameManager.instance.playerSpawnLocation.z;
+    //public GameData()
+    //{
+    //    HP = GameManager.instance.playerScript.ReturnHP();
+    //    lives = GameManager.instance.playerScript.Lives();
+    //    playerSpeed = GameManager.instance.playerScript.GetSpeed();
+    //    maxJumps = GameManager.instance.playerScript.GetMaxJumps();
+    //    coins = GameManager.instance.playerScript.coins;
+    //    spawnLocX = GameManager.instance.playerSpawnLocation.x;
+    //    spawnLocY = GameManager.instance.playerSpawnLocation.y;
+    //    spawnLocZ = GameManager.instance.playerSpawnLocation.z;
 
-    }
+    //}
     public void SaveData()
     {
         HP = GameManager.instance.playerScript.ReturnHP();

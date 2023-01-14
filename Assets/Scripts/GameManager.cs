@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour
         if (instance == null)
             instance = this;
 
-        data.LoadData();
+        //data.LoadData();
 
         player = GameObject.FindGameObjectWithTag("Player");
         
@@ -124,10 +124,10 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        if (data == null)
-        {
-            data = new GameData();
-        }
+        //if (data == null)
+        //{
+        //    data = new GameData();
+        //}
 
         if (SceneManager.GetActiveScene().buildIndex != 1)
             ShowMenu(MenuType.WelcomeMenu, true);
@@ -136,9 +136,12 @@ public class GameManager : MonoBehaviour
             ShowMenu(MenuType.WelcomeMenu, false);
             
         }
+
         playerSpawnLocation = playerScript.ReturnStartCheckpoint();
+
+        playerScript.SetPlayerPos();
         
-        data.SaveData();
+        //data.SaveData();
     }
 
     private void Update()
