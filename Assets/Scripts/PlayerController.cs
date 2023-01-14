@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,11 +20,14 @@ public class PlayerController : MonoBehaviour
 
     [Header("___| Player Settings |___")]
     [SerializeField] int HP;
+    [Range(1,3)] [SerializeField] int lives;
+    int livesRemaining;
     [Range(3, 8)][SerializeField] int playerSpeed;
     [Range(10, 15)][SerializeField] int jumpHeight;
     [Range(15, 50)][SerializeField] int gravity;
     [Range(1, 3)][SerializeField] int maxJumps;
     [SerializeField] GameObject checkpointToSpawnAt;
+    Vector3 startCheckpoint;
 
     [Header("___| Collectables |___")]
     public int coins;
@@ -73,6 +77,8 @@ public class PlayerController : MonoBehaviour
         ResetHP();
         if(gunList.Count > 0)
             changeGun();
+        startCheckpoint = checkpointToSpawnAt.transform.position;
+        livesRemaining = lives;
     }
 
     void Update()
@@ -129,7 +135,8 @@ public class PlayerController : MonoBehaviour
                 {
                     hit.collider.GetComponent<IDamage>().takeDamage((shotDamage + extraDmg));
                 }
-                Instantiate(hitEffect, hit.point, hitEffect.transform.rotation);
+                if(hitEffect)
+                    Instantiate(hitEffect, hit.point, hitEffect.transform.rotation);
             }
             aud.PlayOneShot(gunList[selectedGun].gunShot, gunShotVol);
 
@@ -151,12 +158,29 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(PlayerDamageFlash());
         if (HP <= 0)
         {
-            isDead = true;
             GameManager.instance.ShowMenu(GameManager.MenuType.Lose, true);
+            if (livesRemaining > 0)
+            {
+
+                GameManager.instance.respawnButton.interactable = true;
+                GameManager.instance.SetRespawnText($"All of your light has been lost, you have {livesRemaining} balls of light remaining to revive");
+                livesRemaining--;
+                ResetHP();
+            }
+            else
+            {
+                GameManager.instance.checkpoint = startCheckpoint;
+                GameManager.instance.respawnButton.interactable = false;
+                GameManager.instance.SetRespawnText("You have no light left to revive, you can return to when you came to this world.");
+                isDead = true;
+            }
         }
     }
 
-
+    public int ReturnHP()
+    {
+        return HP;
+    }
     public void SetPlayerPos()
     {
         controller.enabled = false;
@@ -175,7 +199,11 @@ public class PlayerController : MonoBehaviour
         HP += hp;
         UpdatePlayerHPBar();
     }
-
+    public int Lives(int life = 0)
+    {
+        lives += life;
+        return lives;
+    }
     bool AimonEnemy()
     {
         RaycastHit hit;
@@ -435,5 +463,9 @@ public class PlayerController : MonoBehaviour
     public Vector3 ReturnStartCheckpoint()
     {
         return checkpointToSpawnAt.transform.position;
+    }
+    public CharacterController ReturnController()
+    {
+        return controller;
     }
 }

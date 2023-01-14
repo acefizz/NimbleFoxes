@@ -11,6 +11,7 @@ public class Collectables : MonoBehaviour
 
     public int health;
     public int coin;
+    public bool jump;
     public bool weapon;
     string weaponName;
     public bool ability;
@@ -52,7 +53,8 @@ public class Collectables : MonoBehaviour
             StartCoroutine(ShowCollections());
             gameObject.GetComponent<MeshRenderer>().enabled = false;
             gameObject.GetComponent<Collider>().enabled = false;
-
+            if (jump)
+                GameManager.instance.playerScript.AddJumps(1);
             if (weapon)
                 weaponName = GameManager.instance.playerScript.gunName;
             if (ability) { }
@@ -63,13 +65,13 @@ public class Collectables : MonoBehaviour
     IEnumerator ShowCollections()
     {
         if (health > 0)
-            GameManager.instance.healthDisplay = $"+ {health} health added";
+            GameManager.instance.healthDisplay = "+ " + health +"health added";
         if (coin > 0)
-            GameManager.instance.coinDisplay = $"+ {coin} coin(s) added";
+            GameManager.instance.coinDisplay = "+ " + coin + " coin(s) added";
         if (weapon)
-            GameManager.instance.weaponDisplay = $"{weaponName} added";
+            GameManager.instance.weaponDisplay = GameManager.instance.playerScript.gunName + " added";
         if (ability)
-            GameManager.instance.abiltyDisplay = $"{abilityName} added";
+            GameManager.instance.abiltyDisplay = GameManager.instance.playerScript.abilityName + " added";
 
 
         yield return new WaitForSeconds(3.0f);

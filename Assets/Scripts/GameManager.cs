@@ -14,8 +14,9 @@ public class GameManager : MonoBehaviour
     //public GameObject playerSpawnPos;
     public GameObject playerFlashDamage;
     public Image playerHpBar;
-    
-    
+
+    public Button respawnButton;
+    [SerializeField] TextMeshProUGUI respawnText;
 
     public GameObject reticle;
 
@@ -23,11 +24,15 @@ public class GameManager : MonoBehaviour
     float timeScaleOriginal;
 
     [Header("--- UI Menus ---")]
+    [SerializeField] AudioSource menuMusic;
+
     public GameObject welcomeMenu;
     public GameObject pauseMenu;
     public GameObject winMenu;
     public GameObject loseMenu;
     public GameObject upgradeMenu;
+    public GameObject optionsMenu; //TODO: This menu needs to be able to be opened and closed //Buttons are already set up, the functionality just needs applied
+    
 
     [Header("--- UI Pickups ---")]
     public GameObject Pickups;
@@ -79,14 +84,10 @@ public class GameManager : MonoBehaviour
     public Vector3 checkpoint;
     public string checkpointName;
     public int levelCheckpoint;
-    public List<GunSetup> gunCheckpoint;
-    public int gunSelectCheckpoint;
-    //List of Abilities and the current selection
-    public int coinsCheckpoint;
-    //Save the scene as it is (game objects, enemies)
+
 
     //An enum to enforce menu types.
-    public enum MenuType { WelcomeMenu, Pause, Win, Lose, Upgrade, PlayerDamageFlash, CloseAll }
+    public enum MenuType { WelcomeMenu, Pause, Win, Lose, Upgrade, PlayerDamageFlash, OptionsMenu, CloseAll }
 
     private void Awake()
     {
@@ -94,12 +95,12 @@ public class GameManager : MonoBehaviour
             instance = this;
 
 
-        //player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
         
         if (!player )
             Debug.LogError("Player not found in scene or tagged as Player or named Player");
 
-        //playerScript = player.GetComponent<PlayerController>();
+        playerScript = player.GetComponent<PlayerController>();
 
         playerSpawnLocation = playerScript.ReturnStartCheckpoint();
 
@@ -138,7 +139,7 @@ public class GameManager : MonoBehaviour
             playerScript = player.GetComponent<PlayerController>();
         }
 
-        
+        //TODO: see if a menu is active and if so, play the clip on attached on game manager
         
     }
 
@@ -180,6 +181,7 @@ public class GameManager : MonoBehaviour
                 winMenu.SetActive(activeState);
                 break;
             case MenuType.Lose:
+                pauseMenu.SetActive(false);
                 loseMenu.SetActive(activeState);
                 break;
             case MenuType.Upgrade:
@@ -198,12 +200,19 @@ public class GameManager : MonoBehaviour
                 welcomeMenu.SetActive(false);
                 isPaused = false;
                 break;
+            case MenuType.OptionsMenu:
+                pauseMenu.SetActive(false);
+                optionsMenu.SetActive(activeState);
+                break;
             default:
                 break;
 
         }
     }
-
+    public void SetRespawnText(string text)
+    {
+        respawnText.text = text;
+    }
     public void UpdateEnemyCount(int amount)
     {
         enemyCount += amount;
