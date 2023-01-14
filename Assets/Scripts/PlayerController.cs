@@ -140,6 +140,22 @@ public class PlayerController : MonoBehaviour
                 if(hitEffect)
                     Instantiate(hitEffect, hit.point, hitEffect.transform.rotation);
             }
+            if (gunList[selectedGun].pellets > 1)
+            {
+                for (int i = 0; i < gunList[selectedGun].pellets; i++)
+                {
+                    if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector3(UnityEngine.Random.Range(0.4f, 0.6f), UnityEngine.Random.Range(0.4f, 0.6f), 0.0f)), out hit, shotDist))
+                    {
+                        if (hit.collider.GetComponent<IDamage>() != null)
+                        {
+                            hit.collider.GetComponent<IDamage>().takeDamage((int)(shotDamage + extraDmg));
+                        }
+                        if (hitEffect)
+                            Instantiate(hitEffect, hit.point, hitEffect.transform.rotation);
+                    }
+                }
+
+            }
             aud.PlayOneShot(gunList[selectedGun].gunShot, gunShotVol);
 
             yield return new WaitForSeconds(shotRate);
