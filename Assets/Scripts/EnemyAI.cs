@@ -29,6 +29,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] GameObject enemyUI;
     [SerializeField] TextMeshProUGUI bossNameText;
     public string bossName;
+
     bool isDying;
     float HPorg;
     public bool isShooting;
@@ -37,6 +38,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     float angleToPlayer;
     float stoppingDistOrig;
     Vector3 startPos;
+
     // Start is called before the first frame update
     public virtual void Start()
     {
@@ -181,7 +183,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         }
         agent.SetDestination(GameManager.instance.player.transform.position);
         StartCoroutine(flashDamage());
-        if (HP <= 0)
+        if (HP <= 0 && !isDying)
         {
             enemyUI.SetActive(false);
             agent.isStopped = true;
@@ -193,7 +195,6 @@ public class EnemyAI : MonoBehaviour, IDamage
             }
             StartCoroutine(Death());
             GameManager.instance.UpdateEnemyCount(-1);
-
         }
 
     }
@@ -205,6 +206,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         {
             GameManager.instance.ShowMenu(GameManager.MenuType.Win, true);
         }
+
         Destroy(gameObject);
     }
 }

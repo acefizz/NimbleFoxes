@@ -80,7 +80,6 @@ public class PlayerController : MonoBehaviour
 
         startCheckpoint = checkpointToSpawnAt.transform.position;
         SetPlayerPos();
-        
     }
 
     void Update()

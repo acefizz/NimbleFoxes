@@ -13,17 +13,18 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField] GameObject mainMenu;
     [SerializeField] GameObject optionsMenu;
     [SerializeField] Button continueButton;
-    
 
+    GameData data;
     //bool savePresent = false;
 
     private void Start()
     {
-        Cursor.visible= true;
+        Cursor.visible = true;
         //if there is a save present, continue should be enabled and save present should be set to true
-        if (GameManager.instance.data != null)
+        if (GameDataSave.LoadGameData() != null)
         {
             continueButton.enabled = true;
+            data = GameDataSave.LoadGameData();
         }
         else
             continueButton.enabled = false;
@@ -47,11 +48,12 @@ public class MainMenuUI : MonoBehaviour
     
     public void NewGame()
     {
-        GameManager.instance.Load(2);
+        SceneManager.LoadScene(2);
     }
+
     public void Continue()
     {
-        GameManager.instance.Load(PlayerPrefs.GetInt("scene"));
+        GameManager.instance.LoadLevel(data.scene);
     }
     
 }

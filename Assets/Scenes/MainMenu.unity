@@ -9088,7 +9088,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3fb2084cee79b64bb3cc499fa540afd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scenePath: '"Assets/Scenes/SavedScene.unity"'
+  scene: 1
   player: {fileID: 1695068975}
   playerScript: {fileID: 0}
   playerFlashDamage: {fileID: 8739433236367384842}
@@ -9143,10 +9143,13 @@ MonoBehaviour:
   damageCount: {fileID: 1818512941172348391}
   playerCoins: {fileID: 1469459936}
   enemiesLeft: {fileID: 5916013459509319302}
+  livesText: {fileID: 0}
+  coinsText: {fileID: 0}
   jumpCost: 3
   damageCost: 3
   speedCost: 3
   enemyCount: 0
+  enemies: []
   playerSpawnLocation: {x: 0, y: 0, z: 0}
   checkpoint: {x: 0, y: 0, z: 0}
   checkpointName: 
@@ -9160,7 +9163,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 207014110796602972}
-  - component: {fileID: 207014110796602973}
   - component: {fileID: 207014110796602963}
   - component: {fileID: 207014110796602962}
   - component: {fileID: 207014110796602961}
@@ -9267,18 +9269,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &207014110796602973
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 207014110796602960}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd1d6e5729cb0d54bbe8af59572d6f12, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &207014111856327080
 RectTransform:
   m_ObjectHideFlags: 0

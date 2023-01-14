@@ -13,7 +13,6 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     //public string scenePath;
     int scene;
-    public GameData data;
 
     [Header("Player")]
     public GameObject player;
@@ -95,7 +94,6 @@ public class GameManager : MonoBehaviour
     public string checkpointName;
     public int levelCheckpoint;
 
-
     //An enum to enforce menu types.
     public enum MenuType { WelcomeMenu, Pause, Win, Lose, Upgrade, PlayerDamageFlash, OptionsMenu, CloseAll }
 
@@ -103,8 +101,6 @@ public class GameManager : MonoBehaviour
     {
         if (instance == null)
             instance = this;
-
-        //data.LoadData();
 
         player = GameObject.FindGameObjectWithTag("Player");
         
@@ -129,12 +125,15 @@ public class GameManager : MonoBehaviour
         //    data = new GameData();
         //}
 
+        //Load();
+
         if (SceneManager.GetActiveScene().buildIndex != 1)
             ShowMenu(MenuType.WelcomeMenu, true);
         else
         {
             ShowMenu(MenuType.WelcomeMenu, false);
-            
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.Confined;
         }
 
         playerSpawnLocation = playerScript.ReturnStartCheckpoint();
@@ -151,8 +150,8 @@ public class GameManager : MonoBehaviour
         weaponText.text = weaponDisplay;
         abiltyText.text = abiltyDisplay;
 
-        livesText.text = playerScript.Lives().ToString();
-        coinsText.text = playerScript.coins.ToString();
+        //livesText.text = playerScript.Lives().ToString();
+        //coinsText.text = playerScript.coins.ToString();
 
         if (Input.GetButtonDown("Cancel") && !playerScript.isDead && SceneManager.GetActiveScene().buildIndex != 1 && SceneManager.GetActiveScene().buildIndex != 0) 
         {
@@ -249,31 +248,35 @@ public class GameManager : MonoBehaviour
     }
     public void UpdateEnemyCount(int amount)
     {
+        
+
         enemyCount += amount;
         enemiesLeft.text = enemyCount.ToString("F0");
     }
     public void Save()
     {
-        data.SaveData();
+        GameDataSave.SaveGameData(instance);
         //scenePath = SceneManager.GetActiveScene().path;
         //EditorSceneManager.SaveScene(SceneManager.GetActiveScene(), scenePath);
     }
-    public void Load(int sceneNum)
-    {
-        StartCoroutine(LoadLevel(sceneNum));
-        //EditorSceneManager.OpenScene(scenePath);
-    }
-    IEnumerator LoadLevel(int level)
-    {
-        SceneManager.LoadScene(0);
-        yield return new WaitForSeconds(5f);
-        SceneManager.LoadScene(level);
-        data.LoadData();
 
+    // Will or will not be used after deciding if saving should put you back at a checkpoint.
+    //public void Load(/*int sceneNum*/)
+    //{
+    //    GameData data = GameDataSave.LoadGameData();
+
+    //    playerSpawnLocation.x = data.spawn[0];
+    //    playerSpawnLocation.y = data.spawn[1];
+    //    playerSpawnLocation.z = data.spawn[2];
+    //}
+
+    public void LoadLevel(int level)
+    {
+        SceneManager.LoadScene(level);
     }
+
     public int ReturnScene()
     {
         return scene;
     }
-
 }

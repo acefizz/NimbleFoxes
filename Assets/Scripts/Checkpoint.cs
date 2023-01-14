@@ -11,12 +11,15 @@ public class Checkpoint : MonoBehaviour
     //can be used as a player spawner if player is set to that location originally
     private void OnTriggerEnter(Collider other)
     {
-        GameManager.instance.checkpoint = GameManager.instance.player.transform.position;
-        GameManager.instance.playerSpawnLocation = GameManager.instance.checkpoint;
-        GameManager.instance.checkpointName = checkpointName;
+        if (other.CompareTag("Player"))
+        {
+            GameManager.instance.checkpoint = GameManager.instance.player.transform.position;
+            GameManager.instance.playerSpawnLocation = GameManager.instance.checkpoint;
+            GameManager.instance.checkpointName = checkpointName;
 
-        GameManager.instance.Save();
+            GameManager.instance.Save();
 
-        Destroy(gameObject);
+            Destroy(gameObject);
+        }
     }
 }
