@@ -12,4 +12,8 @@ public class GunSetup : ScriptableObject
 
     public GameObject GunModel;
     public AudioClip gunShot;
+
+
+    public float FieldOfView;
+    public int pellets;
 }

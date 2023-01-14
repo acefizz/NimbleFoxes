@@ -41,6 +41,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject hitEffect;
     public string gunName;
     public string abilityName;
+    public int pellets;
+    public float FieldOfView;
 
     [Header("---| Audio |---")]
     [SerializeField] AudioSource aud;
@@ -232,6 +234,8 @@ public class PlayerController : MonoBehaviour
         shotRate = gun.shotRate;
         shotDist = gun.shotDist;
         gunName = gun.gunName;
+        FieldOfView = gun.FieldOfView;
+        pellets = gun.pellets;
 
         gunModel.GetComponent<MeshFilter>().sharedMesh = gun.GunModel.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gun.GunModel.GetComponent<MeshRenderer>().sharedMaterial;
@@ -266,6 +270,8 @@ public class PlayerController : MonoBehaviour
         shotRate = gunList[selectedGun].shotRate;
         shotDist = gunList[selectedGun].shotDist;
         gunName = gunList[selectedGun].gunName;
+        FieldOfView = gunList[selectedGun].FieldOfView;
+        pellets = gunList[selectedGun].pellets;
 
         gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[selectedGun].GunModel.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[selectedGun].GunModel.GetComponent<MeshRenderer>().sharedMaterial;
