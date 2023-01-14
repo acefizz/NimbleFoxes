@@ -6,13 +6,14 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEditor;
 using UnityEditor.SceneManagement;
+using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public string scenePath;
+    //public string scenePath;
     int scene;
-    GameData data;
+    public GameData data;
 
     [Header("Player")]
     public GameObject player;
@@ -75,6 +76,9 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI playerCoins;
     public TextMeshProUGUI enemiesLeft;
 
+    [SerializeField] TextMeshProUGUI livesText;
+    [SerializeField] TextMeshProUGUI coinsText;
+
     [Header("--- Upgrade Costs ---")]
     [SerializeField]
     [Range(1, 3)] public int jumpCost = 1;
@@ -100,6 +104,7 @@ public class GameManager : MonoBehaviour
         if (instance == null)
             instance = this;
 
+        data.LoadData();
 
         player = GameObject.FindGameObjectWithTag("Player");
         
@@ -112,15 +117,17 @@ public class GameManager : MonoBehaviour
 
         timeScaleOriginal = Time.timeScale;
 
-        if (scenePath == null)
-            scenePath = "Assets/Scenes/SavedScene.unity";
+        //if (scenePath == null)
+        //    scenePath = "Assets/Scenes/SavedScene.unity";
 
     }
 
     void Start()
     {
         if (data == null)
+        {
             data = new GameData();
+        }
 
         if (SceneManager.GetActiveScene().buildIndex != 1)
             ShowMenu(MenuType.WelcomeMenu, true);
@@ -141,6 +148,9 @@ public class GameManager : MonoBehaviour
         weaponText.text = weaponDisplay;
         abiltyText.text = abiltyDisplay;
 
+        livesText.text = playerScript.Lives().ToString();
+        coinsText.text = playerScript.coins.ToString();
+
         if (Input.GetButtonDown("Cancel") && !playerScript.isDead && SceneManager.GetActiveScene().buildIndex != 1 && SceneManager.GetActiveScene().buildIndex != 0) 
         {
             isPaused = !isPaused;
@@ -159,11 +169,6 @@ public class GameManager : MonoBehaviour
             playerScript = player.GetComponent<PlayerController>();
         }
         scene = SceneManager.GetActiveScene().buildIndex;
-        
-        if (SceneManager.GetActiveScene().buildIndex == 1)
-        {
-
-        }
 
         //TODO: see if a menu is active and if so, play the clip on attached on game manager
 
@@ -244,22 +249,28 @@ public class GameManager : MonoBehaviour
         enemyCount += amount;
         enemiesLeft.text = enemyCount.ToString("F0");
     }
-    public void SaveScene()
+    public void Save()
     {
         data.SaveData();
-        scenePath = SceneManager.GetActiveScene().path;
-        EditorSceneManager.SaveScene(SceneManager.GetActiveScene(), scenePath);
+        //scenePath = SceneManager.GetActiveScene().path;
+        //EditorSceneManager.SaveScene(SceneManager.GetActiveScene(), scenePath);
     }
-    public void LoadScene()
+    public void Load(int sceneNum)
     {
-        data.LoadData();
-        EditorSceneManager.OpenScene(scenePath);
+        StartCoroutine(LoadLevel(sceneNum));
+        //EditorSceneManager.OpenScene(scenePath);
     }
     IEnumerator LoadLevel(int level)
     {
         SceneManager.LoadScene(0);
         yield return new WaitForSeconds(5f);
         SceneManager.LoadScene(level);
+        data.LoadData();
+
+    }
+    public int ReturnScene()
+    {
+        return scene;
     }
 
 }

@@ -12,15 +12,27 @@ public class GameData : MonoBehaviour
     int playerSpeed;
     int maxJumps;
     int coins;
+    //i dont know how to save the weapons or abilities or what enemies and collectanles have been removed or not from the level.
+
+
     //======= GAME MANAGER
-    string scenePath;
+    //string scenePath;
     float spawnLocX; 
     float spawnLocY;
     float spawnLocZ;
 
     int scene;
+
     public GameData()
     {
+        HP = GameManager.instance.playerScript.ReturnHP();
+        lives = GameManager.instance.playerScript.Lives();
+        playerSpeed = GameManager.instance.playerScript.GetSpeed();
+        maxJumps = GameManager.instance.playerScript.GetMaxJumps();
+        coins = GameManager.instance.playerScript.coins;
+        spawnLocX = GameManager.instance.playerSpawnLocation.x;
+        spawnLocY = GameManager.instance.playerSpawnLocation.y;
+        spawnLocZ = GameManager.instance.playerSpawnLocation.z;
 
     }
     public void SaveData()
@@ -40,8 +52,8 @@ public class GameData : MonoBehaviour
         coins = GameManager.instance.playerScript.coins;
         PlayerPrefs.SetInt("coins", coins);
 
-        scenePath = GameManager.instance.scenePath;
-        PlayerPrefs.SetString("scenePath", scenePath);
+        //scenePath = GameManager.instance.scenePath;
+        //PlayerPrefs.SetString("scenePath", scenePath);
 
         spawnLocX = GameManager.instance.playerSpawnLocation.x;
         spawnLocY = GameManager.instance.playerSpawnLocation.y;
@@ -71,8 +83,8 @@ public class GameData : MonoBehaviour
         coins = PlayerPrefs.GetInt("coins");
         GameManager.instance.playerScript.coins = coins;
 
-        scenePath = PlayerPrefs.GetString("scenePath");
-        GameManager.instance.scenePath = scenePath;
+        //scenePath = PlayerPrefs.GetString("scenePath");
+        //GameManager.instance.scenePath = scenePath;
 
         spawnLocX = PlayerPrefs.GetFloat("spawnX");
         spawnLocY = PlayerPrefs.GetFloat("soawnY");

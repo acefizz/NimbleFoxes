@@ -21,7 +21,7 @@ public class MainMenuUI : MonoBehaviour
     {
         Cursor.visible= true;
         //if there is a save present, continue should be enabled and save present should be set to true
-        if (GameManager.instance.scenePath != null)
+        if (GameManager.instance.data != null)
         {
             continueButton.enabled = true;
         }
@@ -47,17 +47,11 @@ public class MainMenuUI : MonoBehaviour
     
     public void NewGame()
     {
-        
+        GameManager.instance.Load(2);
     }
     public void Continue()
     {
-        LoadSave();
-    }
-    IEnumerator LoadSave()
-    {
-        SceneManager.LoadScene(0);
-        yield return new WaitForSeconds(5f);
-        EditorSceneManager.OpenScene(GameManager.instance.scenePath);
+        GameManager.instance.Load(PlayerPrefs.GetInt("scene"));
     }
     
 }

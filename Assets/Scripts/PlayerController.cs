@@ -207,11 +207,13 @@ public class PlayerController : MonoBehaviour
     public int Lives(int life = 0)
     {
         lives += life;
+        livesRemaining += life;
         return lives;
     }
     public void SetLives(int numLives)
     {
         lives = numLives;
+        livesRemaining = numLives;
     }
     bool AimonEnemy()
     {
