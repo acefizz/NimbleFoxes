@@ -35,7 +35,7 @@ public class Bullet : MonoBehaviour
             other.GetComponent<IDamage>().takeDamage(damage);
         }
 
-        if (!other.isTrigger)
+        if (!other.isTrigger || other.CompareTag("Flame Wall"))
         {
             Destroy(gameObject);
         }

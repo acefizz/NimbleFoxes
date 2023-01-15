@@ -243,4 +243,10 @@ public class GameManager : MonoBehaviour
 
         return temp;
     }
+
+    public void SetCoolDown(AbilitySetup ability)
+    {
+        coolDowns.Add(ability.abilityCoolDown);
+        coolDownTracker.Add(ability.abilityCoolDown);
+    }
 }
