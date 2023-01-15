@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float shotDamage;
     [SerializeField] float shotRate;
     [SerializeField] int shotDist;
-    [SerializeField] GameObject hitEffect;
+    public GameObject hitEffect;
     public string gunName;
     public string abilityName;
     public int pellets;
@@ -64,6 +64,8 @@ public class PlayerController : MonoBehaviour
     bool isShooting;
     bool isSprinting;
     bool stepPlaying;
+
+    bool isAbility;
 
     int extraDmg;
 
@@ -124,44 +126,49 @@ public class PlayerController : MonoBehaviour
         playerVelocity.y -= gravity * Time.deltaTime;
         controller.Move((playerVelocity + pushback) * Time.deltaTime);
     }
+
     IEnumerator Shoot()
     {
         if (!isShooting && Input.GetButton("Shoot"))
         {
             isShooting = true;
 
-            RaycastHit hit;
-            if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shotDist))
-            {
-                if (hit.collider.GetComponent<IDamage>() != null)
-                {
-                    hit.collider.GetComponent<IDamage>().takeDamage((shotDamage + extraDmg));
-                }
-                if(hitEffect)
-                    Instantiate(hitEffect, hit.point, hitEffect.transform.rotation);
-            }
-            if (gunList[selectedGun].pellets > 1)
-            {
-                for (int i = 0; i < gunList[selectedGun].pellets; i++)
-                {
-                    if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector3(UnityEngine.Random.Range(0.4f, 0.6f), UnityEngine.Random.Range(0.4f, 0.6f), 0.0f)), out hit, shotDist))
-                    {
-                        if (hit.collider.GetComponent<IDamage>() != null)
-                        {
-                            hit.collider.GetComponent<IDamage>().takeDamage((int)(shotDamage + extraDmg));
-                        }
-                        if (hitEffect)
-                            Instantiate(hitEffect, hit.point, hitEffect.transform.rotation);
-                    }
-                }
+            gunList[selectedGun].GunModel.GetComponent<IWeapon>().Fire(extraDmg);
 
-            }
+            //RaycastHit hit;
+            //if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shotDist))
+            //{
+            //    if (hit.collider.GetComponent<IDamage>() != null)
+            //    {
+            //        hit.collider.GetComponent<IDamage>().takeDamage((shotDamage + extraDmg));
+            //    }
+            //    if(hitEffect)
+            //        Instantiate(hitEffect, hit.point, hitEffect.transform.rotation);
+            //}
+            //if (gunList[selectedGun].pellets > 1)
+            //{
+            //    for (int i = 0; i < gunList[selectedGun].pellets; i++)
+            //    {
+            //        if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector3(UnityEngine.Random.Range(0.4f, 0.6f), UnityEngine.Random.Range(0.4f, 0.6f), 0.0f)), out hit, shotDist))
+            //        {
+            //            if (hit.collider.GetComponent<IDamage>() != null)
+            //            {
+            //                hit.collider.GetComponent<IDamage>().takeDamage((int)(shotDamage + extraDmg));
+            //            }
+            //            if (hitEffect)
+            //                Instantiate(hitEffect, hit.point, hitEffect.transform.rotation);
+            //        }
+            //    }
+
+            //}
+
             aud.PlayOneShot(gunList[selectedGun].gunShot, gunShotVol);
 
             yield return new WaitForSeconds(shotRate);
             isShooting = false;
         }
     }
+
         IEnumerator PlayerDamageFlash()
     {
         GameManager.instance.ShowMenu(GameManager.MenuType.PlayerDamageFlash, true);
