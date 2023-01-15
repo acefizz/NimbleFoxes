@@ -412,6 +412,7 @@ MonoBehaviour:
   modelBody: {fileID: 4533570552699256853}
   modelHead: {fileID: 4533570552689693435}
   HP: 25
+  HPOrig: 25
   lives: 3
   playerSpeed: 3
   jumpHeight: 15

@@ -48,6 +48,7 @@ public class MainMenuUI : MonoBehaviour
     
     public void NewGame()
     {
+        GameDataSave.DeleteSaves();
         SceneManager.LoadScene(2);
     }
 

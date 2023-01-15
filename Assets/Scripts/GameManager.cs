@@ -125,7 +125,7 @@ public class GameManager : MonoBehaviour
         //    data = new GameData();
         //}
 
-        //Load();
+        Load();
 
         if (SceneManager.GetActiveScene().buildIndex != 1)
             ShowMenu(MenuType.WelcomeMenu, true);
@@ -140,6 +140,7 @@ public class GameManager : MonoBehaviour
 
         playerScript.SetPlayerPos();
         
+        scene = SceneManager.GetActiveScene().buildIndex;
         //data.SaveData();
     }
 
@@ -170,7 +171,6 @@ public class GameManager : MonoBehaviour
             player = GameObject.FindGameObjectWithTag("Player");
             playerScript = player.GetComponent<PlayerController>();
         }
-        scene = SceneManager.GetActiveScene().buildIndex;
 
         //TODO: see if a menu is active and if so, play the clip on attached on game manager
 
@@ -256,19 +256,26 @@ public class GameManager : MonoBehaviour
     public void Save()
     {
         GameDataSave.SaveGameData(instance);
+        GameDataSave.SavePlayerData(playerScript);
         //scenePath = SceneManager.GetActiveScene().path;
         //EditorSceneManager.SaveScene(SceneManager.GetActiveScene(), scenePath);
     }
 
-    // Will or will not be used after deciding if saving should put you back at a checkpoint.
-    //public void Load(/*int sceneNum*/)
-    //{
-    //    GameData data = GameDataSave.LoadGameData();
 
-    //    playerSpawnLocation.x = data.spawn[0];
-    //    playerSpawnLocation.y = data.spawn[1];
-    //    playerSpawnLocation.z = data.spawn[2];
-    //}
+    public void Load(/*int sceneNum*/)
+    {
+        PlayerData data = GameDataSave.LoadPlayerData();
+
+        if(data != null)
+        {
+            playerScript.PlayerLoad(data);
+            playerScript.UpdatePlayerHPBar();
+        }
+        // Will or will not be used after deciding if saving should put you back at a checkpoint.
+        //playerSpawnLocation.x = data.spawn[0];
+        //playerSpawnLocation.y = data.spawn[1];
+        //playerSpawnLocation.z = data.spawn[2];
+    }
 
     public void LoadLevel(int level)
     {

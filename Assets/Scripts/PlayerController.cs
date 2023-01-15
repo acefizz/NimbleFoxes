@@ -20,8 +20,9 @@ public class PlayerController : MonoBehaviour
 
     [Header("___| Player Settings |___")]
     [SerializeField] int HP;
+    [SerializeField] int HPOrig;
     [Range(1,3)] [SerializeField] int lives;
-    int livesRemaining;
+    //int livesRemaining;
     [Range(3, 8)][SerializeField] int playerSpeed;
     [Range(10, 15)][SerializeField] int jumpHeight;
     [Range(15, 50)][SerializeField] int gravity;
@@ -55,7 +56,6 @@ public class PlayerController : MonoBehaviour
 
     Color retOrigColor;
     int timesJumped;
-    int HPOrig;
     int selectedGun;
     private Vector3 playerVelocity;
     Vector3 move;
@@ -73,13 +73,12 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        HPOrig = HP;
-        ResetHP();
         if(gunList.Count > 0)
             changeGun();
 
         startCheckpoint = checkpointToSpawnAt.transform.position;
         SetPlayerPos();
+        UpdatePlayerHPBar();
     }
 
     void Update()
@@ -106,7 +105,6 @@ public class PlayerController : MonoBehaviour
             }
         }
         GameManager.instance.reticle.GetComponent<Image>().color = AimonEnemy() ? Color.green : Color.red;
-        livesRemaining = lives;
     }
     void Movement()
     {
@@ -167,12 +165,12 @@ public class PlayerController : MonoBehaviour
         if (HP <= 0)
         {
             GameManager.instance.ShowMenu(GameManager.MenuType.Lose, true);
-            if (livesRemaining > 0)
+            if (lives > 0)
             {
 
                 GameManager.instance.respawnButton.interactable = true;
-                GameManager.instance.SetRespawnText($"All of your light has been lost, you have {livesRemaining} balls of light remaining to revive");
                 lives--;
+                GameManager.instance.SetRespawnText($"All of your light has been lost, you have {lives} balls of light remaining to revive");
                 ResetHP();
             }
             else
@@ -208,19 +206,44 @@ public class PlayerController : MonoBehaviour
     }
     public void AddHp(int hp)
     {
-        HP += hp;
+        if (HP < HPOrig)
+        {
+            HP += hp;
+
+            if(HP > HPOrig)
+            {
+                hp = HPOrig;
+            }
+
+            UpdatePlayerHPBar();
+        }
+    }
+
+    public void IncreaseMaxHP(int hp)
+    {
+        HPOrig += hp;
+        AddHp(hp);
         UpdatePlayerHPBar();
     }
+
+    public int GetOriginalHP()
+    {
+        return HPOrig;
+    }
+
+    public void SetOriginalHP(int hp)
+    {
+        HPOrig = hp;
+    }
+
     public int Lives(int life = 0)
     {
         lives += life;
-        livesRemaining += life;
         return lives;
     }
     public void SetLives(int numLives)
     {
         lives = numLives;
-        livesRemaining = numLives;
     }
     bool AimonEnemy()
     {
@@ -492,5 +515,15 @@ public class PlayerController : MonoBehaviour
     public CharacterController ReturnController()
     {
         return controller;
+    }
+
+    public void PlayerLoad(PlayerData data)
+    {
+        lives = data.lives;
+        playerSpeed = data.speed;
+        coins = data.coins;
+        maxJumps = data.maxJumps;
+        HP = data.health;
+        HPOrig = data.maxHealth;
     }
 }
