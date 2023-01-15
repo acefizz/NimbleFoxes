@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4125061865080693056}
   - component: {fileID: 2735464018049618203}
   - component: {fileID: 1568637476646761474}
+  - component: {fileID: -7752328105489747386}
   m_Layer: 0
   m_Name: Rifle
   m_TagString: Untagged
@@ -51,12 +52,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 0
   coin: 0
+  jump: 0
   weapon: 1
-  weaponName: Rifle
   ability: 0
-  abilityName: 
+  pullSpeed: 0
+  pullDistance: 0
   audioSource: {fileID: 0}
   upgradeClip: {fileID: 0}
+  effectVol: 0
   speed: 0
   height: 0
 --- !u!114 &1054365948618060724
@@ -72,8 +75,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunSetup: {fileID: 11400000, guid: bff94c45735a20f4aac96544e3b84e22, type: 2}
-  speed: 0
-  height: 0
 --- !u!33 &2223615623080301962
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -151,3 +152,16 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1.079586
   m_Center: {x: 0.09725672, y: -0.052977085, z: -0.00017293356}
+--- !u!114 &-7752328105489747386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2467925974433038485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e001767e4e954fd4dbd9286f0c8745b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gun: {fileID: 11400000, guid: bff94c45735a20f4aac96544e3b84e22, type: 2}
