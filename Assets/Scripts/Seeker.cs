@@ -30,26 +30,36 @@ public class Seeker : MonoBehaviour, IDamage
         model.enabled = true;
         if (other.CompareTag("Player"))
         {
-            if (spawned <= 0)
-            {
-                for (int i = 0; i < toSpawn; i++)
-                {
-                    StartCoroutine(SpawnEnemies());
-                    spawned++;
-                }
-            }
+            StartCoroutine(SpawnEnemies());
         }
     }
+    //private void OnTriggerStay(Collider other)
+    //{
+    //    if (other.CompareTag("Player"))
+    //    {
+    //        StartCoroutine(SpawnEnemies());
+    //    }
+    //}
     private void OnTriggerExit(Collider other)
     {
         model.enabled = false;
         if (other.CompareTag("Player"))
             spawned = 0;
+        StopCoroutine(SpawnEnemies());
     }
     IEnumerator SpawnEnemies()
     {
-        Instantiate(seekers, gameObject.transform);
-        yield return new WaitForSeconds(5.0f);
+        if (spawned <= 0)
+        {
+            for (int i = 0; i < toSpawn; i++)
+            {
+                yield return new WaitForSeconds(3.0f);
+                Instantiate(seekers, gameObject.transform.position, gameObject.transform.rotation);
+                spawned++;
+            }
+        }
+        //yield return new WaitForSeconds(3.0f);
+        //Instantiate(seekers, gameObject.transform.position, gameObject.transform.rotation);
     }
     public virtual void takeDamage(float damage)
     {

@@ -8,6 +8,7 @@ public class SeekerSmall : MonoBehaviour, IDamage
 {
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Renderer model;
+    [SerializeField] GameObject effect; 
     //public Animator animator;
     public float HP;
     private void Start()
@@ -21,7 +22,7 @@ public class SeekerSmall : MonoBehaviour, IDamage
     private void OnTriggerEnter(Collider other)
     {
         StartCoroutine(Death());
-        other.gameObject.GetComponent<PlayerController>().AddHp(-1);
+        GameManager.instance.playerScript.AddHp(-1);
     }
     public virtual void takeDamage(float damage)
     {
@@ -44,12 +45,16 @@ public class SeekerSmall : MonoBehaviour, IDamage
     IEnumerator Death()
     {
         //Explode animation
+        effect.GetComponent<ParticleSystem>().Play();
+        agent.isStopped = true;
         yield return new WaitForSeconds(3.0f);
         if (GameManager.instance.enemyCount <= 0)
         {
             GameManager.instance.ShowMenu(GameManager.MenuType.Win, true);
         }
+        effect.GetComponent<ParticleSystem>().Stop();
         Destroy(gameObject);
+        
     }
     
 }
