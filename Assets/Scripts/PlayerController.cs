@@ -40,9 +40,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] int shotDist;
     public GameObject hitEffect;
     public string gunName;
-    public string abilityName;
     public int pellets;
     public float FieldOfView;
+
+    [Header("---| Ability Info |---")]
+    [SerializeField] Transform abilitySpawn;
+    public string abilityName;
+    [SerializeField] List<GameObject> abilities = new List<GameObject>();
+    int selectedAbility;
 
     [Header("---| Audio |---")]
     [SerializeField] AudioSource aud;
@@ -65,12 +70,9 @@ public class PlayerController : MonoBehaviour
     bool isSprinting;
     bool stepPlaying;
 
-    bool isAbility;
-
     int extraDmg;
 
     Vector3 pushback;
-
 
     public bool isDead;
 
@@ -100,6 +102,11 @@ public class PlayerController : MonoBehaviour
             {
                 gunSelect();
                 StartCoroutine(Shoot());
+            }
+
+            if(abilities.Count > 0)
+            {
+                CastAbility();
             }
         }
         GameManager.instance.reticle.GetComponent<Image>().color = AimonEnemy() ? Color.green : Color.red;
@@ -135,33 +142,6 @@ public class PlayerController : MonoBehaviour
 
             gunList[selectedGun].GunModel.GetComponent<IWeapon>().Fire(extraDmg);
 
-            //RaycastHit hit;
-            //if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shotDist))
-            //{
-            //    if (hit.collider.GetComponent<IDamage>() != null)
-            //    {
-            //        hit.collider.GetComponent<IDamage>().takeDamage((shotDamage + extraDmg));
-            //    }
-            //    if(hitEffect)
-            //        Instantiate(hitEffect, hit.point, hitEffect.transform.rotation);
-            //}
-            //if (gunList[selectedGun].pellets > 1)
-            //{
-            //    for (int i = 0; i < gunList[selectedGun].pellets; i++)
-            //    {
-            //        if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector3(UnityEngine.Random.Range(0.4f, 0.6f), UnityEngine.Random.Range(0.4f, 0.6f), 0.0f)), out hit, shotDist))
-            //        {
-            //            if (hit.collider.GetComponent<IDamage>() != null)
-            //            {
-            //                hit.collider.GetComponent<IDamage>().takeDamage((int)(shotDamage + extraDmg));
-            //            }
-            //            if (hitEffect)
-            //                Instantiate(hitEffect, hit.point, hitEffect.transform.rotation);
-            //        }
-            //    }
-
-            //}
-
             aud.PlayOneShot(gunList[selectedGun].gunShot, gunShotVol);
 
             yield return new WaitForSeconds(shotRate);
@@ -169,12 +149,21 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-        IEnumerator PlayerDamageFlash()
+    void CastAbility()
+    {
+        if (Input.GetButton("Cast") && GameManager.instance.CheckCoolDown(selectedAbility))
+        {
+            Instantiate(abilities[selectedAbility], abilitySpawn);
+        }
+    }
+
+    IEnumerator PlayerDamageFlash()
     {
         GameManager.instance.ShowMenu(GameManager.MenuType.PlayerDamageFlash, true);
         yield return new WaitForSeconds(0.1f);
         GameManager.instance.ShowMenu(GameManager.MenuType.PlayerDamageFlash, false);
     }
+
     public void takeDamage(int dmg)
     {
         HP -= dmg;
