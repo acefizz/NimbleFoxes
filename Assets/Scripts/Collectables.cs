@@ -57,7 +57,8 @@ public class Collectables : MonoBehaviour
                 GameManager.instance.playerScript.AddJumps(1);
             if (weapon)
                 weaponName = GameManager.instance.playerScript.gunName;
-            if (ability) { }
+            if (ability)
+                abilityName = GameManager.instance.playerScript.abilityName;
                 //TODO: ability name needs read from object
         }
         
