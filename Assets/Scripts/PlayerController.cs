@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
     public int coins;
 
     [Header("---| Gun Stats |---")]
-    [SerializeField] List<GunSetup> guns = new List<GunSetup>();
+    [SerializeField] List<GunSetup> gunStorage = new List<GunSetup>();
     [SerializeField] List<GunSetup> gunList = new List<GunSetup>();
     [SerializeField] GameObject gunModel;
     [SerializeField] float shotDamage;
@@ -48,6 +48,7 @@ public class PlayerController : MonoBehaviour
     [Header("---| Ability Info |---")]
     [SerializeField] Transform abilitySpawn;
     public string abilityName;
+    [SerializeField] List<AbilitySetup> abilityStorage = new List<AbilitySetup>();
     [SerializeField] List<AbilitySetup> abilities = new List<AbilitySetup>();
     int selectedAbility;
 
@@ -540,6 +541,12 @@ public class PlayerController : MonoBehaviour
     {
         return gunList;
     }
+
+    public List<AbilitySetup> ReturnAbilities()
+    {
+        return abilities;
+    }
+
     public int ReturnSelectedGun()
     {
         return selectedGun;
@@ -563,14 +570,26 @@ public class PlayerController : MonoBehaviour
         HPOrig = data.maxHealth;
 
         gunList.Clear();
+        abilities.Clear();
 
         for (int i = 0; i < data.guns.Length; ++i)
         {
-            foreach (GunSetup j in guns)
+            foreach (GunSetup j in gunStorage)
             {
                 if (data.guns[i] == j.gunNum)
                 {
                     GunPickup(j);
+                }
+            }
+        }
+
+        for (int i = 0; i < data.abilities.Length; ++i)
+        {
+            foreach (AbilitySetup j in abilityStorage)
+            {
+                if (data.abilities[i] == j.abilityNum)
+                {
+                    AbilityPickup(j);
                 }
             }
         }

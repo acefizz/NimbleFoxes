@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu]
 public class AbilitySetup : ScriptableObject
 {
+    public int abilityNum;
     public float abilityCoolDown;
     public float abilityDamage;
     public string abilityName;

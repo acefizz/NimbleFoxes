@@ -24,11 +24,16 @@ public class PlayerData
         maxHealth = player.GetOriginalHP();
 
         guns = new int[player.ReturnGunList().Count];
-        // abilities = new int[player.GetAbilityList().Count];
+        abilities = new int[player.ReturnAbilities().Count];
 
         for(int i = 0; i < guns.Length; ++i)
         {
             guns[i] = player.ReturnGunList()[i].gunNum;
+        }
+
+        for (int i = 0; i < abilities.Length; ++i)
+        {
+            abilities[i] = player.ReturnAbilities()[i].abilityNum;
         }
     }
 }
