@@ -5,6 +5,8 @@ using UnityEngine;
 [CreateAssetMenu]
 public class GunSetup : ScriptableObject
 {
+    public int gunNum;
+
     public float shotRate;
     public float shotDamage;
     public int shotDist;

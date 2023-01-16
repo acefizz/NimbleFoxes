@@ -1,12 +1,19 @@
 using System;
-using System.Collections.Generic;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using UnityEditor;
+using UnityEditor.SceneManagement;
+using Unity.VisualScripting;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    //public string scenePath;
+    int scene;
 
     [Header("Player")]
     public GameObject player;
@@ -69,6 +76,9 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI playerCoins;
     public TextMeshProUGUI enemiesLeft;
 
+    [SerializeField] TextMeshProUGUI livesText;
+    [SerializeField] TextMeshProUGUI coinsText;
+
     [Header("--- Upgrade Costs ---")]
     [SerializeField]
     [Range(1, 3)] public int jumpCost = 1;
@@ -89,7 +99,6 @@ public class GameManager : MonoBehaviour
     public string checkpointName;
     public int levelCheckpoint;
 
-
     //An enum to enforce menu types.
     public enum MenuType { WelcomeMenu, Pause, Win, Lose, Upgrade, PlayerDamageFlash, OptionsMenu, CloseAll }
 
@@ -98,7 +107,6 @@ public class GameManager : MonoBehaviour
         if (instance == null)
             instance = this;
 
-
         player = GameObject.FindGameObjectWithTag("Player");
         
         if (!player )
@@ -106,15 +114,39 @@ public class GameManager : MonoBehaviour
 
         playerScript = player.GetComponent<PlayerController>();
 
-        playerSpawnLocation = playerScript.ReturnStartCheckpoint();
+        
 
         timeScaleOriginal = Time.timeScale;
+
+        //if (scenePath == null)
+        //    scenePath = "Assets/Scenes/SavedScene.unity";
 
     }
 
     void Start()
     {
-        ShowMenu(MenuType.WelcomeMenu, true);
+        //if (data == null)
+        //{
+        //    data = new GameData();
+        //}
+
+        Load();
+
+        if (SceneManager.GetActiveScene().buildIndex != 1)
+            ShowMenu(MenuType.WelcomeMenu, true);
+        else
+        {
+            ShowMenu(MenuType.WelcomeMenu, false);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.Confined;
+        }
+
+        playerSpawnLocation = playerScript.ReturnStartCheckpoint();
+
+        playerScript.SetPlayerPos();
+        
+        scene = SceneManager.GetActiveScene().buildIndex;
+        //data.SaveData();
     }
 
     private void Update()
@@ -124,7 +156,10 @@ public class GameManager : MonoBehaviour
         weaponText.text = weaponDisplay;
         abiltyText.text = abiltyDisplay;
 
-        if (Input.GetButtonDown("Cancel") && !playerScript.isDead)
+        //livesText.text = playerScript.Lives().ToString();
+        //coinsText.text = playerScript.coins.ToString();
+
+        if (Input.GetButtonDown("Cancel") && !playerScript.isDead && SceneManager.GetActiveScene().buildIndex != 1 && SceneManager.GetActiveScene().buildIndex != 0) 
         {
             isPaused = !isPaused;
             if (isPaused)
@@ -144,7 +179,7 @@ public class GameManager : MonoBehaviour
 
         IncreaseCoolDownTimer();
         //TODO: see if a menu is active and if so, play the clip on attached on game manager
-        
+
     }
 
     private void DoStats()
@@ -219,8 +254,42 @@ public class GameManager : MonoBehaviour
     }
     public void UpdateEnemyCount(int amount)
     {
+        
+
         enemyCount += amount;
         enemiesLeft.text = enemyCount.ToString("F0");
+    }
+    public void Save()
+    {
+        GameDataSave.SaveGameData(instance);
+        GameDataSave.SavePlayerData(playerScript);
+        //scenePath = SceneManager.GetActiveScene().path;
+        //EditorSceneManager.SaveScene(SceneManager.GetActiveScene(), scenePath);
+    }
+
+    public void Load(/*int sceneNum*/)
+    {
+        PlayerData data = GameDataSave.LoadPlayerData();
+
+        if(data != null)
+        {
+            playerScript.PlayerLoad(data);
+            playerScript.UpdatePlayerHPBar();
+        }
+        // Will or will not be used after deciding if saving should put you back at a checkpoint.
+        //playerSpawnLocation.x = data.spawn[0];
+        //playerSpawnLocation.y = data.spawn[1];
+        //playerSpawnLocation.z = data.spawn[2];
+    }
+
+    public void LoadLevel(int level)
+    {
+        SceneManager.LoadScene(level);
+    }
+
+    public int ReturnScene()
+    {
+        return scene;
     }
 
     void IncreaseCoolDownTimer()

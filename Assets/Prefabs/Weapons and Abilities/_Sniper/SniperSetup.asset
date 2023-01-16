@@ -12,9 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ad94a9ebb8e28f43b88a17c5a174fa8, type: 3}
   m_Name: SniperSetup
   m_EditorClassIdentifier: 
+  gunNum: 4
   shotRate: 2
   shotDamage: 3.5
   shotDist: 300
   gunName: Sniper Rifle
   GunModel: {fileID: 9024037184162080505, guid: 97cea5ab3816a6042b2413c54062ffe1, type: 3}
   gunShot: {fileID: 8300000, guid: cc52f9d2865c18d459ef8eaf210375a8, type: 3}
+  FieldOfView: 0
+  pellets: 0
