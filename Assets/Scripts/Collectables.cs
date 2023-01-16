@@ -12,6 +12,7 @@ public class Collectables : MonoBehaviour
     public int health;
     public int coin;
     public bool jump;
+    public bool life;
     public bool weapon;
     string weaponName;
     public bool ability;
@@ -55,9 +56,12 @@ public class Collectables : MonoBehaviour
             gameObject.GetComponent<Collider>().enabled = false;
             if (jump)
                 GameManager.instance.playerScript.AddJumps(1);
+            if (life)
+                GameManager.instance.playerScript.Lives(1);
             if (weapon)
                 weaponName = GameManager.instance.playerScript.gunName;
-            if (ability) { }
+            if (ability)
+                abilityName = GameManager.instance.playerScript.abilityName;
                 //TODO: ability name needs read from object
         }
         

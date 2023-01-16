@@ -84,6 +84,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb01d69f53e1fd04c9e0a322a7593bf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyType: 0
   model: {fileID: 6507943669200804914}
   agent: {fileID: 6507943669187203205}
   enemyDrop: {fileID: 0}
@@ -94,12 +95,13 @@ MonoBehaviour:
   headPos: {fileID: 6507943669186710582}
   roamDist: 5
   shootRate: 1
-  bullet: {fileID: 6860959869791283384, guid: 783fd3890e869cb4489f69a3f44cedef, type: 3}
+  bulletPrefab: {fileID: 6860959869791283384, guid: 783fd3890e869cb4489f69a3f44cedef, type: 3}
   shootPos: {fileID: 6507943669186710684}
   enemyHPBar: {fileID: 4099938273287766776}
   enemyUI: {fileID: 4099938273062668582}
   bossNameText: {fileID: 0}
   bossName: 
+  isShooting: 0
 --- !u!95 &6507943669196563132
 Animator:
   serializedVersion: 4

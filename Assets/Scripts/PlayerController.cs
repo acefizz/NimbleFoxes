@@ -20,8 +20,9 @@ public class PlayerController : MonoBehaviour
 
     [Header("___| Player Settings |___")]
     [SerializeField] int HP;
+    [SerializeField] int HPOrig;
     [Range(1,3)] [SerializeField] int lives;
-    int livesRemaining;
+    //int livesRemaining;
     [Range(3, 8)][SerializeField] int playerSpeed;
     [Range(10, 15)][SerializeField] int jumpHeight;
     [Range(15, 50)][SerializeField] int gravity;
@@ -33,14 +34,23 @@ public class PlayerController : MonoBehaviour
     public int coins;
 
     [Header("---| Gun Stats |---")]
+    [SerializeField] List<GunSetup> gunStorage = new List<GunSetup>();
     [SerializeField] List<GunSetup> gunList = new List<GunSetup>();
     [SerializeField] GameObject gunModel;
     [SerializeField] float shotDamage;
     [SerializeField] float shotRate;
     [SerializeField] int shotDist;
-    [SerializeField] GameObject hitEffect;
+    public GameObject hitEffect;
     public string gunName;
+    public int pellets;
+    public float FieldOfView;
+
+    [Header("---| Ability Info |---")]
+    [SerializeField] Transform abilitySpawn;
     public string abilityName;
+    [SerializeField] List<AbilitySetup> abilityStorage = new List<AbilitySetup>();
+    [SerializeField] List<AbilitySetup> abilities = new List<AbilitySetup>();
+    int selectedAbility;
 
     [Header("---| Audio |---")]
     [SerializeField] AudioSource aud;
@@ -55,34 +65,38 @@ public class PlayerController : MonoBehaviour
 
     Color retOrigColor;
     int timesJumped;
-    int HPOrig;
     int selectedGun;
     private Vector3 playerVelocity;
     Vector3 move;
     bool isShooting;
     bool isSprinting;
     bool stepPlaying;
+    bool firstSpawn = true;
 
     int extraDmg;
 
     Vector3 pushback;
 
-
     public bool isDead;
 
     void Start()
     {
-        HPOrig = HP;
-        SetPlayerPos();
-        ResetHP();
         if(gunList.Count > 0)
             changeGun();
+
         startCheckpoint = checkpointToSpawnAt.transform.position;
-        livesRemaining = lives;
+        SetPlayerPos();
+        UpdatePlayerHPBar();
     }
 
     void Update()
     {
+        if (firstSpawn)
+        {
+            SetPlayerPos();
+            firstSpawn = false;
+        }
+
         if (!GameManager.instance.isPaused)
         {
             pushback = Vector3.Lerp(pushback, Vector3.zero, Time.deltaTime * pushbackTime);   
@@ -96,6 +110,11 @@ public class PlayerController : MonoBehaviour
             {
                 gunSelect();
                 StartCoroutine(Shoot());
+            }
+
+            if(abilities.Count > 0)
+            {
+                CastAbility();
             }
         }
         GameManager.instance.reticle.GetComponent<Image>().color = AimonEnemy() ? Color.green : Color.red;
@@ -122,34 +141,37 @@ public class PlayerController : MonoBehaviour
         playerVelocity.y -= gravity * Time.deltaTime;
         controller.Move((playerVelocity + pushback) * Time.deltaTime);
     }
+
     IEnumerator Shoot()
     {
         if (!isShooting && Input.GetButton("Shoot"))
         {
             isShooting = true;
 
-            RaycastHit hit;
-            if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shotDist))
-            {
-                if (hit.collider.GetComponent<IDamage>() != null)
-                {
-                    hit.collider.GetComponent<IDamage>().takeDamage((shotDamage + extraDmg));
-                }
-                if(hitEffect)
-                    Instantiate(hitEffect, hit.point, hitEffect.transform.rotation);
-            }
+            gunList[selectedGun].GunModel.GetComponent<IWeapon>().Fire(extraDmg);
+
             aud.PlayOneShot(gunList[selectedGun].gunShot, gunShotVol);
 
             yield return new WaitForSeconds(shotRate);
             isShooting = false;
         }
     }
-        IEnumerator PlayerDamageFlash()
+
+    void CastAbility()
+    {
+        if (Input.GetButton("Cast") && GameManager.instance.CheckCoolDown(selectedAbility))
+        {
+            Instantiate(abilities[selectedAbility].abilityProjectile, abilitySpawn.position, abilitySpawn.rotation);
+        }
+    }
+
+    IEnumerator PlayerDamageFlash()
     {
         GameManager.instance.ShowMenu(GameManager.MenuType.PlayerDamageFlash, true);
         yield return new WaitForSeconds(0.1f);
         GameManager.instance.ShowMenu(GameManager.MenuType.PlayerDamageFlash, false);
     }
+
     public void takeDamage(int dmg)
     {
         HP -= dmg;
@@ -159,12 +181,12 @@ public class PlayerController : MonoBehaviour
         if (HP <= 0)
         {
             GameManager.instance.ShowMenu(GameManager.MenuType.Lose, true);
-            if (livesRemaining > 0)
+            if (lives > 0)
             {
 
                 GameManager.instance.respawnButton.interactable = true;
-                GameManager.instance.SetRespawnText($"All of your light has been lost, you have {livesRemaining} balls of light remaining to revive");
-                livesRemaining--;
+                lives--;
+                GameManager.instance.SetRespawnText($"All of your light has been lost, you have {lives} balls of light remaining to revive");
                 ResetHP();
             }
             else
@@ -187,7 +209,11 @@ public class PlayerController : MonoBehaviour
         transform.position = GameManager.instance.playerSpawnLocation;
         controller.enabled = true;
     }
-
+    public void SetHP(int hp)
+    {
+        HP = hp;
+        UpdatePlayerHPBar();
+    }
 
     public void ResetHP()
     {
@@ -196,13 +222,44 @@ public class PlayerController : MonoBehaviour
     }
     public void AddHp(int hp)
     {
-        HP += hp;
+        if (HP < HPOrig)
+        {
+            HP += hp;
+
+            if(HP > HPOrig)
+            {
+                hp = HPOrig;
+            }
+
+            UpdatePlayerHPBar();
+        }
+    }
+
+    public void IncreaseMaxHP(int hp)
+    {
+        HPOrig += hp;
+        AddHp(hp);
         UpdatePlayerHPBar();
     }
+
+    public int GetOriginalHP()
+    {
+        return HPOrig;
+    }
+
+    public void SetOriginalHP(int hp)
+    {
+        HPOrig = hp;
+    }
+
     public int Lives(int life = 0)
     {
         lives += life;
         return lives;
+    }
+    public void SetLives(int numLives)
+    {
+        lives = numLives;
     }
     bool AimonEnemy()
     {
@@ -232,6 +289,8 @@ public class PlayerController : MonoBehaviour
         shotRate = gun.shotRate;
         shotDist = gun.shotDist;
         gunName = gun.gunName;
+        FieldOfView = gun.FieldOfView;
+        pellets = gun.pellets;
 
         gunModel.GetComponent<MeshFilter>().sharedMesh = gun.GunModel.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gun.GunModel.GetComponent<MeshRenderer>().sharedMaterial;
@@ -242,11 +301,22 @@ public class PlayerController : MonoBehaviour
         SetWeaponIcon();
     }
     
+    public void AbilityPickup(AbilitySetup ability)
+    {
+        abilityName = ability.abilityName;
+        abilities.Add(ability);
+        selectedAbility = abilities.Count - 1;
+
+        GameManager.instance.SetCoolDown(ability);
+
+        SetAbilityIcon();
+    }
 
     public void PushbackInput(Vector3 direction)
     {
         pushback = direction;
     }
+
     void gunSelect()
     {
         if (Input.GetAxis("Mouse ScrollWheel") > 0 && selectedGun < gunList.Count - 1)
@@ -266,6 +336,8 @@ public class PlayerController : MonoBehaviour
         shotRate = gunList[selectedGun].shotRate;
         shotDist = gunList[selectedGun].shotDist;
         gunName = gunList[selectedGun].gunName;
+        FieldOfView = gunList[selectedGun].FieldOfView;
+        pellets = gunList[selectedGun].pellets;
 
         gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[selectedGun].GunModel.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[selectedGun].GunModel.GetComponent<MeshRenderer>().sharedMaterial;
@@ -304,16 +376,29 @@ public class PlayerController : MonoBehaviour
     {
         return maxJumps;
     }
-
+    public void SetMaxJumps(int jumps)
+    {
+        maxJumps = jumps;
+    }
     public int GetSpeed()
     {
         return playerSpeed;
+    }
+    public void SetSpeed(int amount)
+    {
+        playerSpeed = amount;
     }
 
     public float GetDamage()
     {
         return (shotDamage + extraDmg);
     }
+
+    public float GetExtraDamage()
+    {
+        return extraDmg;
+    }
+
     public void SetWeaponIcon()
     {
         for (int i = 0; i < GameManager.instance.gunNames.Length; i++)
@@ -456,6 +541,12 @@ public class PlayerController : MonoBehaviour
     {
         return gunList;
     }
+
+    public List<AbilitySetup> ReturnAbilities()
+    {
+        return abilities;
+    }
+
     public int ReturnSelectedGun()
     {
         return selectedGun;
@@ -467,5 +558,40 @@ public class PlayerController : MonoBehaviour
     public CharacterController ReturnController()
     {
         return controller;
+    }
+
+    public void PlayerLoad(PlayerData data)
+    {
+        lives = data.lives;
+        playerSpeed = data.speed;
+        coins = data.coins;
+        maxJumps = data.maxJumps;
+        HP = data.health;
+        HPOrig = data.maxHealth;
+
+        gunList.Clear();
+        abilities.Clear();
+
+        for (int i = 0; i < data.guns.Length; ++i)
+        {
+            foreach (GunSetup j in gunStorage)
+            {
+                if (data.guns[i] == j.gunNum)
+                {
+                    GunPickup(j);
+                }
+            }
+        }
+
+        for (int i = 0; i < data.abilities.Length; ++i)
+        {
+            foreach (AbilitySetup j in abilityStorage)
+            {
+                if (data.abilities[i] == j.abilityNum)
+                {
+                    AbilityPickup(j);
+                }
+            }
+        }
     }
 }

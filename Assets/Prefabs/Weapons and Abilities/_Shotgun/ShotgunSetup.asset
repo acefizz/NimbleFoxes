@@ -12,9 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ad94a9ebb8e28f43b88a17c5a174fa8, type: 3}
   m_Name: ShotgunSetup
   m_EditorClassIdentifier: 
+  gunNum: 3
   shotRate: 1.5
   shotDamage: 3
   shotDist: 25
   gunName: Shotgun
   GunModel: {fileID: 6568983722982623154, guid: 5a974021979d1aa468d57207a3aa7e6a, type: 3}
   gunShot: {fileID: 8300000, guid: c656eacd829f9dd43a451e3721413bad, type: 3}
+  FieldOfView: 0
+  pellets: 10

@@ -10,6 +10,7 @@ public class BurrowEnemyAI : MonoBehaviour, IDamage
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] GameObject enemyDrop;
+    [SerializeField] GameObject parent;
 
     [Header("---Enemy Stats---")]
     [SerializeField] float HP;
@@ -216,9 +217,20 @@ public class BurrowEnemyAI : MonoBehaviour, IDamage
             {
                 Instantiate(enemyDrop, shootPos.position, transform.rotation);
             }
-
+            StartCoroutine(Death());
             GameManager.instance.UpdateEnemyCount(-1);
         }
+    }
+
+    IEnumerator Death()
+    {
+        //animator.SetTrigger("Death");
+        yield return new WaitForSeconds(3.0f);
+        if (GameManager.instance.enemyCount <= 0)
+        {
+            GameManager.instance.ShowMenu(GameManager.MenuType.Win, true);
+        }
+        Destroy(parent);
     }
 
     public void Burrow()
