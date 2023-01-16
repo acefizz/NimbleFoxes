@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
     [Header("---| Ability Info |---")]
     [SerializeField] Transform abilitySpawn;
     public string abilityName;
-    [SerializeField] List<GameObject> abilities = new List<GameObject>();
+    [SerializeField] List<AbilitySetup> abilities = new List<AbilitySetup>();
     int selectedAbility;
 
     [Header("---| Audio |---")]
@@ -160,7 +160,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetButton("Cast") && GameManager.instance.CheckCoolDown(selectedAbility))
         {
-            Instantiate(abilities[selectedAbility], abilitySpawn);
+            Instantiate(abilities[selectedAbility].abilityProjectile, abilitySpawn.position, abilitySpawn.rotation);
         }
     }
 
@@ -300,11 +300,22 @@ public class PlayerController : MonoBehaviour
         SetWeaponIcon();
     }
     
+    public void AbilityPickup(AbilitySetup ability)
+    {
+        abilityName = ability.abilityName;
+        abilities.Add(ability);
+        selectedAbility = abilities.Count - 1;
+
+        GameManager.instance.SetCoolDown(ability);
+
+        SetAbilityIcon();
+    }
 
     public void PushbackInput(Vector3 direction)
     {
         pushback = direction;
     }
+
     void gunSelect()
     {
         if (Input.GetAxis("Mouse ScrollWheel") > 0 && selectedGun < gunList.Count - 1)
@@ -381,6 +392,12 @@ public class PlayerController : MonoBehaviour
     {
         return (shotDamage + extraDmg);
     }
+
+    public float GetExtraDamage()
+    {
+        return extraDmg;
+    }
+
     public void SetWeaponIcon()
     {
         for (int i = 0; i < GameManager.instance.gunNames.Length; i++)

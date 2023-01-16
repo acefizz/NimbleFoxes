@@ -59,7 +59,7 @@ MonoBehaviour:
   pullSpeed: 0
   pullDistance: 0
   audioSource: {fileID: 5256285929869525290}
-  upgradeClip: {fileID: 8300000, guid: 4fbeddc083e5c774b9f21e1778d3bb71, type: 3}
+  upgradeClip: {fileID: 0}
   effectVol: 0.278
   speed: 0
   height: 0
