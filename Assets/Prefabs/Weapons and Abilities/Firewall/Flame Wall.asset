@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 185cce554cc5f8d41a5adace1b682f3e, type: 3}
   m_Name: Flame Wall
   m_EditorClassIdentifier: 
+  abilityNum: 0
   abilityCoolDown: 10
   abilityDamage: 3
-  abilityName: Flame Wall
+  abilityName: Fire Wall
   abilityProjectile: {fileID: 7603154708703590737, guid: b38b94d7ce40f5142a8431d3a1d7ba82, type: 3}
   abilitySound: {fileID: 8300000, guid: a35676b9d2b56524a9d510de96f9b6f4, type: 3}

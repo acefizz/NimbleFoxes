@@ -50,10 +50,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 0
   coin: 0
+  jump: 1
+  life: 0
   weapon: 0
-  weaponName: 
   ability: 0
-  abilityName: 
   pullSpeed: 0.2
   pullDistance: 10
   audioSource: {fileID: 7185441112138508587}

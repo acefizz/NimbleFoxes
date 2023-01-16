@@ -51,7 +51,6 @@ public class Collectables : MonoBehaviour
             GameManager.instance.playerScript.AddCoins(coin);
             if (upgradeClip != null)
                 audioSource.PlayOneShot(upgradeClip, effectVol);
-            StartCoroutine(ShowCollections());
             gameObject.GetComponent<MeshRenderer>().enabled = false;
             gameObject.GetComponent<Collider>().enabled = false;
             if (jump)
@@ -62,7 +61,7 @@ public class Collectables : MonoBehaviour
                 weaponName = GameManager.instance.playerScript.gunName;
             if (ability)
                 abilityName = GameManager.instance.playerScript.abilityName;
-                //TODO: ability name needs read from object
+            StartCoroutine(ShowCollections());
         }
         
     }

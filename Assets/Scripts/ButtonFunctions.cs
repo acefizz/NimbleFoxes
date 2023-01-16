@@ -13,7 +13,7 @@ public class ButtonFunctions : MonoBehaviour
     {
         Application.Quit();
     }
-    public void RestartGame() //TODO: I dont know if this code will work with the loading and respawning
+    public void RestartGame() 
     {
         GameManager.instance.ShowMenu(GameManager.MenuType.CloseAll);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);

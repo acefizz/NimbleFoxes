@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seekers: {fileID: 6153089179475593135, guid: b8de7301d5e68b94a9fa62c658846116, type: 3}
-  toSpawn: 5
+  toSpawn: 10
   HP: 5
   enemyUI: {fileID: 2886521440653291424}
   enemyHPBar: {fileID: 2886521440340108414}
@@ -144,7 +144,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 5
+  m_Radius: 10
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!195 &6714073958178975471
 NavMeshAgent:

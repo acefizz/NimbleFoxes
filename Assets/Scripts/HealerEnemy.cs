@@ -44,7 +44,6 @@ public class HealerEnemy : MonoBehaviour, IDamage
         if (other.GetComponent<EnemyAI>().ReturnHP() <= (other.GetComponent<EnemyAI>().ReturnOrigHp()-5))
         {
             other.gameObject.GetComponent<EnemyAI>().AddHP(5);
-            //TODO: needs to be able to add health to other types of enemies
         }
         else if (other.GetComponent<EnemyAI>().ReturnHP() >= (other.GetComponent<EnemyAI>().ReturnOrigHp() - 5))
         {

@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-//TODO: When the player picks up / changes abilities, SetAbilitiesIcon should be used, there is another TODO in Collectables where the game object for the ability needs to be read.
+
 
 
 public class PlayerController : MonoBehaviour
@@ -472,7 +472,7 @@ public class PlayerController : MonoBehaviour
     {
         for (int i = 0; i < GameManager.instance.abilityNames.Length; i++)
         {
-            if (GameManager.instance.abilityNames[i] == gunName)
+            if (GameManager.instance.abilityNames[i] == abilityName)
             {
                 switch (i)
                 {
