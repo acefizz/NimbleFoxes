@@ -83,17 +83,26 @@ public class SoundManager : MonoBehaviour
     #endregion
 
     [SerializeField] private AudioMixer gameAudio;
+    [SerializeField] private AudioClip exampleVolume;
+    [SerializeField] private AudioSource source;
 
     public void SetVolume(float sliderValue)
     {
         gameAudio.SetFloat("MainVolume", Mathf.Log10(sliderValue) * 20);
+        //ExampleSound();
     }
     public void SetMusicVolume(float sliderValue)
     {
         gameAudio.SetFloat("MusicVolume", Mathf.Log10(sliderValue) * 20);
+        //ExampleSound();
     }
     public void SetSfxVolume(float sliderValue)
     {
         gameAudio.SetFloat("SfxVolume", Mathf.Log10(sliderValue) * 20);
+        ExampleSound();
+    }
+    void ExampleSound()
+    {
+        source.PlayOneShot(exampleVolume);
     }
 }

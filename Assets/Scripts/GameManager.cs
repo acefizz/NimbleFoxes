@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     [Header("--- UI Menus ---")]
     [SerializeField] AudioSource menuMusic;
 
+
     public GameObject welcomeMenu;
     public GameObject pauseMenu;
     public GameObject winMenu;
@@ -171,6 +172,11 @@ public class GameManager : MonoBehaviour
             Time.timeScale = activeState ? 0 : timeScaleOriginal;
         }
 
+        if (activeState)
+        {
+            menuMusic.Play();
+        }
+
         switch (menu)
         {
             case MenuType.WelcomeMenu:
@@ -202,7 +208,9 @@ public class GameManager : MonoBehaviour
                 upgradeMenu.SetActive(false);
                 playerFlashDamage.SetActive(false);
                 welcomeMenu.SetActive(false);
+                optionsMenu.SetActive(false);
                 isPaused = false;
+                menuMusic.Stop();
                 break;
             case MenuType.OptionsMenu:
                 pauseMenu.SetActive(false);
