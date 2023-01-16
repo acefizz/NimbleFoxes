@@ -39,9 +39,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float shotDamage;
     [SerializeField] float shotRate;
     [SerializeField] int shotDist;
-    [SerializeField] GameObject hitEffect;
+    public GameObject hitEffect;
     public string gunName;
+    public int pellets;
+    public float FieldOfView;
+
+    [Header("---| Ability Info |---")]
+    [SerializeField] Transform abilitySpawn;
     public string abilityName;
+    [SerializeField] List<GameObject> abilities = new List<GameObject>();
+    int selectedAbility;
 
     [Header("---| Audio |---")]
     [SerializeField] AudioSource aud;
@@ -67,7 +74,6 @@ public class PlayerController : MonoBehaviour
     int extraDmg;
 
     Vector3 pushback;
-
 
     public bool isDead;
 
@@ -103,6 +109,11 @@ public class PlayerController : MonoBehaviour
                 gunSelect();
                 StartCoroutine(Shoot());
             }
+
+            if(abilities.Count > 0)
+            {
+                CastAbility();
+            }
         }
         GameManager.instance.reticle.GetComponent<Image>().color = AimonEnemy() ? Color.green : Color.red;
     }
@@ -128,34 +139,37 @@ public class PlayerController : MonoBehaviour
         playerVelocity.y -= gravity * Time.deltaTime;
         controller.Move((playerVelocity + pushback) * Time.deltaTime);
     }
+
     IEnumerator Shoot()
     {
         if (!isShooting && Input.GetButton("Shoot"))
         {
             isShooting = true;
 
-            RaycastHit hit;
-            if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shotDist))
-            {
-                if (hit.collider.GetComponent<IDamage>() != null)
-                {
-                    hit.collider.GetComponent<IDamage>().takeDamage((shotDamage + extraDmg));
-                }
-                if(hitEffect)
-                    Instantiate(hitEffect, hit.point, hitEffect.transform.rotation);
-            }
+            gunList[selectedGun].GunModel.GetComponent<IWeapon>().Fire(extraDmg);
+
             aud.PlayOneShot(gunList[selectedGun].gunShot, gunShotVol);
 
             yield return new WaitForSeconds(shotRate);
             isShooting = false;
         }
     }
-        IEnumerator PlayerDamageFlash()
+
+    void CastAbility()
+    {
+        if (Input.GetButton("Cast") && GameManager.instance.CheckCoolDown(selectedAbility))
+        {
+            Instantiate(abilities[selectedAbility], abilitySpawn);
+        }
+    }
+
+    IEnumerator PlayerDamageFlash()
     {
         GameManager.instance.ShowMenu(GameManager.MenuType.PlayerDamageFlash, true);
         yield return new WaitForSeconds(0.1f);
         GameManager.instance.ShowMenu(GameManager.MenuType.PlayerDamageFlash, false);
     }
+
     public void takeDamage(int dmg)
     {
         HP -= dmg;
@@ -273,6 +287,8 @@ public class PlayerController : MonoBehaviour
         shotRate = gun.shotRate;
         shotDist = gun.shotDist;
         gunName = gun.gunName;
+        FieldOfView = gun.FieldOfView;
+        pellets = gun.pellets;
 
         gunModel.GetComponent<MeshFilter>().sharedMesh = gun.GunModel.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gun.GunModel.GetComponent<MeshRenderer>().sharedMaterial;
@@ -307,6 +323,8 @@ public class PlayerController : MonoBehaviour
         shotRate = gunList[selectedGun].shotRate;
         shotDist = gunList[selectedGun].shotDist;
         gunName = gunList[selectedGun].gunName;
+        FieldOfView = gunList[selectedGun].FieldOfView;
+        pellets = gunList[selectedGun].pellets;
 
         gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[selectedGun].GunModel.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[selectedGun].GunModel.GetComponent<MeshRenderer>().sharedMaterial;

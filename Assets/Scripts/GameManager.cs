@@ -88,6 +88,10 @@ public class GameManager : MonoBehaviour
 
     public int enemyCount;
 
+    [Header("--- Ability Cooldowns ---")]
+    List<float> coolDowns = new List<float>();
+    List<float> coolDownTracker = new List<float>();
+
     [Header("--- Checkpoint info - Don't change ---")]
     public Vector3 playerSpawnLocation;
     public Vector3 checkpoint;
@@ -172,6 +176,7 @@ public class GameManager : MonoBehaviour
             playerScript = player.GetComponent<PlayerController>();
         }
 
+        IncreaseCoolDownTimer();
         //TODO: see if a menu is active and if so, play the clip on attached on game manager
 
     }
@@ -261,7 +266,6 @@ public class GameManager : MonoBehaviour
         //EditorSceneManager.SaveScene(SceneManager.GetActiveScene(), scenePath);
     }
 
-
     public void Load(/*int sceneNum*/)
     {
         PlayerData data = GameDataSave.LoadPlayerData();
@@ -285,5 +289,26 @@ public class GameManager : MonoBehaviour
     public int ReturnScene()
     {
         return scene;
+    }
+
+    void IncreaseCoolDownTimer()
+    {
+        for (int i = 0; i < coolDownTracker.Count; ++i)
+        {
+            coolDownTracker[i] += Time.deltaTime;
+        }
+    }
+
+    public bool CheckCoolDown(int time)
+    {
+        bool temp = false;
+
+        if (coolDownTracker[time] >= coolDowns[time])
+        {
+            temp = true;
+            coolDownTracker[time] = 0;
+        }
+
+        return temp;
     }
 }
