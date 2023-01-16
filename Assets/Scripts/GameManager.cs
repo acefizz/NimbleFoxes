@@ -1,13 +1,14 @@
 using System;
-using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using UnityEditor;
-using UnityEditor.SceneManagement;
-using Unity.VisualScripting;
 using System.Collections.Generic;
+
+//TODO: must have a way to switch abilities
+//TODO: icon appears for ability, but not the name on pickup
+//TODO: Cooldowns need functionality
+
 
 public class GameManager : MonoBehaviour
 {
@@ -39,7 +40,7 @@ public class GameManager : MonoBehaviour
     public GameObject winMenu;
     public GameObject loseMenu;
     public GameObject upgradeMenu;
-    public GameObject optionsMenu; //TODO: This menu needs to be able to be opened and closed //Buttons are already set up, the functionality just needs applied
+    public GameObject optionsMenu; 
     
 
     [Header("--- UI Pickups ---")]
@@ -179,7 +180,6 @@ public class GameManager : MonoBehaviour
         }
 
         IncreaseCoolDownTimer();
-        //TODO: see if a menu is active and if so, play the clip on attached on game manager
 
     }
 
