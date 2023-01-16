@@ -11,6 +11,8 @@ public class PlayerData
     public int maxJumps;
     public int health;
     public int maxHealth;
+    public int[] guns;
+    public int[] abilities;
 
     public PlayerData(PlayerController player)
     {
@@ -20,5 +22,13 @@ public class PlayerData
         maxJumps = player.GetMaxJumps();
         health = player.ReturnHP();
         maxHealth = player.GetOriginalHP();
+
+        guns = new int[player.ReturnGunList().Count];
+        // abilities = new int[player.GetAbilityList().Count];
+
+        for(int i = 0; i < guns.Length; ++i)
+        {
+            guns[i] = player.ReturnGunList()[i].gunNum;
+        }
     }
 }

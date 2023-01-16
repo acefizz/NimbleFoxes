@@ -452,6 +452,12 @@ MonoBehaviour:
   maxJumps: 1
   checkpointToSpawnAt: {fileID: 0}
   coins: 0
+  guns:
+  - {fileID: 11400000, guid: fefc4ee030dbe5f4e9e23e48f3d37c0b, type: 2}
+  - {fileID: 11400000, guid: bff94c45735a20f4aac96544e3b84e22, type: 2}
+  - {fileID: 11400000, guid: 00e5449962e31bf49820c6f1618c67a5, type: 2}
+  - {fileID: 11400000, guid: bd68a109c7cedc140af8ead98077333b, type: 2}
+  - {fileID: 11400000, guid: 0a2f6868875321448a5f7bcc4e9d8afd, type: 2}
   gunList: []
   gunModel: {fileID: 761319279755175072}
   shotDamage: 0

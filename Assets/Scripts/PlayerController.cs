@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
     public int coins;
 
     [Header("---| Gun Stats |---")]
+    [SerializeField] List<GunSetup> guns = new List<GunSetup>();
     [SerializeField] List<GunSetup> gunList = new List<GunSetup>();
     [SerializeField] GameObject gunModel;
     [SerializeField] float shotDamage;
@@ -543,5 +544,18 @@ public class PlayerController : MonoBehaviour
         maxJumps = data.maxJumps;
         HP = data.health;
         HPOrig = data.maxHealth;
+
+        gunList.Clear();
+
+        for (int i = 0; i < data.guns.Length; ++i)
+        {
+            foreach (GunSetup j in guns)
+            {
+                if (data.guns[i] == j.gunNum)
+                {
+                    GunPickup(j);
+                }
+            }
+        }
     }
 }
