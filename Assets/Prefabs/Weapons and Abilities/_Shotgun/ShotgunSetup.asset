@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ad94a9ebb8e28f43b88a17c5a174fa8, type: 3}
   m_Name: ShotgunSetup
   m_EditorClassIdentifier: 
+  gunNum: 3
   shotRate: 1.5
   shotDamage: 3
   shotDist: 25

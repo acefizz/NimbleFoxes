@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ad94a9ebb8e28f43b88a17c5a174fa8, type: 3}
   m_Name: SmgSetup
   m_EditorClassIdentifier: 
+  gunNum: 1
   shotRate: 0.08
   shotDamage: 0.2
   shotDist: 50
+  gunName: 
   GunModel: {fileID: 2897716854381138052, guid: b66f2adb35217c04d954093c174fceb6, type: 3}
   gunShot: {fileID: 8300000, guid: 57c4765ade54fe54b82ea0aff876fd18, type: 3}
+  FieldOfView: 0
+  pellets: 0
