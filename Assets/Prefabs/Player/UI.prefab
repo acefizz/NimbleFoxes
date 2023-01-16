@@ -4852,9 +4852,6 @@ MonoBehaviour:
   checkpoint: {x: 0, y: 0, z: 0}
   checkpointName: 
   levelCheckpoint: 0
-  gunCheckpoint: []
-  gunSelectCheckpoint: 0
-  coinsCheckpoint: 0
 --- !u!82 &762480100
 AudioSource:
   m_ObjectHideFlags: 0

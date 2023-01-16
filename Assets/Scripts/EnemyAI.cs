@@ -122,6 +122,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         {
             playerInRange = true;
         }
+
     }
     public virtual void OnTriggerExit(Collider other)
     {
@@ -160,6 +161,19 @@ public class EnemyAI : MonoBehaviour, IDamage
         enemyUI.SetActive(true);
         yield return new WaitForSeconds(5f);
         enemyUI.SetActive(false);
+    }
+    public void AddHP(float amount)
+    {
+        HP += amount;
+        UpdateEnemyHPBar();
+    }
+    public float ReturnHP()
+    {
+        return HP;
+    }
+    public float ReturnOrigHp()
+    {
+        return HPorg;
     }
     public virtual void UpdateEnemyHPBar()
     {
