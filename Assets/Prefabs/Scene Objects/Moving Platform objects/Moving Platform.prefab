@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 8155263096213705687}
   - component: {fileID: 6072404845648136536}
   - component: {fileID: 2739806666428491161}
-  - component: {fileID: 6460994636475563783}
   - component: {fileID: 5847655215983028159}
+  - component: {fileID: 6460994636475563783}
+  - component: {fileID: 4909010514882545713}
   m_Layer: 0
   m_Name: Moving Platform
   m_TagString: Untagged
@@ -85,19 +86,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6460994636475563783
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8489098136717622276}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5847655215983028159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,6 +99,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.5
-  startPoint: {fileID: 2937395169906928618, guid: 8a1f63439bcd28d47a6771516590e817, type: 3}
-  endPoint: {fileID: 4537201944014469577, guid: 95e2627cee46a21459e085069f17e056, type: 3}
+  startPoint: {fileID: 0}
+  endPoint: {fileID: 0}
   changeDirectionDelay: 2
+--- !u!65 &6460994636475563783
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8489098136717622276}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 24, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &4909010514882545713
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8489098136717622276}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}

@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
     [Header("--- UI Menus ---")]
     [SerializeField] AudioSource menuMusic;
 
-    public GameObject welcomeMenu;
+    //public GameObject welcomeMenu;
     public GameObject pauseMenu;
     public GameObject winMenu;
     public GameObject loseMenu;
@@ -113,8 +113,6 @@ public class GameManager : MonoBehaviour
             Debug.LogError("Player not found in scene or tagged as Player or named Player");
 
         playerScript = player.GetComponent<PlayerController>();
-
-        
 
         timeScaleOriginal = Time.timeScale;
 
@@ -200,10 +198,13 @@ public class GameManager : MonoBehaviour
             Time.timeScale = activeState ? 0 : timeScaleOriginal;
         }
 
-        if (activeState)
+        if (pauseMenu == true || optionsMenu == true || upgradeMenu == true )
         {
             menuMusic.Play();
         }
+
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
 
         switch (menu)
         {
@@ -232,7 +233,7 @@ public class GameManager : MonoBehaviour
                 loseMenu.SetActive(false);
                 upgradeMenu.SetActive(false);
                 playerFlashDamage.SetActive(false);
-                welcomeMenu.SetActive(false);
+                //welcomeMenu.SetActive(false);
                 optionsMenu.SetActive(false);
                 isPaused = false;
                 menuMusic.Stop();
