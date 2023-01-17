@@ -25,8 +25,9 @@ public class Checkpoint : MonoBehaviour
             //GameManager.instance.playerSpawnLocation = GameManager.instance.checkpoint;
             //GameManager.instance.checkpointName = checkpointName;
 
-            GameManager.instance.Load();
             GameManager.instance.Save();
+            GameManager.instance.Load();
+            
 
             Destroy(gameObject);
         }
