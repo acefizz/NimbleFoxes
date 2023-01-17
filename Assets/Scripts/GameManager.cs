@@ -34,14 +34,12 @@ public class GameManager : MonoBehaviour
     [Header("--- UI Menus ---")]
     [SerializeField] AudioSource menuMusic;
 
-
     public GameObject welcomeMenu;
     public GameObject pauseMenu;
     public GameObject winMenu;
     public GameObject loseMenu;
     public GameObject upgradeMenu;
     public GameObject optionsMenu; 
-    
 
     [Header("--- UI Pickups ---")]
     public GameObject Pickups;
@@ -135,7 +133,7 @@ public class GameManager : MonoBehaviour
         Load();
 
 
-        Cursor.visible = true;
+        Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Confined;
 
         playerSpawnLocation = playerScript.ReturnStartCheckpoint();
