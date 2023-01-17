@@ -83,11 +83,11 @@ public class GameManager : MonoBehaviour
 
     [Header("--- Upgrade Costs ---")]
     [SerializeField]
-    [Range(1, 3)] public int jumpCost = 1;
+    [Range(1, 5)] public int jumpCost = 1;
     [SerializeField]
-    [Range(1, 3)] public int damageCost = 1;
+    [Range(1, 5)] public int damageCost = 1;
     [SerializeField]
-    [Range(1, 3)] public int speedCost = 1;
+    [Range(1, 5)] public int speedCost = 1;
 
     public int enemyCount;
 

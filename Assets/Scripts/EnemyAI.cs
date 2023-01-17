@@ -216,10 +216,10 @@ public class EnemyAI : MonoBehaviour, IDamage
     {
         animator.SetTrigger("Death");
         yield return new WaitForSeconds(3.0f);
-        if (GameManager.instance.enemyCount <= 0)
-        {
-            GameManager.instance.ShowMenu(GameManager.MenuType.Win, true);
-        }
+        //if (GameManager.instance.enemyCount <= 0)
+        //{
+        //    GameManager.instance.ShowMenu(GameManager.MenuType.Win, true);
+        //}
 
         Destroy(gameObject);
     }

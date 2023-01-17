@@ -412,6 +412,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 207014111112979185, guid: 1a528ee935687154191c79eb73a457b8, type: 3}
+      propertyPath: jumpCost
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 207014111112979185, guid: 1a528ee935687154191c79eb73a457b8, type: 3}
+      propertyPath: speedCost
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 207014111112979185, guid: 1a528ee935687154191c79eb73a457b8, type: 3}
+      propertyPath: damageCost
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a528ee935687154191c79eb73a457b8, type: 3}
 --- !u!1 &57106595
@@ -813,9 +825,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6507943669187203206, guid: 417ea48fd54111341891f7911081fe78, type: 3}
+      propertyPath: enemyDrop
+      value: 
+      objectReference: {fileID: 2642166720542923538, guid: 9779f6e10a0a3cd4babf5f90bcd756c8, type: 3}
     - target: {fileID: 6507943669187203226, guid: 417ea48fd54111341891f7911081fe78, type: 3}
       propertyPath: m_Name
       value: EnemyPolice (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6507943669187203227, guid: 417ea48fd54111341891f7911081fe78, type: 3}
+      propertyPath: m_Radius
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 417ea48fd54111341891f7911081fe78, type: 3}
@@ -1064,9 +1084,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6507943669187203206, guid: 417ea48fd54111341891f7911081fe78, type: 3}
+      propertyPath: enemyDrop
+      value: 
+      objectReference: {fileID: 2642166720542923538, guid: 9779f6e10a0a3cd4babf5f90bcd756c8, type: 3}
     - target: {fileID: 6507943669187203226, guid: 417ea48fd54111341891f7911081fe78, type: 3}
       propertyPath: m_Name
       value: EnemyPolice (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6507943669187203227, guid: 417ea48fd54111341891f7911081fe78, type: 3}
+      propertyPath: m_Radius
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 417ea48fd54111341891f7911081fe78, type: 3}
@@ -1913,9 +1941,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6507943669187203206, guid: 417ea48fd54111341891f7911081fe78, type: 3}
+      propertyPath: enemyDrop
+      value: 
+      objectReference: {fileID: 2642166720542923538, guid: 9779f6e10a0a3cd4babf5f90bcd756c8, type: 3}
     - target: {fileID: 6507943669187203226, guid: 417ea48fd54111341891f7911081fe78, type: 3}
       propertyPath: m_Name
       value: EnemyPolice (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6507943669187203227, guid: 417ea48fd54111341891f7911081fe78, type: 3}
+      propertyPath: m_Radius
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 417ea48fd54111341891f7911081fe78, type: 3}
@@ -2340,6 +2376,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6507943669187203206, guid: 417ea48fd54111341891f7911081fe78, type: 3}
+      propertyPath: enemyDrop
+      value: 
+      objectReference: {fileID: 2642166720542923538, guid: 9779f6e10a0a3cd4babf5f90bcd756c8, type: 3}
     - target: {fileID: 6507943669187203226, guid: 417ea48fd54111341891f7911081fe78, type: 3}
       propertyPath: m_Name
       value: EnemyPolice
@@ -2569,8 +2609,16 @@ PrefabInstance:
       value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 4533570552687267969, guid: 7deb2b4814649544ebba244c1ee09ba9, type: 3}
+      propertyPath: hitEffect
+      value: 
+      objectReference: {fileID: 1000010191825552, guid: 83e55d3418297934fab882559d009285, type: 3}
+    - target: {fileID: 4533570552687267969, guid: 7deb2b4814649544ebba244c1ee09ba9, type: 3}
       propertyPath: jumpHeight
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4533570552687267969, guid: 7deb2b4814649544ebba244c1ee09ba9, type: 3}
+      propertyPath: playerStepsVol
+      value: 0.166
       objectReference: {fileID: 0}
     - target: {fileID: 4533570552687267969, guid: 7deb2b4814649544ebba244c1ee09ba9, type: 3}
       propertyPath: checkpointToSpawnAt
@@ -2623,6 +2671,10 @@ PrefabInstance:
     - target: {fileID: 4533570552687693027, guid: 7deb2b4814649544ebba244c1ee09ba9, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8335207976358769998, guid: 7deb2b4814649544ebba244c1ee09ba9, type: 3}
+      propertyPath: m_Volume
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7deb2b4814649544ebba244c1ee09ba9, type: 3}
@@ -2928,9 +2980,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6507943669187203206, guid: 417ea48fd54111341891f7911081fe78, type: 3}
+      propertyPath: enemyDrop
+      value: 
+      objectReference: {fileID: 2642166720542923538, guid: 9779f6e10a0a3cd4babf5f90bcd756c8, type: 3}
     - target: {fileID: 6507943669187203226, guid: 417ea48fd54111341891f7911081fe78, type: 3}
       propertyPath: m_Name
       value: EnemyPolice (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6507943669187203227, guid: 417ea48fd54111341891f7911081fe78, type: 3}
+      propertyPath: m_Radius
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 417ea48fd54111341891f7911081fe78, type: 3}
@@ -3042,9 +3102,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6507943669187203206, guid: 417ea48fd54111341891f7911081fe78, type: 3}
+      propertyPath: enemyDrop
+      value: 
+      objectReference: {fileID: 2642166720542923538, guid: 9779f6e10a0a3cd4babf5f90bcd756c8, type: 3}
     - target: {fileID: 6507943669187203226, guid: 417ea48fd54111341891f7911081fe78, type: 3}
       propertyPath: m_Name
       value: EnemyPolice (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6507943669187203227, guid: 417ea48fd54111341891f7911081fe78, type: 3}
+      propertyPath: m_Radius
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 417ea48fd54111341891f7911081fe78, type: 3}
@@ -3253,9 +3321,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6507943669187203206, guid: 417ea48fd54111341891f7911081fe78, type: 3}
+      propertyPath: enemyDrop
+      value: 
+      objectReference: {fileID: 2642166720542923538, guid: 9779f6e10a0a3cd4babf5f90bcd756c8, type: 3}
     - target: {fileID: 6507943669187203226, guid: 417ea48fd54111341891f7911081fe78, type: 3}
       propertyPath: m_Name
       value: EnemyPolice (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6507943669187203227, guid: 417ea48fd54111341891f7911081fe78, type: 3}
+      propertyPath: m_Radius
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 417ea48fd54111341891f7911081fe78, type: 3}
@@ -3310,9 +3386,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6507943669187203206, guid: 417ea48fd54111341891f7911081fe78, type: 3}
+      propertyPath: enemyDrop
+      value: 
+      objectReference: {fileID: 2642166720542923538, guid: 9779f6e10a0a3cd4babf5f90bcd756c8, type: 3}
     - target: {fileID: 6507943669187203226, guid: 417ea48fd54111341891f7911081fe78, type: 3}
       propertyPath: m_Name
       value: EnemyPolice (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6507943669187203227, guid: 417ea48fd54111341891f7911081fe78, type: 3}
+      propertyPath: m_Radius
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 417ea48fd54111341891f7911081fe78, type: 3}
@@ -3789,10 +3873,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BulletHell
       objectReference: {fileID: 0}
-    - target: {fileID: 6983741779407670451, guid: 270a16bb9dfc7544eb6ef8d1ce2da38a, type: 3}
-      propertyPath: enemyDrop
-      value: 
-      objectReference: {fileID: 1454977450576073988, guid: bd98c259fe58f2d4f9557fdc9248dcd9, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 270a16bb9dfc7544eb6ef8d1ce2da38a, type: 3}
 --- !u!1001 &1211599772
@@ -4459,9 +4539,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6507943669187203206, guid: 417ea48fd54111341891f7911081fe78, type: 3}
+      propertyPath: enemyDrop
+      value: 
+      objectReference: {fileID: 2642166720542923538, guid: 9779f6e10a0a3cd4babf5f90bcd756c8, type: 3}
     - target: {fileID: 6507943669187203226, guid: 417ea48fd54111341891f7911081fe78, type: 3}
       propertyPath: m_Name
       value: EnemyPolice (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6507943669187203227, guid: 417ea48fd54111341891f7911081fe78, type: 3}
+      propertyPath: m_Radius
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 417ea48fd54111341891f7911081fe78, type: 3}
@@ -5286,9 +5374,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6507943669187203206, guid: 417ea48fd54111341891f7911081fe78, type: 3}
+      propertyPath: enemyDrop
+      value: 
+      objectReference: {fileID: 2642166720542923538, guid: 9779f6e10a0a3cd4babf5f90bcd756c8, type: 3}
     - target: {fileID: 6507943669187203226, guid: 417ea48fd54111341891f7911081fe78, type: 3}
       propertyPath: m_Name
       value: EnemyPolice (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6507943669187203227, guid: 417ea48fd54111341891f7911081fe78, type: 3}
+      propertyPath: m_Radius
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 417ea48fd54111341891f7911081fe78, type: 3}
@@ -6598,9 +6694,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6507943669187203206, guid: 417ea48fd54111341891f7911081fe78, type: 3}
+      propertyPath: enemyDrop
+      value: 
+      objectReference: {fileID: 2642166720542923538, guid: 9779f6e10a0a3cd4babf5f90bcd756c8, type: 3}
     - target: {fileID: 6507943669187203226, guid: 417ea48fd54111341891f7911081fe78, type: 3}
       propertyPath: m_Name
       value: EnemyPolice (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6507943669187203227, guid: 417ea48fd54111341891f7911081fe78, type: 3}
+      propertyPath: m_Radius
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 417ea48fd54111341891f7911081fe78, type: 3}
