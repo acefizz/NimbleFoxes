@@ -9,7 +9,6 @@ using System.Collections.Generic;
 //TODO: icon appears for ability, but not the name on pickup
 //TODO: Cooldowns need functionality
 
-
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
@@ -34,7 +33,6 @@ public class GameManager : MonoBehaviour
     [Header("--- UI Menus ---")]
     [SerializeField] AudioSource menuMusic;
 
-    //public GameObject welcomeMenu;
     public GameObject pauseMenu;
     public GameObject winMenu;
     public GameObject loseMenu;
@@ -114,6 +112,10 @@ public class GameManager : MonoBehaviour
 
         playerScript = player.GetComponent<PlayerController>();
 
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Confined;
+        
+
         timeScaleOriginal = Time.timeScale;
 
         //if (scenePath == null)
@@ -131,8 +133,6 @@ public class GameManager : MonoBehaviour
         Load();
 
 
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Confined;
 
         playerSpawnLocation = playerScript.ReturnStartCheckpoint();
 
@@ -198,13 +198,10 @@ public class GameManager : MonoBehaviour
             Time.timeScale = activeState ? 0 : timeScaleOriginal;
         }
 
-        if (pauseMenu == true || optionsMenu == true || upgradeMenu == true )
+        if (activeState)
         {
             menuMusic.Play();
         }
-
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.Confined;
 
         switch (menu)
         {
@@ -233,9 +230,10 @@ public class GameManager : MonoBehaviour
                 loseMenu.SetActive(false);
                 upgradeMenu.SetActive(false);
                 playerFlashDamage.SetActive(false);
-                //welcomeMenu.SetActive(false);
                 optionsMenu.SetActive(false);
                 isPaused = false;
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Confined;
                 menuMusic.Stop();
                 break;
             case MenuType.OptionsMenu:
