@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] AudioSource menuMusic;
 
 
-    public GameObject welcomeMenu;
+    //public GameObject welcomeMenu;
     public GameObject pauseMenu;
     public GameObject winMenu;
     public GameObject loseMenu;
@@ -237,7 +237,7 @@ public class GameManager : MonoBehaviour
                 loseMenu.SetActive(false);
                 upgradeMenu.SetActive(false);
                 playerFlashDamage.SetActive(false);
-                welcomeMenu.SetActive(false);
+                //welcomeMenu.SetActive(false);
                 optionsMenu.SetActive(false);
                 isPaused = false;
                 menuMusic.Stop();
