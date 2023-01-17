@@ -207,6 +207,9 @@ public class GameManager : MonoBehaviour
             menuMusic.Play();
         }
 
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
+
         switch (menu)
         {
             case MenuType.Pause:
