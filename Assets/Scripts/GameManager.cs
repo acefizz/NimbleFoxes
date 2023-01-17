@@ -130,18 +130,17 @@ public class GameManager : MonoBehaviour
         //    data = new GameData();
         //}
 
-        Load();
 
 
 
         if(playerScript != null)
+        {
             playerSpawnLocation = playerScript.ReturnStartCheckpoint();
-
-        if(playerScript != null)
             playerScript.SetPlayerPos();
+            Load();
+        }
 
         scene = SceneManager.GetActiveScene().buildIndex;
-        //data.SaveData();
     }
 
     private void Update()
@@ -275,7 +274,9 @@ public class GameManager : MonoBehaviour
         {
             playerScript.PlayerLoad(data);
             playerScript.UpdatePlayerHPBar();
+            playerSpawnLocation = playerScript.ReturnStartCheckpoint();
         }
+
         // Will or will not be used after deciding if saving should put you back at a checkpoint.
         //playerSpawnLocation.x = data.spawn[0];
         //playerSpawnLocation.y = data.spawn[1];

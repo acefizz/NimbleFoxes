@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
     [Range(10, 15)][SerializeField] int jumpHeight;
     [Range(15, 50)][SerializeField] int gravity;
     [Range(1, 3)][SerializeField] int maxJumps;
-    [SerializeField] GameObject checkpointToSpawnAt;
+    public GameObject checkpointToSpawnAt;
     Vector3 startCheckpoint;
 
     [Header("___| Collectables |___")]
@@ -548,6 +548,11 @@ public class PlayerController : MonoBehaviour
         return abilities;
     }
 
+    public void GrabCheckpoint(GameObject cp)
+    {
+        checkpointToSpawnAt = cp;
+    }
+
     public int ReturnSelectedGun()
     {
         return selectedGun;
@@ -569,6 +574,8 @@ public class PlayerController : MonoBehaviour
         maxJumps = data.maxJumps;
         HP = data.health;
         HPOrig = data.maxHealth;
+        if(data.checkpointName != null)
+            checkpointToSpawnAt = GameObject.Find(data.checkpointName);
 
         gunList.Clear();
         abilities.Clear();
