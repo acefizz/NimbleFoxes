@@ -1,12 +1,20 @@
 using System;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using System.Collections.Generic;
+
+//TODO: must have a way to switch abilities
+//TODO: icon appears for ability, but not the name on pickup
+//TODO: Cooldowns need functionality
+
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    //public string scenePath;
+    int scene;
 
     [Header("Player")]
     public GameObject player;
@@ -26,12 +34,13 @@ public class GameManager : MonoBehaviour
     [Header("--- UI Menus ---")]
     [SerializeField] AudioSource menuMusic;
 
+
     public GameObject welcomeMenu;
     public GameObject pauseMenu;
     public GameObject winMenu;
     public GameObject loseMenu;
     public GameObject upgradeMenu;
-    public GameObject optionsMenu; //TODO: This menu needs to be able to be opened and closed //Buttons are already set up, the functionality just needs applied
+    public GameObject optionsMenu; 
     
 
     [Header("--- UI Pickups ---")]
@@ -69,6 +78,9 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI playerCoins;
     public TextMeshProUGUI enemiesLeft;
 
+    [SerializeField] TextMeshProUGUI livesText;
+    [SerializeField] TextMeshProUGUI coinsText;
+
     [Header("--- Upgrade Costs ---")]
     [SerializeField]
     [Range(1, 3)] public int jumpCost = 1;
@@ -79,12 +91,15 @@ public class GameManager : MonoBehaviour
 
     public int enemyCount;
 
+    [Header("--- Ability Cooldowns ---")]
+    List<float> coolDowns = new List<float>();
+    List<float> coolDownTracker = new List<float>();
+
     [Header("--- Checkpoint info - Don't change ---")]
     public Vector3 playerSpawnLocation;
     public Vector3 checkpoint;
     public string checkpointName;
     public int levelCheckpoint;
-
 
     //An enum to enforce menu types.
     public enum MenuType { WelcomeMenu, Pause, Win, Lose, Upgrade, PlayerDamageFlash, OptionsMenu, CloseAll }
@@ -94,7 +109,6 @@ public class GameManager : MonoBehaviour
         if (instance == null)
             instance = this;
 
-
         player = GameObject.FindGameObjectWithTag("Player");
         
         if (!player )
@@ -102,16 +116,39 @@ public class GameManager : MonoBehaviour
 
         playerScript = player.GetComponent<PlayerController>();
 
-        playerSpawnLocation = playerScript.ReturnStartCheckpoint();
+        
 
         timeScaleOriginal = Time.timeScale;
+
+        //if (scenePath == null)
+        //    scenePath = "Assets/Scenes/SavedScene.unity";
 
     }
 
     void Start()
     {
-        ShowMenu(MenuType.WelcomeMenu, true);
+        //if (data == null)
+        //{
+        //    data = new GameData();
+        //}
+
+        Load();
+
+        if (SceneManager.GetActiveScene().buildIndex != 1)
+            ShowMenu(MenuType.WelcomeMenu, true);
+        else
+        {
+            ShowMenu(MenuType.WelcomeMenu, false);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.Confined;
+        }
+
+        playerSpawnLocation = playerScript.ReturnStartCheckpoint();
+
+        playerScript.SetPlayerPos();
         
+        scene = SceneManager.GetActiveScene().buildIndex;
+        //data.SaveData();
     }
 
     private void Update()
@@ -121,7 +158,10 @@ public class GameManager : MonoBehaviour
         weaponText.text = weaponDisplay;
         abiltyText.text = abiltyDisplay;
 
-        if (Input.GetButtonDown("Cancel") && !playerScript.isDead)
+        //livesText.text = playerScript.Lives().ToString();
+        //coinsText.text = playerScript.coins.ToString();
+
+        if (Input.GetButtonDown("Cancel") && !playerScript.isDead && SceneManager.GetActiveScene().buildIndex != 1 && SceneManager.GetActiveScene().buildIndex != 0) 
         {
             isPaused = !isPaused;
             if (isPaused)
@@ -139,8 +179,8 @@ public class GameManager : MonoBehaviour
             playerScript = player.GetComponent<PlayerController>();
         }
 
-        //TODO: see if a menu is active and if so, play the clip on attached on game manager
-        
+        IncreaseCoolDownTimer();
+
     }
 
     private void DoStats()
@@ -165,6 +205,11 @@ public class GameManager : MonoBehaviour
             Cursor.lockState = activeState ? CursorLockMode.Confined : CursorLockMode.Locked;
             Cursor.visible = activeState;
             Time.timeScale = activeState ? 0 : timeScaleOriginal;
+        }
+
+        if (activeState)
+        {
+            menuMusic.Play();
         }
 
         switch (menu)
@@ -198,7 +243,9 @@ public class GameManager : MonoBehaviour
                 upgradeMenu.SetActive(false);
                 playerFlashDamage.SetActive(false);
                 welcomeMenu.SetActive(false);
+                optionsMenu.SetActive(false);
                 isPaused = false;
+                menuMusic.Stop();
                 break;
             case MenuType.OptionsMenu:
                 pauseMenu.SetActive(false);
@@ -215,8 +262,68 @@ public class GameManager : MonoBehaviour
     }
     public void UpdateEnemyCount(int amount)
     {
+        
+
         enemyCount += amount;
         enemiesLeft.text = enemyCount.ToString("F0");
     }
+    public void Save()
+    {
+        GameDataSave.SaveGameData(instance);
+        GameDataSave.SavePlayerData(playerScript);
+        //scenePath = SceneManager.GetActiveScene().path;
+        //EditorSceneManager.SaveScene(SceneManager.GetActiveScene(), scenePath);
+    }
 
+    public void Load(/*int sceneNum*/)
+    {
+        PlayerData data = GameDataSave.LoadPlayerData();
+
+        if(data != null)
+        {
+            playerScript.PlayerLoad(data);
+            playerScript.UpdatePlayerHPBar();
+        }
+        // Will or will not be used after deciding if saving should put you back at a checkpoint.
+        //playerSpawnLocation.x = data.spawn[0];
+        //playerSpawnLocation.y = data.spawn[1];
+        //playerSpawnLocation.z = data.spawn[2];
+    }
+
+    public void LoadLevel(int level)
+    {
+        SceneManager.LoadScene(level);
+    }
+
+    public int ReturnScene()
+    {
+        return scene;
+    }
+
+    void IncreaseCoolDownTimer()
+    {
+        for (int i = 0; i < coolDownTracker.Count; ++i)
+        {
+            coolDownTracker[i] += Time.deltaTime;
+        }
+    }
+
+    public bool CheckCoolDown(int time)
+    {
+        bool temp = false;
+
+        if (coolDownTracker[time] >= coolDowns[time])
+        {
+            temp = true;
+            coolDownTracker[time] = 0;
+        }
+
+        return temp;
+    }
+
+    public void SetCoolDown(AbilitySetup ability)
+    {
+        coolDowns.Add(ability.abilityCoolDown);
+        coolDownTracker.Add(ability.abilityCoolDown);
+    }
 }

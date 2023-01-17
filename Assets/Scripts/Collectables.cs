@@ -12,6 +12,7 @@ public class Collectables : MonoBehaviour
     public int health;
     public int coin;
     public bool jump;
+    public bool life;
     public bool weapon;
     string weaponName;
     public bool ability;
@@ -50,15 +51,17 @@ public class Collectables : MonoBehaviour
             GameManager.instance.playerScript.AddCoins(coin);
             if (upgradeClip != null)
                 audioSource.PlayOneShot(upgradeClip, effectVol);
-            StartCoroutine(ShowCollections());
             gameObject.GetComponent<MeshRenderer>().enabled = false;
             gameObject.GetComponent<Collider>().enabled = false;
             if (jump)
                 GameManager.instance.playerScript.AddJumps(1);
+            if (life)
+                GameManager.instance.playerScript.Lives(1);
             if (weapon)
                 weaponName = GameManager.instance.playerScript.gunName;
-            if (ability) { }
-                //TODO: ability name needs read from object
+            if (ability)
+                abilityName = GameManager.instance.playerScript.abilityName;
+            StartCoroutine(ShowCollections());
         }
         
     }
