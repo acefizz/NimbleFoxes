@@ -13,7 +13,6 @@ public class SeekerSmall : MonoBehaviour, IDamage
     public float HP;
     private void Start()
     {
-        GameManager.instance.UpdateEnemyCount(1);
     }
     private void Update()
     {
@@ -32,7 +31,7 @@ public class SeekerSmall : MonoBehaviour, IDamage
         {
             agent.isStopped = true;
             StartCoroutine(Death());
-            GameManager.instance.UpdateEnemyCount(-1);
+          
         }
     }
     
@@ -48,10 +47,7 @@ public class SeekerSmall : MonoBehaviour, IDamage
         effect.GetComponent<ParticleSystem>().Play();
         agent.isStopped = true;
         yield return new WaitForSeconds(3.0f);
-        if (GameManager.instance.enemyCount <= 0)
-        {
-            GameManager.instance.ShowMenu(GameManager.MenuType.Win, true);
-        }
+        
         effect.GetComponent<ParticleSystem>().Stop();
         Destroy(gameObject);
         

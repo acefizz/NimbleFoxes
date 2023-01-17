@@ -15,17 +15,18 @@ public class ButtonFunctions : MonoBehaviour
     }
     public void RestartGame() 
     {
-        GameManager.instance.ShowMenu(GameManager.MenuType.CloseAll);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
-    public void Respawn()
-    {
-
         GameManager.instance.playerScript.ReturnController().enabled = false;
         GameManager.instance.ShowMenu(GameManager.MenuType.CloseAll);
         GameManager.instance.playerSpawnLocation = GameManager.instance.checkpoint;
         GameManager.instance.player.transform.position = GameManager.instance.playerSpawnLocation;
         GameManager.instance.playerScript.ReturnController().enabled = true;
+        
+    }
+    public void Respawn()
+    {
+        GameManager.instance.ShowMenu(GameManager.MenuType.CloseAll);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
     }
     public void UpgradeMenuOpen()
     {

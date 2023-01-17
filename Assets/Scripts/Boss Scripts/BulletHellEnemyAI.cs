@@ -24,7 +24,11 @@ public class BulletHellEnemyAI : EnemyAI
             BHS = (BulletHellState)Random.Range(0, 4);
         }
     }
+    public virtual void takeDamage(float dmg)
+    {
+     
 
+    }
     public override IEnumerator shoot()
     {
 

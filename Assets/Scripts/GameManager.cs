@@ -72,7 +72,6 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI jumpCount;
     public TextMeshProUGUI damageCount;
     public TextMeshProUGUI playerCoins;
-    public TextMeshProUGUI enemiesLeft;
 
     [SerializeField] TextMeshProUGUI livesText;
     [SerializeField] TextMeshProUGUI coinsText;
@@ -85,7 +84,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     [Range(1, 5)] public int speedCost = 1;
 
-    public int enemyCount;
+
 
     [Header("--- Ability Cooldowns ---")]
     List<float> coolDowns = new List<float>();
@@ -251,13 +250,7 @@ public class GameManager : MonoBehaviour
     {
         respawnText.text = text;
     }
-    public void UpdateEnemyCount(int amount)
-    {
 
-
-        enemyCount += amount;
-        enemiesLeft.text = enemyCount.ToString("F0");
-    }
     public void Save()
     {
         GameDataSave.SaveGameData(instance);

@@ -19,7 +19,7 @@ public class Seeker : MonoBehaviour, IDamage
     private void Start()
     {
         model.enabled = false;
-        GameManager.instance.UpdateEnemyCount(1);
+        
         hpOrig = HP;
     }
     private void OnTriggerEnter(Collider other)
@@ -70,7 +70,7 @@ public class Seeker : MonoBehaviour, IDamage
             enemyUI.SetActive(false);
             agent.isStopped = true;
             StartCoroutine(Death());
-            GameManager.instance.UpdateEnemyCount(-1);
+           
 
         }
 
@@ -79,10 +79,7 @@ public class Seeker : MonoBehaviour, IDamage
     {
         //animator.SetTrigger("Death");
         yield return new WaitForSeconds(3.0f);
-        if (GameManager.instance.enemyCount <= 0)
-        {
-            GameManager.instance.ShowMenu(GameManager.MenuType.Win, true);
-        }
+     
         Destroy(gameObject);
     }
     public virtual IEnumerator ShowHP()

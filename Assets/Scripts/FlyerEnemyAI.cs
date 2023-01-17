@@ -39,7 +39,7 @@ public class FlyerEnemyAI : MonoBehaviour, IDamage
         startPos = transform.position;
         stoppingDistOrig = agent.stoppingDistance;
         UpdateEnemyHPBar();
-        GameManager.instance.UpdateEnemyCount(1);
+      
     }
 
     // Update is called once per frame
@@ -155,7 +155,7 @@ public class FlyerEnemyAI : MonoBehaviour, IDamage
             agent.isStopped = true;
             isDying = true;
             StartCoroutine(Death());
-            GameManager.instance.UpdateEnemyCount(-1);
+     
 
         }
 
@@ -165,10 +165,7 @@ public class FlyerEnemyAI : MonoBehaviour, IDamage
     {
         //animator.SetTrigger("Death");
         yield return new WaitForSeconds(3.0f);
-        if (GameManager.instance.enemyCount <= 0)
-        {
-            GameManager.instance.ShowMenu(GameManager.MenuType.Win, true);
-        }
+       
         Destroy(transform.parent.gameObject);
     }
 
