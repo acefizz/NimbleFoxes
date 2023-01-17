@@ -153,6 +153,7 @@ public class PlayerController : MonoBehaviour
             aud.PlayOneShot(gunList[selectedGun].gunShot, gunShotVol);
 
             yield return new WaitForSeconds(shotRate);
+            
             isShooting = false;
         }
     }
