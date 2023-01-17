@@ -9,7 +9,6 @@ using System.Collections.Generic;
 //TODO: icon appears for ability, but not the name on pickup
 //TODO: Cooldowns need functionality
 
-
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
@@ -34,14 +33,11 @@ public class GameManager : MonoBehaviour
     [Header("--- UI Menus ---")]
     [SerializeField] AudioSource menuMusic;
 
-
-    //public GameObject welcomeMenu;
     public GameObject pauseMenu;
     public GameObject winMenu;
     public GameObject loseMenu;
     public GameObject upgradeMenu;
     public GameObject optionsMenu; 
-    
 
     [Header("--- UI Pickups ---")]
     public GameObject Pickups;
@@ -116,6 +112,8 @@ public class GameManager : MonoBehaviour
 
         playerScript = player.GetComponent<PlayerController>();
 
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
         
 
         timeScaleOriginal = Time.timeScale;
@@ -135,12 +133,12 @@ public class GameManager : MonoBehaviour
         Load();
 
 
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.Confined;
 
-        playerSpawnLocation = playerScript.ReturnStartCheckpoint();
+        if(playerScript != null)
+            playerSpawnLocation = playerScript.ReturnStartCheckpoint();
 
-        playerScript.SetPlayerPos();
+        if(playerScript != null)
+            playerScript.SetPlayerPos();
 
         scene = SceneManager.GetActiveScene().buildIndex;
         //data.SaveData();
@@ -156,7 +154,7 @@ public class GameManager : MonoBehaviour
         //livesText.text = playerScript.Lives().ToString();
         //coinsText.text = playerScript.coins.ToString();
 
-        if (Input.GetButtonDown("Cancel") && !playerScript.isDead && SceneManager.GetActiveScene().buildIndex != 1 && SceneManager.GetActiveScene().buildIndex != 0)
+        if (Input.GetButtonDown("Cancel") && (playerScript == null || !playerScript.isDead))
         {
             isPaused = !isPaused;
             if (isPaused)
@@ -166,13 +164,14 @@ public class GameManager : MonoBehaviour
         }
         if (isPaused)
             DoStats();
-
+        /*
         if (!player || !playerScript)
         {
             Debug.Log("Still not found, searching again");
             player = GameObject.FindGameObjectWithTag("Player");
             playerScript = player.GetComponent<PlayerController>();
         }
+        */
 
         IncreaseCoolDownTimer();
 
@@ -202,13 +201,10 @@ public class GameManager : MonoBehaviour
             Time.timeScale = activeState ? 0 : timeScaleOriginal;
         }
 
-        if (pauseMenu == true || optionsMenu == true || upgradeMenu == true )
+        if (activeState)
         {
             menuMusic.Play();
         }
-
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.Confined;
 
         switch (menu)
         {
@@ -237,9 +233,10 @@ public class GameManager : MonoBehaviour
                 loseMenu.SetActive(false);
                 upgradeMenu.SetActive(false);
                 playerFlashDamage.SetActive(false);
-                //welcomeMenu.SetActive(false);
                 optionsMenu.SetActive(false);
                 isPaused = false;
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Confined;
                 menuMusic.Stop();
                 break;
             case MenuType.OptionsMenu:
@@ -274,7 +271,7 @@ public class GameManager : MonoBehaviour
     {
         PlayerData data = GameDataSave.LoadPlayerData();
 
-        if (data != null)
+        if (data != null && playerScript != null)
         {
             playerScript.PlayerLoad(data);
             playerScript.UpdatePlayerHPBar();
