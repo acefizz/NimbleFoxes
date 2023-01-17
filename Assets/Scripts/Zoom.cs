@@ -18,6 +18,8 @@ public class Zoom : MonoBehaviour
     }
     void Update()
     {
+        if (!zoomCamera)
+            return;
         GetFOV();
         if (Input.GetButton("Zoom"))
         {

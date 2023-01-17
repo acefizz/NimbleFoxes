@@ -112,7 +112,7 @@ public class GameManager : MonoBehaviour
 
         playerScript = player.GetComponent<PlayerController>();
 
-        Cursor.visible = false;
+        Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
         
 
@@ -134,9 +134,11 @@ public class GameManager : MonoBehaviour
 
 
 
-        playerSpawnLocation = playerScript.ReturnStartCheckpoint();
+        if(playerScript != null)
+            playerSpawnLocation = playerScript.ReturnStartCheckpoint();
 
-        playerScript.SetPlayerPos();
+        if(playerScript != null)
+            playerScript.SetPlayerPos();
 
         scene = SceneManager.GetActiveScene().buildIndex;
         //data.SaveData();
@@ -152,7 +154,7 @@ public class GameManager : MonoBehaviour
         //livesText.text = playerScript.Lives().ToString();
         //coinsText.text = playerScript.coins.ToString();
 
-        if (Input.GetButtonDown("Cancel") && !playerScript.isDead && SceneManager.GetActiveScene().buildIndex != 1 && SceneManager.GetActiveScene().buildIndex != 0)
+        if (Input.GetButtonDown("Cancel") && (playerScript == null || !playerScript.isDead))
         {
             isPaused = !isPaused;
             if (isPaused)
@@ -162,13 +164,14 @@ public class GameManager : MonoBehaviour
         }
         if (isPaused)
             DoStats();
-
+        /*
         if (!player || !playerScript)
         {
             Debug.Log("Still not found, searching again");
             player = GameObject.FindGameObjectWithTag("Player");
             playerScript = player.GetComponent<PlayerController>();
         }
+        */
 
         IncreaseCoolDownTimer();
 
@@ -268,7 +271,7 @@ public class GameManager : MonoBehaviour
     {
         PlayerData data = GameDataSave.LoadPlayerData();
 
-        if (data != null)
+        if (data != null && playerScript != null)
         {
             playerScript.PlayerLoad(data);
             playerScript.UpdatePlayerHPBar();
