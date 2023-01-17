@@ -102,7 +102,7 @@ public class GameManager : MonoBehaviour
     public int levelCheckpoint;
 
     //An enum to enforce menu types.
-    public enum MenuType { WelcomeMenu, Pause, Win, Lose, Upgrade, PlayerDamageFlash, OptionsMenu, CloseAll }
+    public enum MenuType { Pause, Win, Lose, Upgrade, PlayerDamageFlash, OptionsMenu, CloseAll }
 
     private void Awake()
     {
@@ -134,19 +134,14 @@ public class GameManager : MonoBehaviour
 
         Load();
 
-        if (SceneManager.GetActiveScene().buildIndex != 1)
-            ShowMenu(MenuType.WelcomeMenu, true);
-        else
-        {
-            ShowMenu(MenuType.WelcomeMenu, false);
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.Confined;
-        }
+
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
 
         playerSpawnLocation = playerScript.ReturnStartCheckpoint();
 
         playerScript.SetPlayerPos();
-        
+
         scene = SceneManager.GetActiveScene().buildIndex;
         //data.SaveData();
     }
@@ -161,7 +156,7 @@ public class GameManager : MonoBehaviour
         //livesText.text = playerScript.Lives().ToString();
         //coinsText.text = playerScript.coins.ToString();
 
-        if (Input.GetButtonDown("Cancel") && !playerScript.isDead && SceneManager.GetActiveScene().buildIndex != 1 && SceneManager.GetActiveScene().buildIndex != 0) 
+        if (Input.GetButtonDown("Cancel") && !playerScript.isDead && SceneManager.GetActiveScene().buildIndex != 1 && SceneManager.GetActiveScene().buildIndex != 0)
         {
             isPaused = !isPaused;
             if (isPaused)
@@ -214,9 +209,6 @@ public class GameManager : MonoBehaviour
 
         switch (menu)
         {
-            case MenuType.WelcomeMenu:
-                welcomeMenu.SetActive(activeState);
-                break;
             case MenuType.Pause:
                 pauseMenu.SetActive(activeState);
                 upgradeMenu.SetActive(false);
@@ -262,7 +254,7 @@ public class GameManager : MonoBehaviour
     }
     public void UpdateEnemyCount(int amount)
     {
-        
+
 
         enemyCount += amount;
         enemiesLeft.text = enemyCount.ToString("F0");
@@ -279,7 +271,7 @@ public class GameManager : MonoBehaviour
     {
         PlayerData data = GameDataSave.LoadPlayerData();
 
-        if(data != null)
+        if (data != null)
         {
             playerScript.PlayerLoad(data);
             playerScript.UpdatePlayerHPBar();
