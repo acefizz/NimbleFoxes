@@ -12,9 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ad94a9ebb8e28f43b88a17c5a174fa8, type: 3}
   m_Name: PistolSetup
   m_EditorClassIdentifier: 
+  gunNum: 0
   shotRate: 0.83
   shotDamage: 0.85
   shotDist: 25
   gunName: Pistol
   GunModel: {fileID: 5043873141336150979, guid: f0db8dfe5ef8cad40b07cc32889eaa19, type: 3}
   gunShot: {fileID: 8300000, guid: 195d8474e450d8d4d92d4f6bf7623d67, type: 3}
+  FieldOfView: 55
+  pellets: 1
