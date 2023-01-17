@@ -447,8 +447,8 @@ MonoBehaviour:
   HPOrig: 25
   lives: 3
   playerSpeed: 3
-  jumpHeight: 15
-  gravity: 20
+  jumpHeight: 10
+  gravity: 30
   maxJumps: 1
   checkpointToSpawnAt: {fileID: 0}
   coins: 0
@@ -464,7 +464,7 @@ MonoBehaviour:
   shotDamage: 0
   shotRate: 0
   shotDist: 0
-  hitEffect: {fileID: 1000011945391522, guid: 78b71003e8b357d4bbf89c8b5e5e4f0e, type: 3}
+  hitEffect: {fileID: 5571629057815831605, guid: 9098bf7465618c141b1121349a754496, type: 3}
   gunName: 
   pellets: 0
   FieldOfView: 60
