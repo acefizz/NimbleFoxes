@@ -2445,9 +2445,21 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4533570552687267969, guid: 7deb2b4814649544ebba244c1ee09ba9, type: 3}
+      propertyPath: startCheckpoint.x
+      value: -97
+      objectReference: {fileID: 0}
+    - target: {fileID: 4533570552687267969, guid: 7deb2b4814649544ebba244c1ee09ba9, type: 3}
+      propertyPath: startCheckpoint.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4533570552687267969, guid: 7deb2b4814649544ebba244c1ee09ba9, type: 3}
+      propertyPath: startCheckpoint.z
+      value: -94
+      objectReference: {fileID: 0}
+    - target: {fileID: 4533570552687267969, guid: 7deb2b4814649544ebba244c1ee09ba9, type: 3}
       propertyPath: checkpointToSpawnAt
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 5465412014136569536}
     - target: {fileID: 4533570552687267971, guid: 7deb2b4814649544ebba244c1ee09ba9, type: 3}
       propertyPath: m_RootOrder
       value: 40
@@ -6623,3 +6635,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 093a243b5e9037b48bed143636d4dbab, type: 3}
+--- !u!1 &5465412014136569536 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3569825448048060621, guid: 093a243b5e9037b48bed143636d4dbab, type: 3}
+  m_PrefabInstance: {fileID: 5465412014136569535}
+  m_PrefabAsset: {fileID: 0}

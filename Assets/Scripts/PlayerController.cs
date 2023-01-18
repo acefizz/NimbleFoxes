@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     [Range(15, 50)][SerializeField] int gravity;
     [Range(1, 3)][SerializeField] int maxJumps;
     public GameObject checkpointToSpawnAt;
+    [SerializeField]
     Vector3 startCheckpoint;
 
     [Header("___| Collectables |___")]
