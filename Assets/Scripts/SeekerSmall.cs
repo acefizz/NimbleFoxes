@@ -20,9 +20,12 @@ public class SeekerSmall : MonoBehaviour, IDamage
     }
     private void OnTriggerEnter(Collider other)
     {
-        StartCoroutine(Death());
-        if(GameManager.instance.playerScript)
-            GameManager.instance.playerScript.AddHp(-1);
+        if (other.CompareTag("Player"))
+        {
+            StartCoroutine(Death());
+            if (GameManager.instance.playerScript)
+                GameManager.instance.playerScript.AddHp(-1);
+        }
     }
     public virtual void takeDamage(float damage)
     {
@@ -32,10 +35,10 @@ public class SeekerSmall : MonoBehaviour, IDamage
         {
             agent.isStopped = true;
             StartCoroutine(Death());
-          
+
         }
     }
-    
+
     IEnumerator flashDamage()
     {
         model.material.color = Color.red;
@@ -48,10 +51,10 @@ public class SeekerSmall : MonoBehaviour, IDamage
         effect.GetComponent<ParticleSystem>().Play();
         agent.isStopped = true;
         yield return new WaitForSeconds(3.0f);
-        
+
         effect.GetComponent<ParticleSystem>().Stop();
         Destroy(gameObject);
-        
+
     }
-    
+
 }

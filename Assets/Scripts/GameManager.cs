@@ -104,16 +104,8 @@ public class GameManager : MonoBehaviour
         if (instance == null)
             instance = this;
 
-        player = GameObject.FindGameObjectWithTag("Player");
-        
-        if (!player )
-            Debug.LogError("Player not found in scene or tagged as Player or named Player");
-
-        playerScript = player.GetComponent<PlayerController>();
-
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Confined;
-        
 
         timeScaleOriginal = Time.timeScale;
 

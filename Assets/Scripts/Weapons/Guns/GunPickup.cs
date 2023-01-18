@@ -12,6 +12,8 @@ public class GunPickup : MonoBehaviour
     
     public void OnTriggerEnter(Collider other)
     {
+        if(!GameManager.instance.playerScript)
+            return;
         if (other.CompareTag("Player") && isAbility)
         {
             GameManager.instance.playerScript.AbilityPickup(abilitySetup);

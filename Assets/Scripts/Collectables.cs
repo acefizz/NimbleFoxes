@@ -47,6 +47,8 @@ public class Collectables : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            if(GameManager.instance.playerScript == null)
+                return;
             GameManager.instance.playerScript.AddHp(health);
             GameManager.instance.playerScript.AddCoins(coin);
             if (upgradeClip != null)
@@ -63,12 +65,12 @@ public class Collectables : MonoBehaviour
                 abilityName = GameManager.instance.playerScript.abilityName;
             StartCoroutine(ShowCollections());
         }
-        
+
     }
     IEnumerator ShowCollections()
     {
         if (health > 0)
-            GameManager.instance.healthDisplay = "+ " + health +"health added";
+            GameManager.instance.healthDisplay = "+ " + health + "health added";
         if (coin > 0)
             GameManager.instance.coinDisplay = "+ " + coin + " coin(s) added";
         if (weapon)
