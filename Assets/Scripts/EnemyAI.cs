@@ -47,7 +47,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         startPos = transform.position;
         stoppingDistOrig = agent.stoppingDistance;
         UpdateEnemyHPBar();
-        GameManager.instance.UpdateEnemyCount(1);
+      
     }
 
     // Update is called once per frame
@@ -208,7 +208,7 @@ public class EnemyAI : MonoBehaviour, IDamage
                 Instantiate(enemyDrop, shootPos.position, transform.rotation);
             }
             StartCoroutine(Death());
-            GameManager.instance.UpdateEnemyCount(-1);
+ 
         }
 
     }

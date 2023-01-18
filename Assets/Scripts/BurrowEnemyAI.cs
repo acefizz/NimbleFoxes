@@ -48,7 +48,7 @@ public class BurrowEnemyAI : MonoBehaviour, IDamage
         startPos = transform.position;
         stoppingDistOrig = agent.stoppingDistance;
         UpdateEnemyHPBar();
-        GameManager.instance.UpdateEnemyCount(1);
+       
     }
 
     // Update is called once per frame
@@ -218,7 +218,7 @@ public class BurrowEnemyAI : MonoBehaviour, IDamage
                 Instantiate(enemyDrop, shootPos.position, transform.rotation);
             }
             StartCoroutine(Death());
-            GameManager.instance.UpdateEnemyCount(-1);
+           
         }
     }
 
@@ -226,10 +226,7 @@ public class BurrowEnemyAI : MonoBehaviour, IDamage
     {
         //animator.SetTrigger("Death");
         yield return new WaitForSeconds(3.0f);
-        if (GameManager.instance.enemyCount <= 0)
-        {
-            GameManager.instance.ShowMenu(GameManager.MenuType.Win, true);
-        }
+       
         Destroy(parent);
     }
 

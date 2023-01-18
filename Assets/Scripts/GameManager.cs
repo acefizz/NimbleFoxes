@@ -72,7 +72,6 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI jumpCount;
     public TextMeshProUGUI damageCount;
     public TextMeshProUGUI playerCoins;
-    public TextMeshProUGUI enemiesLeft;
 
     [SerializeField] TextMeshProUGUI livesText;
     [SerializeField] TextMeshProUGUI coinsText;
@@ -85,7 +84,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     [Range(1, 5)] public int speedCost = 1;
 
-    public int enemyCount;
+
 
     [Header("--- Ability Cooldowns ---")]
     List<float> coolDowns = new List<float>();
@@ -112,7 +111,7 @@ public class GameManager : MonoBehaviour
 
         playerScript = player.GetComponent<PlayerController>();
 
-        Cursor.visible = true;
+        Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Confined;
         
 
@@ -130,18 +129,17 @@ public class GameManager : MonoBehaviour
         //    data = new GameData();
         //}
 
-        Load();
 
 
 
         if(playerScript != null)
+        {
             playerSpawnLocation = playerScript.ReturnStartCheckpoint();
-
-        if(playerScript != null)
             playerScript.SetPlayerPos();
+            Load();
+        }
 
         scene = SceneManager.GetActiveScene().buildIndex;
-        //data.SaveData();
     }
 
     private void Update()
@@ -154,7 +152,7 @@ public class GameManager : MonoBehaviour
         //livesText.text = playerScript.Lives().ToString();
         //coinsText.text = playerScript.coins.ToString();
 
-        if (Input.GetButtonDown("Cancel") && (playerScript == null || !playerScript.isDead))
+        if (Input.GetButtonDown("Cancel") && (playerScript == null || !playerScript.isDead) || (SceneManager.GetActiveScene().buildIndex != 1 && SceneManager.GetActiveScene().buildIndex != 0))
         {
             isPaused = !isPaused;
             if (isPaused)
@@ -252,13 +250,7 @@ public class GameManager : MonoBehaviour
     {
         respawnText.text = text;
     }
-    public void UpdateEnemyCount(int amount)
-    {
 
-
-        enemyCount += amount;
-        enemiesLeft.text = enemyCount.ToString("F0");
-    }
     public void Save()
     {
         GameDataSave.SaveGameData(instance);
@@ -275,7 +267,9 @@ public class GameManager : MonoBehaviour
         {
             playerScript.PlayerLoad(data);
             playerScript.UpdatePlayerHPBar();
+            playerSpawnLocation = playerScript.ReturnStartCheckpoint();
         }
+
         // Will or will not be used after deciding if saving should put you back at a checkpoint.
         //playerSpawnLocation.x = data.spawn[0];
         //playerSpawnLocation.y = data.spawn[1];

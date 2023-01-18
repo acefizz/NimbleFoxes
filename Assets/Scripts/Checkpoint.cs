@@ -14,6 +14,9 @@ public class Checkpoint : MonoBehaviour
     {
         if(other.CompareTag("Player") && isEnd)
         {
+            GameManager.instance.playerScript.AddHp(GameManager.instance.playerScript.GetOriginalHP());
+
+            GameManager.instance.playerScript.GrabCheckpoint(this.gameObject);
             GameManager.instance.Save();
             GameManager.instance.LoadLevel(GameManager.instance.ReturnScene() + 1);
         }
@@ -23,6 +26,9 @@ public class Checkpoint : MonoBehaviour
             //GameManager.instance.checkpoint = GameManager.instance.player.transform.position;
             //GameManager.instance.playerSpawnLocation = GameManager.instance.checkpoint;
             //GameManager.instance.checkpointName = checkpointName;
+            GameManager.instance.playerScript.AddHp(GameManager.instance.playerScript.GetOriginalHP());
+
+            GameManager.instance.playerScript.GrabCheckpoint(this.gameObject);
 
             GameManager.instance.Save();
             GameManager.instance.Load();

@@ -13,6 +13,7 @@ public class PlayerData
     public int maxHealth;
     public int[] guns;
     public int[] abilities;
+    public string checkpointName;
 
     public PlayerData(PlayerController player)
     {
@@ -22,9 +23,9 @@ public class PlayerData
         maxJumps = player.GetMaxJumps();
         health = player.ReturnHP();
         maxHealth = player.GetOriginalHP();
-
         guns = new int[player.ReturnGunList().Count];
         abilities = new int[player.ReturnAbilities().Count];
+        checkpointName = player.checkpointToSpawnAt.name;
 
         for(int i = 0; i < guns.Length; ++i)
         {
