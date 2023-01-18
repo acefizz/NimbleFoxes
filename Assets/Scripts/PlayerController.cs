@@ -227,7 +227,7 @@ public class PlayerController : MonoBehaviour
 
             if (HP > HPOrig)
             {
-                hp = HPOrig;
+                HP = HPOrig;
             }
 
             UpdatePlayerHPBar();
