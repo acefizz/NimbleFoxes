@@ -199,10 +199,12 @@ public class GameManager : MonoBehaviour
             Time.timeScale = activeState ? 0 : timeScaleOriginal;
         }
 
-        if (activeState)
+        if (pauseMenu == true || optionsMenu == true || upgradeMenu == true)
         {
             menuMusic.Play();
         }
+
+
 
         switch (menu)
         {
