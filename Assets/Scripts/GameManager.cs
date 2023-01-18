@@ -177,6 +177,8 @@ public class GameManager : MonoBehaviour
 
     private void DoStats()
     {
+        if(playerScript == null)
+            return;
         jumpCount.text = "Jumps : " + playerScript.GetMaxJumps();
         damageCount.text = "Damage : " + playerScript.GetDamage();
         speedCount.text = "Speed : " + playerScript.GetSpeed();

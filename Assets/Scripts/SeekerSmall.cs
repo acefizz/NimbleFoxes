@@ -21,7 +21,8 @@ public class SeekerSmall : MonoBehaviour, IDamage
     private void OnTriggerEnter(Collider other)
     {
         StartCoroutine(Death());
-        GameManager.instance.playerScript.AddHp(-1);
+        if(GameManager.instance.playerScript)
+            GameManager.instance.playerScript.AddHp(-1);
     }
     public virtual void takeDamage(float damage)
     {

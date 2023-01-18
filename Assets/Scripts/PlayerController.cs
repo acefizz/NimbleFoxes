@@ -574,6 +574,8 @@ public class PlayerController : MonoBehaviour
         HPOrig = data.maxHealth;
         if (data.checkpointName != null)
             checkpointToSpawnAt = GameObject.Find(data.checkpointName);
+        else 
+            checkpointToSpawnAt = GameObject.Find("Checkpoint");
 
         gunList.Clear();
         abilities.Clear();
