@@ -6,10 +6,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-
-
-
-
 public class PlayerController : MonoBehaviour
 {
     [Header("___| Components |___")]
@@ -28,6 +24,7 @@ public class PlayerController : MonoBehaviour
     [Range(15, 50)][SerializeField] int gravity;
     [Range(1, 3)][SerializeField] int maxJumps;
     public GameObject checkpointToSpawnAt;
+    [SerializeField]
     Vector3 startCheckpoint;
 
     [Header("___| Collectables |___")]
@@ -174,13 +171,14 @@ public class PlayerController : MonoBehaviour
     }
 
     public void takeDamage(int dmg)
-    {
-        HP -= dmg;
+   {
         aud.PlayOneShot(playerHurt[UnityEngine.Random.Range(0, playerHurt.Length)], playerHurtVol);
         UpdatePlayerHPBar();
+        HP -= dmg;
         StartCoroutine(PlayerDamageFlash());
         if (HP <= 0)
         {
+            HP = 0;
             GameManager.instance.ShowMenu(GameManager.MenuType.Lose, true);
             if (lives > 0)
             {
@@ -227,7 +225,7 @@ public class PlayerController : MonoBehaviour
         {
             HP += hp;
 
-            if(HP > HPOrig)
+            if (HP > HPOrig)
             {
                 hp = HPOrig;
             }
@@ -301,7 +299,7 @@ public class PlayerController : MonoBehaviour
 
         SetWeaponIcon();
     }
-    
+
     public void AbilityPickup(AbilitySetup ability)
     {
         abilityName = ability.abilityName;
@@ -345,7 +343,7 @@ public class PlayerController : MonoBehaviour
 
         SetWeaponIcon();
     }
-    
+
     IEnumerator playSteps()
     {
         stepPlaying = true;
@@ -572,10 +570,12 @@ public class PlayerController : MonoBehaviour
         playerSpeed = data.speed;
         coins = data.coins;
         maxJumps = data.maxJumps;
-        HP = data.health;
+        HP = data.health > 0 ? data.health : HPOrig;
         HPOrig = data.maxHealth;
-        if(data.checkpointName != null)
+        if (data.checkpointName != null)
             checkpointToSpawnAt = GameObject.Find(data.checkpointName);
+        else 
+            checkpointToSpawnAt = GameObject.Find("Checkpoint");
 
         gunList.Clear();
         abilities.Clear();

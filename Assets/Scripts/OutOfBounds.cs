@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class OutOfBounds : MonoBehaviour
 {
@@ -8,13 +7,7 @@ public class OutOfBounds : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Respawn();
+            GameManager.instance.playerScript.takeDamage(33000);
         }
-    }
-    public void Respawn()
-    {
-        GameManager.instance.playerScript.ReturnController().enabled= false;
-        transform.position =  GameManager.instance.playerSpawnLocation;
-        GameManager.instance.playerScript.ReturnController().enabled = true;
     }
 }

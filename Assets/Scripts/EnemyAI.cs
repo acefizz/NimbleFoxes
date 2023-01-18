@@ -185,7 +185,6 @@ public class EnemyAI : MonoBehaviour, IDamage
     public virtual void takeDamage(float dmg)
     {
         HP -= dmg;
-        UpdateEnemyHPBar();
         if (CompareTag("Boss"))
         {
             enemyUI.SetActive(true);
@@ -195,6 +194,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         {
             StartCoroutine(ShowHP());
         }
+        UpdateEnemyHPBar();
         agent.SetDestination(GameManager.instance.player.transform.position);
         StartCoroutine(flashDamage());
         if (HP <= 0 && !isDying)

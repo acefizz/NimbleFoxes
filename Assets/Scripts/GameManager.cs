@@ -104,16 +104,8 @@ public class GameManager : MonoBehaviour
         if (instance == null)
             instance = this;
 
-        player = GameObject.FindGameObjectWithTag("Player");
-        
-        if (!player )
-            Debug.LogError("Player not found in scene or tagged as Player or named Player");
-
-        playerScript = player.GetComponent<PlayerController>();
-
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Confined;
-        
 
         timeScaleOriginal = Time.timeScale;
 
@@ -152,7 +144,7 @@ public class GameManager : MonoBehaviour
         //livesText.text = playerScript.Lives().ToString();
         //coinsText.text = playerScript.coins.ToString();
 
-        if (Input.GetButtonDown("Cancel") && (playerScript == null || !playerScript.isDead) || (SceneManager.GetActiveScene().buildIndex != 1 && SceneManager.GetActiveScene().buildIndex != 0))
+        if (Input.GetButtonDown("Cancel") && (playerScript == null || !playerScript.isDead) && (/*SceneManager.GetActiveScene().buildIndex != 1 &&*/ SceneManager.GetActiveScene().buildIndex != 0))
         {
             isPaused = !isPaused;
             if (isPaused)
@@ -177,6 +169,8 @@ public class GameManager : MonoBehaviour
 
     private void DoStats()
     {
+        if(playerScript == null)
+            return;
         jumpCount.text = "Jumps : " + playerScript.GetMaxJumps();
         damageCount.text = "Damage : " + playerScript.GetDamage();
         speedCount.text = "Speed : " + playerScript.GetSpeed();
@@ -199,15 +193,17 @@ public class GameManager : MonoBehaviour
             Time.timeScale = activeState ? 0 : timeScaleOriginal;
         }
 
-        if (activeState)
+        if (pauseMenu == true || optionsMenu == true || upgradeMenu == true)
         {
             menuMusic.Play();
         }
 
+
+
         switch (menu)
         {
             case MenuType.Pause:
-                pauseMenu.SetActive(activeState);
+                pauseMenu.SetActive(true);
                 upgradeMenu.SetActive(false);
                 break;
             case MenuType.Win:
