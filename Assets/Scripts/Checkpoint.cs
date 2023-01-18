@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.SceneManagement;
 
 public class Checkpoint : MonoBehaviour
 {
@@ -12,13 +13,15 @@ public class Checkpoint : MonoBehaviour
     //can be used as a player spawner if player is set to that location originally
     private void OnTriggerEnter(Collider other)
     {
+        
         if(other.CompareTag("Player") && isEnd)
         {
+            
             GameManager.instance.playerScript.AddHp(GameManager.instance.playerScript.GetOriginalHP());
 
             GameManager.instance.playerScript.GrabCheckpoint(this.gameObject);
             GameManager.instance.Save();
-            GameManager.instance.LoadLevel(GameManager.instance.ReturnScene() + 1);
+            GameManager.instance.LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
         }
         else if (other.CompareTag("Player") /*&& isStart*/)
         {
