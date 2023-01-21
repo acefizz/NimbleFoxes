@@ -120,7 +120,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: eb3d986bc5451b646930eac0189baccb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -172,6 +172,7 @@ MonoBehaviour:
   agent: {fileID: 7389231552751148867}
   enemyDrop: {fileID: 0}
   collider: {fileID: 7389231553329515914}
+  smokeBomb: {fileID: 1623808255513594831, guid: 047ad4f0d6984ee46bea7e3de12fa236, type: 3}
   HP: 5
   playerFaceSpeed: 10
   sightAngle: 80
