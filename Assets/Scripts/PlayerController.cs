@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float shotRate;
     [SerializeField] int shotDist;
     public GameObject hitEffect;
+    public ParticleSystem muzzleFlash;
     public string gunName;
     public int pellets;
     public float FieldOfView;
@@ -141,10 +142,10 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator Shoot()
     {
+        
         if (!isShooting && Input.GetButton("Shoot"))
         {
-            isShooting = true;
-
+            isShooting = true;          
             gunList[selectedGun].GunModel.GetComponent<IWeapon>().Fire(extraDmg);
 
             aud.PlayOneShot(gunList[selectedGun].gunShot, gunShotVol);

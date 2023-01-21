@@ -6,19 +6,29 @@ public class SingleShot : MonoBehaviour, IWeapon
 {
     [SerializeField] GunSetup gun;
 
+   
     public void Fire(int damage)
     {
+        ParticleSystem muzzleFlash = GameManager.instance.playerScript.muzzleFlash;
         GameObject effect = GameManager.instance.playerScript.hitEffect;
+        ParticleSystem tempMuzzle = Instantiate(muzzleFlash);
 
+        
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, gun.shotDist))
         {
             if (hit.collider.GetComponent<IDamage>() != null)
             {
+                tempMuzzle.Play();
                 hit.collider.GetComponent<IDamage>().takeDamage((gun.shotDamage + damage));
             }
             if (effect)
-                Instantiate(effect, hit.point, effect.transform.rotation);
+            {
+                tempMuzzle.Play();
+                GameObject bullet = Instantiate(effect, hit.point, effect.transform.rotation);
+                Destroy(bullet, 2f);
+            }
+               
         }
     }
 }
