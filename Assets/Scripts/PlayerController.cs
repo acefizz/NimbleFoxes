@@ -85,6 +85,7 @@ public class PlayerController : MonoBehaviour
 
         startCheckpoint = checkpointToSpawnAt.transform.position;
         SetPlayerPos();
+        
         UpdatePlayerHPBar();
     }
 
@@ -148,7 +149,6 @@ public class PlayerController : MonoBehaviour
         {
             isShooting = true;          
             gunList[selectedGun].GunModel.GetComponent<IWeapon>().Fire(extraDmg);
-
             aud.PlayOneShot(gunList[selectedGun].gunShot, gunShotVol);
 
             yield return new WaitForSeconds(shotRate);
@@ -204,6 +204,7 @@ public class PlayerController : MonoBehaviour
     {
         return HP;
     }
+  
     public void SetPlayerPos()
     {
         controller.enabled = false;
@@ -291,8 +292,8 @@ public class PlayerController : MonoBehaviour
         shotDist = gun.shotDist;
         gunName = gun.gunName;
         FieldOfView = gun.FieldOfView;
-        pellets = gun.pellets;
-        muzzlePos = gun
+        pellets = gun.pellets;  
+       // muzzlePos = gun.muzzlePos;    unable to get this to work properly
         gunModel.GetComponent<MeshFilter>().sharedMesh = gun.GunModel.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gun.GunModel.GetComponent<MeshRenderer>().sharedMaterial;
 
@@ -339,10 +340,11 @@ public class PlayerController : MonoBehaviour
         gunName = gunList[selectedGun].gunName;
         FieldOfView = gunList[selectedGun].FieldOfView;
         pellets = gunList[selectedGun].pellets;
+        //muzzlePos = gunList[selectedGun].muzzlePos;       unable to get this to work properly
 
         gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[selectedGun].GunModel.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[selectedGun].GunModel.GetComponent<MeshRenderer>().sharedMaterial;
-
+    
         SetWeaponIcon();
     }
 
