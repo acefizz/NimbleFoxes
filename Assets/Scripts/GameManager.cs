@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using System.Collections;
 
 //TODO: must have a way to switch abilities
 //TODO: icon appears for ability, but not the name on pickup
@@ -31,7 +32,7 @@ public class GameManager : MonoBehaviour
     float timeScaleOriginal;
 
     [Header("--- UI Menus ---")]
-    [SerializeField] AudioSource menuMusic;
+    public AudioSource audioSource;
 
     public GameObject pauseMenu;
     public GameObject winMenu;
@@ -95,6 +96,7 @@ public class GameManager : MonoBehaviour
     public Vector3 checkpoint;
     public string checkpointName;
     public int levelCheckpoint;
+    float musicVolume;
 
     //An enum to enforce menu types.
     public enum MenuType { Pause, Win, Lose, Upgrade, PlayerDamageFlash, OptionsMenu, CloseAll }
@@ -108,7 +110,9 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Confined;
 
         timeScaleOriginal = Time.timeScale;
-
+        audioSource = GetComponent<AudioSource>();
+        musicVolume = audioSource.volume;
+        
         //if (scenePath == null)
         //    scenePath = "Assets/Scenes/SavedScene.unity";
 
@@ -116,13 +120,14 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+
         //if (data == null)
         //{
         //    data = new GameData();
         //}
 
 
-
+        GetComponent<SoundManager>().PlayMusic();
 
         if(playerScript != null)
         {
@@ -163,6 +168,11 @@ public class GameManager : MonoBehaviour
         }
         */
 
+        if (isPaused)
+            audioSource.volume += (audioSource.volume / .25f);
+        else
+            audioSource.volume = musicVolume;
+
         IncreaseCoolDownTimer();
 
     }
@@ -192,13 +202,6 @@ public class GameManager : MonoBehaviour
             Cursor.visible = activeState;
             Time.timeScale = activeState ? 0 : timeScaleOriginal;
         }
-
-        if (pauseMenu == true || optionsMenu == true || upgradeMenu == true)
-        {
-            menuMusic.Play();
-        }
-
-
 
         switch (menu)
         {
@@ -231,7 +234,6 @@ public class GameManager : MonoBehaviour
                 isPaused = false;
                 Cursor.visible = false;
                 Cursor.lockState = CursorLockMode.Confined;
-                menuMusic.Stop();
                 break;
             case MenuType.OptionsMenu:
                 pauseMenu.SetActive(false);
@@ -307,5 +309,18 @@ public class GameManager : MonoBehaviour
     {
         coolDowns.Add(ability.abilityCoolDown);
         coolDownTracker.Add(ability.abilityCoolDown);
+    }
+    public IEnumerator FadeMusic(float targetVolume)
+    {
+        float time = 0;
+        float volume = audioSource.volume;
+        float duration = 5.0f;
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            audioSource.volume = Mathf.Lerp(volume, targetVolume, time / duration);
+            yield return null;
+        }
+        yield break;
     }
 }

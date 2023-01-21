@@ -5064,6 +5064,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 762480100, guid: 1a528ee935687154191c79eb73a457b8, type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 762480100, guid: 1a528ee935687154191c79eb73a457b8, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: bba57102ca12b944c8e8ee7ae3e71926, type: 3}
+    - target: {fileID: 762480100, guid: 1a528ee935687154191c79eb73a457b8, type: 3}
       propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
       value: 0
       objectReference: {fileID: 0}
@@ -5160,6 +5168,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 776772551}
     - target: {fileID: 207014111112979185, guid: 1a528ee935687154191c79eb73a457b8, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 1934162988}
+    - target: {fileID: 207014111112979185, guid: 1a528ee935687154191c79eb73a457b8, type: 3}
       propertyPath: playerScript
       value: 
       objectReference: {fileID: 776772550}
@@ -5232,6 +5244,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b58fdf950bf832348af4bfaa2fd9f743, type: 3}
+--- !u!82 &1934162988 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 762480100, guid: 1a528ee935687154191c79eb73a457b8, type: 3}
+  m_PrefabInstance: {fileID: 1815904221}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1950893530
 PrefabInstance:
   m_ObjectHideFlags: 0

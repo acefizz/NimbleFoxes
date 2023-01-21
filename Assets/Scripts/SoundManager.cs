@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
+using System.Diagnostics.Tracing;
 
 public class SoundManager : MonoBehaviour
 {
@@ -86,6 +87,11 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip exampleVolume;
     [SerializeField] private AudioSource source;
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(GameManager.instance.GetComponent<SoundManager>());
+        source = GameManager.instance.GetComponent<AudioSource>();
+    }
     public void SetVolume(float sliderValue)
     {
         gameAudio.SetFloat("MainVolume", Mathf.Log10(sliderValue) * 20);
@@ -104,5 +110,10 @@ public class SoundManager : MonoBehaviour
     void ExampleSound()
     {
         source.PlayOneShot(exampleVolume);
+    }
+    public void PlayMusic()
+    {
+        if(source.isPlaying) { return; }
+        source.Play();
     }
 }
