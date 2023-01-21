@@ -48,15 +48,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb91619ba38f9d94587f43859ac6dfa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UI: {fileID: 0}
-  healthText: {fileID: 0}
-  jumpText: {fileID: 0}
-  coinText: {fileID: 0}
   health: 0
-  jump: 0
   coin: 1
+  jump: 0
+  life: 0
+  weapon: 0
+  ability: 0
+  pullSpeed: 0.2
+  pullDistance: 10
   audioSource: {fileID: 6012009385456454925}
   upgradeClip: {fileID: 8300000, guid: 0e475ef0a6289224f9cd24a823718a23, type: 3}
+  effectVol: 0
   speed: 1
   height: 0.5
 --- !u!33 &641937414801930053
@@ -131,9 +133,9 @@ AudioSource:
   m_GameObject: {fileID: 2642166720542923538}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 3736333018260920128, guid: 07ff31af15591cc4fb63a689701381f9, type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

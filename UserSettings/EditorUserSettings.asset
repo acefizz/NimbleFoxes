@@ -1,4 +1,4 @@
-%YAML 1.1
+YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
 --- !u!162 &1
 EditorUserSettings:
@@ -6,15 +6,12 @@ EditorUserSettings:
   serializedVersion: 4
   m_ConfigSettings:
     RecentlyUsedSceneGuid-0:
-      value: 5002075251015859580f597449275d441415487e2a7f7668782b1b63b4b4616d
-      flags: 0
-    RecentlyUsedSceneGuid-1:
       value: 0009575057535a0e0f0d0a7549770c44421649792d7c7f35287d1e64b5b96d6f
       flags: 0
-    RecentlyUsedSceneGuid-2:
+    RecentlyUsedSceneGuid-1:
       value: 025501035c575e0a550f5d2044220744414e40787f7075697c7e1e60b3b36039
       flags: 0
-    RecentlyUsedSceneGuid-3:
+    RecentlyUsedSceneGuid-2:
       value: 5208565f55020f0c545d092411220744474f4c7f787824327d7f4830bbb8673a
       flags: 0
     RecentlyUsedSceneGuid-4:
