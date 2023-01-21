@@ -21,7 +21,9 @@ public class Checkpoint : MonoBehaviour
 
             GameManager.instance.playerScript.GrabCheckpoint(this.gameObject);
             GameManager.instance.Save();
+            StartCoroutine(GameManager.instance.FadeMusic(0));
             GameManager.instance.LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
+            //StartCoroutine(GameManager.instance.FadeMusic(1));
         }
         else if (other.CompareTag("Player") /*&& isStart*/)
         {
