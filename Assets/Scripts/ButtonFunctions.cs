@@ -45,6 +45,16 @@ public class ButtonFunctions : MonoBehaviour
         GameManager.instance.ShowMenu(GameManager.MenuType.OptionsMenu, false);
         GameManager.instance.ShowMenu(GameManager.MenuType.Pause, true);
     }
+    public void TutorialOpen()
+    {
+        GameManager.instance.ShowMenu(GameManager.MenuType.Pause, false);
+        GameManager.instance.ShowMenu(GameManager.MenuType.Tutorial, true);
+    }
+    public void TutorialClose()
+    {
+        GameManager.instance.ShowMenu(GameManager.MenuType.Tutorial, false);
+        GameManager.instance.ShowMenu(GameManager.MenuType.Pause, true);
+    }
 
     public void AddMaxJumps(int amount)
     {

@@ -50,10 +50,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 1
   coin: 1
+  jump: 0
+  life: 0
   weapon: 0
-  weaponName: 
   ability: 0
-  abilityName: 
   pullSpeed: 0.2
   pullDistance: 10
   audioSource: {fileID: 681557645234699646}
@@ -133,9 +133,9 @@ AudioSource:
   m_GameObject: {fileID: 9129164909035776865}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 3736333018260920128, guid: 07ff31af15591cc4fb63a689701381f9, type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 //TODO: must have a way to switch abilities
 //TODO: icon appears for ability, but not the name on pickup
@@ -38,6 +39,7 @@ public class GameManager : MonoBehaviour
     public GameObject loseMenu;
     public GameObject upgradeMenu;
     public GameObject optionsMenu; 
+    public GameObject tutorial;
 
     [Header("--- UI Pickups ---")]
     public GameObject Pickups;
@@ -97,7 +99,7 @@ public class GameManager : MonoBehaviour
     public int levelCheckpoint;
 
     //An enum to enforce menu types.
-    public enum MenuType { Pause, Win, Lose, Upgrade, PlayerDamageFlash, OptionsMenu, CloseAll }
+    public enum MenuType { Pause, Win, Lose, Upgrade, PlayerDamageFlash, OptionsMenu, Tutorial, CloseAll }
 
     private void Awake()
     {
@@ -228,6 +230,7 @@ public class GameManager : MonoBehaviour
                 upgradeMenu.SetActive(false);
                 playerFlashDamage.SetActive(false);
                 optionsMenu.SetActive(false);
+                tutorial.SetActive(false);
                 isPaused = false;
                 Cursor.visible = false;
                 Cursor.lockState = CursorLockMode.Confined;
@@ -236,6 +239,10 @@ public class GameManager : MonoBehaviour
             case MenuType.OptionsMenu:
                 pauseMenu.SetActive(false);
                 optionsMenu.SetActive(activeState);
+                break;
+            case MenuType.Tutorial:
+                pauseMenu.SetActive(false);
+                tutorial.SetActive(activeState);
                 break;
             default:
                 break;
