@@ -12,6 +12,7 @@ TagManager:
   - Barrel
   - Boss
   - Flame Wall
+  - Music
   layers:
   - Default
   - TransparentFX
