@@ -168,10 +168,10 @@ public class GameManager : MonoBehaviour
         }
         */
 
-        if (isPaused)
-            audioSource.volume += (audioSource.volume / .25f);
-        else
-            audioSource.volume = musicVolume;
+        if (!isPaused)
+            StartCoroutine(FadeMusic(.5f));
+        else if (isPaused)
+            StartCoroutine(FadeMusic(1));
 
         IncreaseCoolDownTimer();
 

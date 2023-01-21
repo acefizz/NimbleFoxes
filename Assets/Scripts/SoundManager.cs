@@ -1,10 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Audio;
-using System.Diagnostics.Tracing;
 
 public class SoundManager : MonoBehaviour
 {
