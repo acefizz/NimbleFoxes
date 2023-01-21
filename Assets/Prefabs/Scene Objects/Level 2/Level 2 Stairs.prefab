@@ -1488,6 +1488,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1667986190279852356}
     m_Modifications:
+    - target: {fileID: 6983621020320119737, guid: 5f2bb9a94cb594e4e889a51a1ce9aa37, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 52c9083b299dfa3479caa56bb9f0a98c, type: 2}
     - target: {fileID: 6983621020320119738, guid: 5f2bb9a94cb594e4e889a51a1ce9aa37, type: 3}
       propertyPath: m_Name
       value: Level 2 Step
