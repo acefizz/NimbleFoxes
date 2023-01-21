@@ -605,7 +605,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb01d69f53e1fd04c9e0a322a7593bf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyType: 0
   model: {fileID: 4307893916742329762}
   agent: {fileID: 1649030559209144946}
   enemyDrop: {fileID: 0}
@@ -616,7 +615,7 @@ MonoBehaviour:
   headPos: {fileID: 4618993455375799774}
   roamDist: 10
   shootRate: 0.5
-  bulletPrefab: {fileID: 6975092354297469973, guid: 5a4203acb0db6094faa18a9fbdf794d6, type: 3}
+  bulletPrefab: {fileID: 1398159156579844429, guid: 3df6b2a861dac9747bcde958e71d93f0, type: 3}
   shootPos: {fileID: 6668242728300228155}
   enemyHPBar: {fileID: 962173869}
   enemyUI: {fileID: 1498461016}

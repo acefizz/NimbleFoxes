@@ -19,5 +19,5 @@ MonoBehaviour:
   gunName: Sniper Rifle
   GunModel: {fileID: 9024037184162080505, guid: 97cea5ab3816a6042b2413c54062ffe1, type: 3}
   gunShot: {fileID: 8300000, guid: cc52f9d2865c18d459ef8eaf210375a8, type: 3}
-  FieldOfView: 0
-  pellets: 0
+  FieldOfView: 35
+  pellets: 1

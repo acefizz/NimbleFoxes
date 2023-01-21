@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2ad94a9ebb8e28f43b88a17c5a174fa8, type: 3}
-  m_Name: RifleSetup
+  m_Name: cam Zoom
   m_EditorClassIdentifier: 
-  gunNum: 2
-  shotRate: 0.13
-  shotDamage: 0.65
-  shotDist: 100
-  gunName: Assault Rifle
-  GunModel: {fileID: 2467925974433038485, guid: b658ffb3bae43e34c9b89b282bc195fe, type: 3}
-  gunShot: {fileID: 8300000, guid: 1f306bd7cebdbee46a3ee7a75ac15a71, type: 3}
-  FieldOfView: 46
-  pellets: 1
+  gunNum: 0
+  shotRate: 0
+  shotDamage: 0
+  shotDist: 0
+  gunName: 
+  GunModel: {fileID: 0}
+  gunShot: {fileID: 0}
+  FieldOfView: 60
+  pellets: 0

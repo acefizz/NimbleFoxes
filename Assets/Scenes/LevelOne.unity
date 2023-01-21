@@ -298,6 +298,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 417ea48fd54111341891f7911081fe78, type: 3}
+--- !u!4 &54523237 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 762539680, guid: 7deb2b4814649544ebba244c1ee09ba9, type: 3}
+  m_PrefabInstance: {fileID: 776772549}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &75440999
 GameObject:
   m_ObjectHideFlags: 0
@@ -1034,6 +1039,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 392340936119074250, guid: f0db8dfe5ef8cad40b07cc32889eaa19, type: 3}
+      propertyPath: muzzleFlash
+      value: 
+      objectReference: {fileID: 8480076497579813135, guid: 217ce890aee65064dad04d88eb228e0f, type: 3}
     - target: {fileID: 5043873141336150979, guid: f0db8dfe5ef8cad40b07cc32889eaa19, type: 3}
       propertyPath: m_Name
       value: Pistol
@@ -1658,31 +1667,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 417ea48fd54111341891f7911081fe78, type: 3}
---- !u!1 &638862620 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3441083132161361783, guid: 7deb2b4814649544ebba244c1ee09ba9, type: 3}
-  m_PrefabInstance: {fileID: 776772549}
-  m_PrefabAsset: {fileID: 0}
---- !u!20 &638862623 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 3441083132161361781, guid: 7deb2b4814649544ebba244c1ee09ba9, type: 3}
-  m_PrefabInstance: {fileID: 776772549}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &638862625
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 638862620}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d82ba403e92024c419c42a783cedaa7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  zoomCamera: {fileID: 0}
-  PovCam: {fileID: 638862623}
-  FieldOfView: 60
 --- !u!1001 &656382387
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2100,17 +2084,9 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4533570552687267969, guid: 7deb2b4814649544ebba244c1ee09ba9, type: 3}
-      propertyPath: startCheckpoint.x
-      value: 16
-      objectReference: {fileID: 0}
-    - target: {fileID: 4533570552687267969, guid: 7deb2b4814649544ebba244c1ee09ba9, type: 3}
-      propertyPath: startCheckpoint.y
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4533570552687267969, guid: 7deb2b4814649544ebba244c1ee09ba9, type: 3}
-      propertyPath: startCheckpoint.z
-      value: 12
-      objectReference: {fileID: 0}
+      propertyPath: muzzlePos
+      value: 
+      objectReference: {fileID: 54523237}
     - target: {fileID: 4533570552687267969, guid: 7deb2b4814649544ebba244c1ee09ba9, type: 3}
       propertyPath: checkpointToSpawnAt
       value: 
@@ -5064,13 +5040,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 762480100, guid: 1a528ee935687154191c79eb73a457b8, type: 3}
-      propertyPath: Loop
+      propertyPath: MaxDistance
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 762480100, guid: 1a528ee935687154191c79eb73a457b8, type: 3}
+      propertyPath: rolloffMode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 762480100, guid: 1a528ee935687154191c79eb73a457b8, type: 3}
-      propertyPath: m_audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: bba57102ca12b944c8e8ee7ae3e71926, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 762480100, guid: 1a528ee935687154191c79eb73a457b8, type: 3}
       propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
       value: 0
@@ -5168,10 +5148,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 776772551}
     - target: {fileID: 207014111112979185, guid: 1a528ee935687154191c79eb73a457b8, type: 3}
-      propertyPath: audioSource
-      value: 
-      objectReference: {fileID: 1934162988}
-    - target: {fileID: 207014111112979185, guid: 1a528ee935687154191c79eb73a457b8, type: 3}
       propertyPath: playerScript
       value: 
       objectReference: {fileID: 776772550}
@@ -5244,11 +5220,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b58fdf950bf832348af4bfaa2fd9f743, type: 3}
---- !u!82 &1934162988 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 762480100, guid: 1a528ee935687154191c79eb73a457b8, type: 3}
-  m_PrefabInstance: {fileID: 1815904221}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1950893530
 PrefabInstance:
   m_ObjectHideFlags: 0
