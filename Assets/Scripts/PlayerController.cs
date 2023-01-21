@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] int shotDist;
     public GameObject hitEffect;
     public ParticleSystem muzzleFlash;
+    public Transform muzzlePos;
     public string gunName;
     public int pellets;
     public float FieldOfView;
@@ -291,7 +292,7 @@ public class PlayerController : MonoBehaviour
         gunName = gun.gunName;
         FieldOfView = gun.FieldOfView;
         pellets = gun.pellets;
-
+        muzzlePos = gun
         gunModel.GetComponent<MeshFilter>().sharedMesh = gun.GunModel.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gun.GunModel.GetComponent<MeshRenderer>().sharedMaterial;
 

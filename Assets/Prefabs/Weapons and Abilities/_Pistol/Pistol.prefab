@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2045515422701192828}
   - component: {fileID: 9064325136342468393}
   - component: {fileID: 5256285929869525290}
-  - component: {fileID: 511185043325910057}
+  - component: {fileID: 392340936119074250}
   m_Layer: 0
   m_Name: Pistol
   m_TagString: Untagged
@@ -253,7 +253,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &511185043325910057
+--- !u!114 &392340936119074250
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -266,6 +266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gun: {fileID: 11400000, guid: fefc4ee030dbe5f4e9e23e48f3d37c0b, type: 2}
+  muzzle: {fileID: 621197921595135704}
 --- !u!1001 &5651670125513012369
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -287,7 +288,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5111643021733028425, guid: ecc4b9a77cc83b14c80724962de6cda5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.007
       objectReference: {fileID: 0}
     - target: {fileID: 5111643021733028425, guid: ecc4b9a77cc83b14c80724962de6cda5, type: 3}
       propertyPath: m_LocalRotation.w
