@@ -1680,7 +1680,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d82ba403e92024c419c42a783cedaa7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zoomCamera: {fileID: 0}
+  zoomCamera: {fileID: 11400000, guid: 9b0deeb93ba54a142a61302ecb27d1f4, type: 2}
   PovCam: {fileID: 638862623}
   FieldOfView: 60
 --- !u!1001 &656382387

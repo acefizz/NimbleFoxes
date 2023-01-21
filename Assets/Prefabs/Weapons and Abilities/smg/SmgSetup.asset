@@ -19,5 +19,5 @@ MonoBehaviour:
   gunName: 
   GunModel: {fileID: 2897716854381138052, guid: b66f2adb35217c04d954093c174fceb6, type: 3}
   gunShot: {fileID: 8300000, guid: 57c4765ade54fe54b82ea0aff876fd18, type: 3}
-  FieldOfView: 0
-  pellets: 0
+  FieldOfView: 50
+  pellets: 1
