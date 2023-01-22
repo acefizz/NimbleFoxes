@@ -71,7 +71,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1269450601}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.228, z: 0.184}
+  m_LocalPosition: {x: 0, y: 1.095, z: 0.184}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -584,8 +584,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 4533570552687267968}
   pushbackTime: 1
-  modelBody: {fileID: 4533570552699256853}
-  modelHead: {fileID: 4533570552689693435}
+  modelBody: {fileID: 4533570552687693177}
+  modelHead: {fileID: 4533570552687693063}
   HP: 25
   HPOrig: 25
   lives: 3
@@ -977,7 +977,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4533570552687268135}
   m_Layer: 3
-  m_Name: Bip001
+  m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1590,7 +1590,7 @@ GameObject:
   - component: {fileID: 4533570552687268121}
   - component: {fileID: 4533570552699256853}
   m_Layer: 3
-  m_Name: Body_09_jacket
+  m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
