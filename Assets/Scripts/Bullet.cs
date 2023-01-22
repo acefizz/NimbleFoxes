@@ -9,12 +9,25 @@ public class Bullet : MonoBehaviour
     [SerializeField] int damage;
     [SerializeField] int speed;
     [SerializeField] int timer;
+    [SerializeField] bool isBossBullet;
 
+    Vector3 direction;
 
     // Start is called before the first frame update
     void Start()
     {
-        rb.velocity = transform.forward * speed;
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, GameManager.instance.player.transform.position - transform.position, out hit) && !isBossBullet)
+        {
+            direction = GameManager.instance.player.transform.position - transform.position;
+            direction.y += 1;
+            rb.velocity = direction;
+        }
+        else
+        {
+            rb.velocity = transform.forward * speed;
+        }
+
         Destroy(gameObject, timer);
     }
 
