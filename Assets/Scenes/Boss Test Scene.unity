@@ -1454,6 +1454,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 185f2594ae14c0c458a705a09f10d395, type: 3}
+--- !u!114 &958715588 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2180892138682209673, guid: 185f2594ae14c0c458a705a09f10d395, type: 3}
+  m_PrefabInstance: {fileID: 958715587}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3ac9fe926b23c14a88105c677379fa0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &987628204
 GameObject:
   m_ObjectHideFlags: 0
@@ -2047,6 +2058,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 148296131, guid: 1a528ee935687154191c79eb73a457b8, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 958715588}
+    - target: {fileID: 148296131, guid: 1a528ee935687154191c79eb73a457b8, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetMusicVolume
+      objectReference: {fileID: 0}
+    - target: {fileID: 536179166, guid: 1a528ee935687154191c79eb73a457b8, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 958715588}
+    - target: {fileID: 536179166, guid: 1a528ee935687154191c79eb73a457b8, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetVolume
+      objectReference: {fileID: 0}
+    - target: {fileID: 826700975, guid: 1a528ee935687154191c79eb73a457b8, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 958715588}
+    - target: {fileID: 826700975, guid: 1a528ee935687154191c79eb73a457b8, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetSfxVolume
+      objectReference: {fileID: 0}
     - target: {fileID: 207014110389967111, guid: 1a528ee935687154191c79eb73a457b8, type: 3}
       propertyPath: m_Name
       value: UI
