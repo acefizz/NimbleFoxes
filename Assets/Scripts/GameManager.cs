@@ -39,7 +39,6 @@ public class GameManager : MonoBehaviour
     public GameObject loseMenu;
     public GameObject upgradeMenu;
     public GameObject optionsMenu; 
-    public GameObject tutorialPlayer;
     public GameObject tutorial;
 
     [Header("--- UI Pickups ---")]
@@ -274,10 +273,6 @@ public class GameManager : MonoBehaviour
             playerSpawnLocation = playerScript.ReturnStartCheckpoint();
         }
 
-        // Will or will not be used after deciding if saving should put you back at a checkpoint.
-        //playerSpawnLocation.x = data.spawn[0];
-        //playerSpawnLocation.y = data.spawn[1];
-        //playerSpawnLocation.z = data.spawn[2];
     }
 
     public void LoadLevel(int level)

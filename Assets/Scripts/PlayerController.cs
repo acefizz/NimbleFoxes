@@ -11,8 +11,8 @@ public class PlayerController : MonoBehaviour
     [Header("___| Components |___")]
     [SerializeField] CharacterController controller;
     [SerializeField] int pushbackTime;
-    [SerializeField] Renderer modelBody;
-    [SerializeField] Renderer modelHead;
+    [SerializeField] GameObject modelBody;
+    [SerializeField] GameObject modelHead;
 
     [Header("___| Player Settings |___")]
     [SerializeField] int HP;
@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     public GameObject checkpointToSpawnAt;
     [SerializeField]
     Vector3 startCheckpoint;
+    
 
     [Header("___| Collectables |___")]
     public int coins;
@@ -87,6 +88,9 @@ public class PlayerController : MonoBehaviour
         SetPlayerPos();
         
         UpdatePlayerHPBar();
+        modelBody.SetActive(false);
+        modelHead.SetActive(false);
+        
     }
 
     void Update()
