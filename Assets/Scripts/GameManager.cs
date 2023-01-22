@@ -127,7 +127,7 @@ public class GameManager : MonoBehaviour
         //    data = new GameData();
         //}
 
-        GetComponent<SoundManager>().PlayMusic();
+        //GetComponent<SoundManager>().PlayMusic();
 
         if (playerScript != null)
         {

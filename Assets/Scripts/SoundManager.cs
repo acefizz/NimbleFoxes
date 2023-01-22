@@ -84,8 +84,8 @@ public class SoundManager : MonoBehaviour
 
     private void Awake()
     {
-        DontDestroyOnLoad(GameManager.instance.GetComponent<SoundManager>());
-        source = GameManager.instance.GetComponent<AudioSource>();
+        //DontDestroyOnLoad(GameManager.instance.GetComponent<SoundManager>());
+        //source = GameManager.instance.GetComponent<AudioSource>();
     }
     public void SetVolume(float sliderValue)
     {
