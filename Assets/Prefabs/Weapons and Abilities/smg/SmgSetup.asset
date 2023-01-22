@@ -16,7 +16,7 @@ MonoBehaviour:
   shotRate: 0.08
   shotDamage: 0.2
   shotDist: 50
-  gunName: 
+  gunName: SMG
   GunModel: {fileID: 2897716854381138052, guid: b66f2adb35217c04d954093c174fceb6, type: 3}
   gunShot: {fileID: 8300000, guid: 57c4765ade54fe54b82ea0aff876fd18, type: 3}
   FieldOfView: 50
