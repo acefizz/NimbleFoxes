@@ -11,6 +11,7 @@ public class NinjaEnemyAI : MonoBehaviour, IDamage
     [SerializeField] NavMeshAgent agent;
     [SerializeField] GameObject enemyDrop;
     [SerializeField] CapsuleCollider collider;
+    [SerializeField] GameObject smokeBomb;
     //public Animator animator;
 
     [Header("---Enemy Stats---")]
@@ -72,6 +73,7 @@ public class NinjaEnemyAI : MonoBehaviour, IDamage
     void canSeePlayer()
     {
         playerDirection = GameManager.instance.player.transform.position - headPos.position;
+        playerDirection.y += 1;
         angleToPlayer = Vector3.Angle(playerDirection, transform.forward);
 
         agent.stoppingDistance = stoppingDistOrig;
@@ -226,6 +228,7 @@ public class NinjaEnemyAI : MonoBehaviour, IDamage
     {
         agent.isStopped = true;
         enemyUI.SetActive(true);
+        Instantiate(smokeBomb, transform.parent.transform.position, transform.parent.transform.rotation, transform.parent.transform);
 
         yield return new WaitForSeconds(disappearSpeed);
 

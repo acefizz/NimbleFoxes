@@ -88,6 +88,7 @@ public class BurrowEnemyAI : MonoBehaviour, IDamage
     void canSeePlayer()
     {
         playerDirection = GameManager.instance.player.transform.position - headPos.position;
+        playerDirection.y += 1;
         angleToPlayer = Vector3.Angle(playerDirection, transform.forward);
 
         agent.stoppingDistance = stoppingDistOrig;
