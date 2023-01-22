@@ -128,12 +128,9 @@ public class GameManager : MonoBehaviour
         //    data = new GameData();
         //}
 
-        var SM = GetComponent<SoundManager>();
+        GetComponent<SoundManager>().PlayMusic();
 
-        if(SM)
-            SM.PlayMusic();
-
-        if(playerScript != null)
+        if (playerScript != null)
         {
             playerSpawnLocation = playerScript.ReturnStartCheckpoint();
             playerScript.SetPlayerPos();
@@ -183,7 +180,7 @@ public class GameManager : MonoBehaviour
 
     private void DoStats()
     {
-        if(playerScript == null)
+        if (playerScript == null)
             return;
         jumpCount.text = "Jumps : " + playerScript.GetMaxJumps();
         damageCount.text = "Damage : " + playerScript.GetDamage();
