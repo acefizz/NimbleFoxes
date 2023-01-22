@@ -9,10 +9,10 @@ public class SeekerSmall : MonoBehaviour, IDamage
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Renderer model;
     [SerializeField] GameObject effect; 
-    //public Animator animator;
     public float HP;
     private void Start()
     {
+
     }
     private void Update()
     {
@@ -47,12 +47,10 @@ public class SeekerSmall : MonoBehaviour, IDamage
     }
     IEnumerator Death()
     {
-        //Explode animation
-        effect.GetComponent<ParticleSystem>().Play();
+        Instantiate(effect, transform.position, transform.rotation);
         agent.isStopped = true;
-        yield return new WaitForSeconds(3.0f);
+        yield return new WaitForSeconds(1.0f);
 
-        effect.GetComponent<ParticleSystem>().Stop();
         Destroy(gameObject);
 
     }
