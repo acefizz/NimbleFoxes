@@ -21,7 +21,7 @@ public class PlayerData
         speed = player.GetSpeed();
         coins = player.coins;
         maxJumps = player.GetMaxJumps();
-        health = player.ReturnHP();
+        health = player.GetOriginalHP();
         maxHealth = player.GetOriginalHP();
         guns = new int[player.ReturnGunList().Count];
         abilities = new int[player.ReturnAbilities().Count];
