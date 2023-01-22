@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
     public GameObject loseMenu;
     public GameObject upgradeMenu;
     public GameObject optionsMenu; 
+    public GameObject tutorialPlayer;
     public GameObject tutorial;
 
     [Header("--- UI Pickups ---")]
@@ -127,8 +128,10 @@ public class GameManager : MonoBehaviour
         //    data = new GameData();
         //}
 
+        var SM = GetComponent<SoundManager>();
 
-        GetComponent<SoundManager>().PlayMusic();
+        if(SM)
+            SM.PlayMusic();
 
         if(playerScript != null)
         {
@@ -147,8 +150,8 @@ public class GameManager : MonoBehaviour
         weaponText.text = weaponDisplay;
         abiltyText.text = abiltyDisplay;
 
-        //livesText.text = playerScript.Lives().ToString();
-        //coinsText.text = playerScript.coins.ToString();
+        livesText.text = "Lives: " + playerScript.Lives().ToString();
+        coinsText.text = "Coins: " + playerScript.coins.ToString();
 
         if (Input.GetButtonDown("Cancel") && (playerScript == null || !playerScript.isDead) && (/*SceneManager.GetActiveScene().buildIndex != 1 &&*/ SceneManager.GetActiveScene().buildIndex != 0))
         {

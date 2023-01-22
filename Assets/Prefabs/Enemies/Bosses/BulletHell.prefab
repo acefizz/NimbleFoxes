@@ -1326,6 +1326,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BossUI
       objectReference: {fileID: 0}
+    - target: {fileID: 3169293514297504619, guid: 7495993d6f1c2504fa8788ef6caaaa2b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7161735937538239158, guid: 7495993d6f1c2504fa8788ef6caaaa2b, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1408,6 +1412,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7161735937538239158, guid: 7495993d6f1c2504fa8788ef6caaaa2b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8249273378259022959, guid: 7495993d6f1c2504fa8788ef6caaaa2b, type: 3}
+      propertyPath: m_Type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8249273378259022959, guid: 7495993d6f1c2504fa8788ef6caaaa2b, type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8249273378259022959, guid: 7495993d6f1c2504fa8788ef6caaaa2b, type: 3}
+      propertyPath: m_FillMethod
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
