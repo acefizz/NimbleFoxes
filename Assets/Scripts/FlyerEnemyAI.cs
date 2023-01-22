@@ -96,11 +96,11 @@ public class FlyerEnemyAI : MonoBehaviour, IDamage
         Vector3 randDir = Random.insideUnitSphere * roamDist;
         randDir += startPos;
         NavMeshHit hit;
-        NavMesh.SamplePosition(new Vector3(randDir.x, 0, randDir.z), out hit, 1, 1);
-        NavMeshPath path = new NavMeshPath();
+
         //Check if hit is valid
-        if (hit.position != null)
+        if (NavMesh.SamplePosition(new Vector3(randDir.x, 0, randDir.z), out hit, 1, 1))
         {
+            NavMeshPath path = new NavMeshPath();
             agent.CalculatePath(hit.position, path);
             agent.SetPath(path);
         }
