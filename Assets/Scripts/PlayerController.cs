@@ -182,6 +182,7 @@ public class PlayerController : MonoBehaviour
         {
             HP = 0;
             GameManager.instance.ShowMenu(GameManager.MenuType.Lose, true);
+            GameManager.instance.Save();
             if (lives > 0)
             {
 
