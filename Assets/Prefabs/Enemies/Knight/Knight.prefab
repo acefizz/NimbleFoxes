@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 4188336552118124925}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1.5, z: 0.25}
-  m_LocalScale: {x: 1, y: 3, z: 0.5}
+  m_LocalScale: {x: 0.020833, y: 0.020833, z: 0.020833}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4188336552168292891}
@@ -56,7 +56,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4188336552118124925}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: 00336dff3160434469e0b7bbd961a3e2, type: 3}
 --- !u!23 &4188336552118124922
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -77,7 +77,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 4d396ea1a93a050449d996228e3e2123, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -110,7 +110,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 50, y: 150, z: 25}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &1933809884
 BoxCollider:
@@ -123,8 +123,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 1}
+  m_Size: {x: 50, y: 150, z: 25}
+  m_Center: {x: 0, y: 0, z: 25}
 --- !u!1 &4188336552168292893
 GameObject:
   m_ObjectHideFlags: 0
@@ -320,7 +320,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 2d82b276e7df1e9419a3e0012b406469, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -449,7 +449,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8717752932178014071, guid: 39fd5ec4c1279fb4faeaa914b5523b5b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.5
+      value: -0.16129494
       objectReference: {fileID: 0}
     - target: {fileID: 8717752932178014071, guid: 39fd5ec4c1279fb4faeaa914b5523b5b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -469,11 +469,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8717752932178014071, guid: 39fd5ec4c1279fb4faeaa914b5523b5b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -1.3235111
       objectReference: {fileID: 0}
     - target: {fileID: 8717752932178014071, guid: 39fd5ec4c1279fb4faeaa914b5523b5b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2.5
+      value: 3.6249995
       objectReference: {fileID: 0}
     - target: {fileID: 8717752932178014071, guid: 39fd5ec4c1279fb4faeaa914b5523b5b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
