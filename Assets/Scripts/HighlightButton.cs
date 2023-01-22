@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class HighlightButton : MonoBehaviour
@@ -13,19 +15,20 @@ public class HighlightButton : MonoBehaviour
 
     private void Start()
     {
-        defaultColor = button.colors.normalColor;
+        button = GetComponent<Button>();
     }
-    private void OnMouseEnter()
+    public void OnMouseEnter()
     {
         source.PlayOneShot(soundEffect);
         ColorBlock colors = button.colors;
         colors.normalColor = highlightColor;
         button.colors = colors;
     }
-    private void OnMouseExit()
+    public void OnMouseExit()
     {
         ColorBlock colors = button.colors;
         colors.normalColor = defaultColor;
         button.colors = colors;
     }
 }
+
