@@ -2529,6 +2529,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ddc772754b32ee499d7705fcc3ac59d, type: 3}
+--- !u!4 &587714493 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 762539680, guid: 7deb2b4814649544ebba244c1ee09ba9, type: 3}
+  m_PrefabInstance: {fileID: 763012749}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &606802599
 GameObject:
   m_ObjectHideFlags: 0
@@ -3019,6 +3024,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4533570552687267969, guid: 7deb2b4814649544ebba244c1ee09ba9, type: 3}
+      propertyPath: muzzlePos
+      value: 
+      objectReference: {fileID: 587714493}
     - target: {fileID: 4533570552687267969, guid: 7deb2b4814649544ebba244c1ee09ba9, type: 3}
       propertyPath: checkpointToSpawnAt
       value: 
