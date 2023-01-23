@@ -149,7 +149,7 @@ public class GameManager : MonoBehaviour
         livesText.text = "Lives: " + playerScript.Lives().ToString();
         coinsText.text = "Coins: " + playerScript.coins.ToString();
 
-        if (Input.GetButtonDown("Cancel") && playerScript == null &&!playerScript.isDead && SceneManager.GetActiveScene().buildIndex != 0)
+        if (Input.GetButtonDown("Cancel") && (playerScript == null || !playerScript.isDead) && SceneManager.GetActiveScene().buildIndex != 0)
         {
             isPaused = !isPaused;
             if (isPaused)
@@ -214,6 +214,7 @@ public class GameManager : MonoBehaviour
                 winMenu.SetActive(activeState);
                 break;
             case MenuType.Lose:
+                GameManager.instance.playerScript.isDead = true; //lol
                 pauseMenu.SetActive(false);
                 loseMenu.SetActive(activeState);
                 break;

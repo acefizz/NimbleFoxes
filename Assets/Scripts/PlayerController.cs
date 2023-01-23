@@ -193,6 +193,7 @@ public class PlayerController : MonoBehaviour
                 GameManager.instance.respawnButton.interactable = true;
                 lives--;
                 GameManager.instance.SetRespawnText($"All of your light has been lost, you have {lives} balls of light remaining to revive");
+                isDead = true;
                 ResetHP();
             }
             else
