@@ -10,7 +10,6 @@ public class GameData
     //public float[] spawn = new float[3];
 
     public int scene;
-
     public GameData(GameManager data)
     {
         // Will or will not be used after deciding if saving should put you back at a checkpoint.

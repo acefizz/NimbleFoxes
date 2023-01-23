@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2568,41 +2568,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 183409527, guid: 1a528ee935687154191c79eb73a457b8, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 331302839, guid: 1a528ee935687154191c79eb73a457b8, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 762480100, guid: 1a528ee935687154191c79eb73a457b8, type: 3}
-      propertyPath: Loop
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 762480100, guid: 1a528ee935687154191c79eb73a457b8, type: 3}
-      propertyPath: m_audioClip
+    - target: {fileID: 148296131, guid: 1a528ee935687154191c79eb73a457b8, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 8300000, guid: bba57102ca12b944c8e8ee7ae3e71926, type: 3}
-    - target: {fileID: 821879770, guid: 1a528ee935687154191c79eb73a457b8, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 959093219, guid: 1a528ee935687154191c79eb73a457b8, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
+    - target: {fileID: 148296131, guid: 1a528ee935687154191c79eb73a457b8, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetMusicVolume
       objectReference: {fileID: 0}
-    - target: {fileID: 1115830493, guid: 1a528ee935687154191c79eb73a457b8, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
+    - target: {fileID: 536179166, guid: 1a528ee935687154191c79eb73a457b8, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 1236775119, guid: 1a528ee935687154191c79eb73a457b8, type: 3}
-      propertyPath: m_IsActive
-      value: 0
+    - target: {fileID: 536179166, guid: 1a528ee935687154191c79eb73a457b8, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetVolume
       objectReference: {fileID: 0}
-    - target: {fileID: 1837037018, guid: 1a528ee935687154191c79eb73a457b8, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
+    - target: {fileID: 826700975, guid: 1a528ee935687154191c79eb73a457b8, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 826700975, guid: 1a528ee935687154191c79eb73a457b8, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetSfxVolume
       objectReference: {fileID: 0}
     - target: {fileID: 207014110389967111, guid: 1a528ee935687154191c79eb73a457b8, type: 3}
       propertyPath: m_Name
@@ -2697,20 +2685,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1294461942}
     - target: {fileID: 207014111112979185, guid: 1a528ee935687154191c79eb73a457b8, type: 3}
-      propertyPath: audioSource
-      value: 
-      objectReference: {fileID: 1272222673}
-    - target: {fileID: 207014111112979185, guid: 1a528ee935687154191c79eb73a457b8, type: 3}
       propertyPath: playerScript
       value: 
       objectReference: {fileID: 1294461946}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a528ee935687154191c79eb73a457b8, type: 3}
---- !u!82 &1272222673 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 762480100, guid: 1a528ee935687154191c79eb73a457b8, type: 3}
-  m_PrefabInstance: {fileID: 1272222672}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1294461942 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4533570552687693027, guid: 7deb2b4814649544ebba244c1ee09ba9, type: 3}

@@ -78,15 +78,20 @@ public class SoundManager : MonoBehaviour
     //} 
     #endregion
 
-    [SerializeField] private AudioMixer gameAudio;
+    public AudioMixer gameAudio;
     [SerializeField] private AudioClip exampleVolume;
     [SerializeField] private AudioSource source;
 
     private void Awake()
     {
-        DontDestroyOnLoad(GameManager.instance.GetComponent<SoundManager>());
-        source = GameManager.instance.GetComponent<AudioSource>();
+        DontDestroyOnLoad(this.gameObject);
     }
+
+    private void Start()
+    {
+        source = GameObject.FindGameObjectWithTag("GameController").GetComponent<AudioSource>();
+    }
+
     public void SetVolume(float sliderValue)
     {
         gameAudio.SetFloat("MainVolume", Mathf.Log10(sliderValue) * 20);

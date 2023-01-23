@@ -608,7 +608,7 @@ MonoBehaviour:
   shotDamage: 0
   shotRate: 0
   shotDist: 0
-  hitEffect: {fileID: 1000010355441670, guid: 02a509a7fa70ed740ba4197e20c5d32d, type: 3}
+  hitEffect: {fileID: 5571629057815831605, guid: 9098bf7465618c141b1121349a754496, type: 3}
   muzzleFlash: {fileID: 8480076497579813135, guid: 217ce890aee65064dad04d88eb228e0f, type: 3}
   muzzlePos: {fileID: 762539680}
   gunName: 
