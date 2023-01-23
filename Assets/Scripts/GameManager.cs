@@ -149,7 +149,7 @@ public class GameManager : MonoBehaviour
         livesText.text = "Lives: " + playerScript.Lives().ToString();
         coinsText.text = "Coins: " + playerScript.coins.ToString();
 
-        if (Input.GetButtonDown("Cancel") && (playerScript == null || !playerScript.isDead) && (/*SceneManager.GetActiveScene().buildIndex != 1 &&*/ SceneManager.GetActiveScene().buildIndex != 0))
+        if (Input.GetButtonDown("Cancel") && playerScript == null &&!playerScript.isDead && SceneManager.GetActiveScene().buildIndex != 0)
         {
             isPaused = !isPaused;
             if (isPaused)

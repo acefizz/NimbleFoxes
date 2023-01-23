@@ -336,7 +336,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f1779f0d8b6a05547af012556b3fd93a, type: 2}
+  - {fileID: 2100000, guid: c8be14fdf1c50c04b955a8fb7c8b8eab, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -610,7 +610,7 @@ MonoBehaviour:
   headPos: {fileID: 6103858273953397267}
   roamDist: 200
   shootRate: 0.5
-  bulletPrefab: {fileID: 6860959869791283384, guid: 783fd3890e869cb4489f69a3f44cedef, type: 3}
+  bulletPrefab: {fileID: 1398159156579844429, guid: 3df6b2a861dac9747bcde958e71d93f0, type: 3}
   shootPos: {fileID: 8465031711615542638}
   enemyHPBar: {fileID: 5493631040746648617}
   enemyUI: {fileID: 1566572715737002797}
@@ -1325,6 +1325,10 @@ PrefabInstance:
     - target: {fileID: 3169293514297504619, guid: 7495993d6f1c2504fa8788ef6caaaa2b, type: 3}
       propertyPath: m_Name
       value: BossUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 5411481334462181815, guid: 7495993d6f1c2504fa8788ef6caaaa2b, type: 3}
+      propertyPath: m_text
+      value: WILLIAM MCCARTHY
       objectReference: {fileID: 0}
     - target: {fileID: 7161735937538239158, guid: 7495993d6f1c2504fa8788ef6caaaa2b, type: 3}
       propertyPath: m_Pivot.x
