@@ -29,8 +29,10 @@ public class PatternBoss : EnemyAI
 
     void Shoot()
     {
-        for (int i = 0; i < 16; i++)
-            Instantiate(bulletPrefab, shootPos.position, transform.rotation * Quaternion.Euler(0, 45/2 * i, 0));
+        int numShots = 32;
+        
+        for (int i = 0; i < numShots; i++)
+            Instantiate(bulletPrefab, shootPos.position, transform.rotation * Quaternion.Euler(0, 45/3 * i, 0));
     }
 
     public override IEnumerator shoot()
