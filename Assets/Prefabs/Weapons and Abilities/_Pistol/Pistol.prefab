@@ -65,6 +65,7 @@ MonoBehaviour:
   effectVol: 0.278
   speed: 0
   height: 0
+  startPos: {fileID: 0}
 --- !u!114 &5190937475101278765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,7 +167,7 @@ AudioSource:
   m_GameObject: {fileID: 5043873141336150979}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 3736333018260920128, guid: 07ff31af15591cc4fb63a689701381f9, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -266,7 +267,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gun: {fileID: 11400000, guid: fefc4ee030dbe5f4e9e23e48f3d37c0b, type: 2}
-  muzzle: {fileID: 621197921595135704}
 --- !u!1001 &5651670125513012369
 PrefabInstance:
   m_ObjectHideFlags: 0

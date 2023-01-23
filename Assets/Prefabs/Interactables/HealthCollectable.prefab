@@ -60,7 +60,8 @@ MonoBehaviour:
   upgradeClip: {fileID: 8300000, guid: 0e475ef0a6289224f9cd24a823718a23, type: 3}
   effectVol: 0
   speed: 1
-  height: 0.5
+  height: 1.5
+  startPos: {fileID: 4533570552687693027, guid: 7deb2b4814649544ebba244c1ee09ba9, type: 3}
 --- !u!33 &6946781276224613459
 MeshFilter:
   m_ObjectHideFlags: 0

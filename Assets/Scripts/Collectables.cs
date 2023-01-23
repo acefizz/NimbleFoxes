@@ -29,7 +29,7 @@ public class Collectables : MonoBehaviour
     public float speed;
     public float height;
 
-    //public GameObject startPos;
+    public GameObject startPos;
     private void Start()
     {
     }
@@ -37,7 +37,7 @@ public class Collectables : MonoBehaviour
     {
         Vector3 position = transform.position;
         float newY = Mathf.Sin(Time.time * speed);
-        transform.position = new Vector3(position.x, Mathf.Abs(newY) * height + transform.position.y, position.z) ;
+        transform.position = new Vector3(position.x, Mathf.Abs(newY) * height + startPos.transform.position.y, position.z) ;
 
         if(pullDistance > 0)
         {

@@ -23,8 +23,6 @@ public class Spiketrap : MonoBehaviour
             spikeTrap = GetComponent<Animator>();
 
             StartCoroutine(TriggeredTrap());
-
-
         }
     }
     private void OnTriggerExit(Collider other)
@@ -34,22 +32,23 @@ public class Spiketrap : MonoBehaviour
     }
     public void TrapUp()
     {
-        spikeTrap.SetTrigger("open");
-        GameManager.instance.playerScript.takeDamage(damage);
+            spikeTrap.SetTrigger("open");
+            GameManager.instance.playerScript.takeDamage(damage);
+        
     }
+            
     public void TrapDown()
     {
-        spikeTrap.SetTrigger("close");
+        spikeTrap.SetTrigger("close"); 
     }
     IEnumerator TriggeredTrap()
     {
-        yield return new WaitForSeconds(.8f);
+      //  yield return new WaitForSeconds(.8f);
         TrapUp();
-
-        yield return new WaitForSeconds(.05f);
+        //yield return new WaitForSeconds(.05f);
         TrapDown();
         yield return new WaitForSeconds(1);
 
     }
-
+  
 }
