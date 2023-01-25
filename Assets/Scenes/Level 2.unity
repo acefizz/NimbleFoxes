@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.03427147, g: 0.07924773, b: 0.04497624, a: 1}
+  m_IndirectSpecularColor: {r: 0.20302072, g: 0.29936957, b: 0.21765146, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3693,6 +3693,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2372483494108113467, guid: f0db8dfe5ef8cad40b07cc32889eaa19, type: 3}
+      propertyPath: startPos
+      value: 
+      objectReference: {fileID: 2104565004}
     - target: {fileID: 5043873141336150979, guid: f0db8dfe5ef8cad40b07cc32889eaa19, type: 3}
       propertyPath: m_Name
       value: Pistol
@@ -4137,11 +4141,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7deb2b4814649544ebba244c1ee09ba9, type: 3}
---- !u!1 &723684350 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 761319279755175072, guid: 7deb2b4814649544ebba244c1ee09ba9, type: 3}
-  m_PrefabInstance: {fileID: 723684349}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &726945608
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6520,7 +6519,7 @@ PrefabInstance:
     - target: {fileID: 4288740052731826829, guid: b66f2adb35217c04d954093c174fceb6, type: 3}
       propertyPath: startPos
       value: 
-      objectReference: {fileID: 723684350}
+      objectReference: {fileID: 2104565004}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b66f2adb35217c04d954093c174fceb6, type: 3}
 --- !u!1001 &1287193383
@@ -7348,13 +7347,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 511099058311362873, guid: 5a974021979d1aa468d57207a3aa7e6a, type: 3}
+      propertyPath: startPos
+      value: 
+      objectReference: {fileID: 2104565004}
     - target: {fileID: 5792305632992533768, guid: 5a974021979d1aa468d57207a3aa7e6a, type: 3}
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5792305632992533768, guid: 5a974021979d1aa468d57207a3aa7e6a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -17.954412
+      value: -17.47
       objectReference: {fileID: 0}
     - target: {fileID: 5792305632992533768, guid: 5a974021979d1aa468d57207a3aa7e6a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -9624,6 +9627,37 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad80af4b12394f44c9cad73559f0ea98, type: 3}
+--- !u!1 &2104565004
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2104565005}
+  m_Layer: 0
+  m_Name: weapon position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2104565005
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2104565004}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.060872, y: 1, z: 19.289959}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 170
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2108751774 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4533570552687693027, guid: 7deb2b4814649544ebba244c1ee09ba9, type: 3}
@@ -9711,7 +9745,7 @@ PrefabInstance:
     - target: {fileID: 1928702541108870511, guid: 97cea5ab3816a6042b2413c54062ffe1, type: 3}
       propertyPath: startPos
       value: 
-      objectReference: {fileID: 723684350}
+      objectReference: {fileID: 2104565004}
     - target: {fileID: 8534324237720484931, guid: 97cea5ab3816a6042b2413c54062ffe1, type: 3}
       propertyPath: m_RootOrder
       value: 22
