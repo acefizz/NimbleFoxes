@@ -18,5 +18,5 @@ public class GunSetup : ScriptableObject
 
     public float FieldOfView;
     public int pellets;
-  //  public Transform muzzlePos;
+    public GameObject muzzlePos;
 }
