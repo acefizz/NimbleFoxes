@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI weaponText;
     public string weaponDisplay;
     [SerializeField] TextMeshProUGUI abiltyText;
-    public string abiltyDisplay;
+    public string jumpDisplay;
 
     [Header("--- Icons ---")]
     public GameObject weapon1;
@@ -144,7 +144,7 @@ public class GameManager : MonoBehaviour
         healthText.text = healthDisplay;
         coinText.text = coinDisplay;
         weaponText.text = weaponDisplay;
-        abiltyText.text = abiltyDisplay;
+        abiltyText.text = jumpDisplay;
 
         livesText.text = "Lives: " + playerScript.Lives().ToString();
         coinsText.text = "Coins: " + playerScript.coins.ToString();
