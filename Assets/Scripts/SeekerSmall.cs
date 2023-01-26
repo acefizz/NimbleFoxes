@@ -24,7 +24,7 @@ public class SeekerSmall : MonoBehaviour, IDamage
         {
             StartCoroutine(Death());
             if (GameManager.instance.playerScript)
-                GameManager.instance.playerScript.AddHp(-1);
+                GameManager.instance.playerScript.takeDamage(-1);
         }
     }
     public virtual void takeDamage(float damage)
