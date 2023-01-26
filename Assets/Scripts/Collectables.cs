@@ -79,15 +79,15 @@ public class Collectables : MonoBehaviour
             GameManager.instance.coinDisplay = "+ " + coin + " coin(s) added";
         if (weapon)
             GameManager.instance.weaponDisplay = GameManager.instance.playerScript.gunName + " added";
-        if (ability)
-            GameManager.instance.abiltyDisplay = GameManager.instance.playerScript.abilityName + " added";
+        if (jump)
+            GameManager.instance.jumpDisplay = "Jump added";
 
 
         yield return new WaitForSeconds(3.0f);
         GameManager.instance.healthDisplay = "";
         GameManager.instance.coinDisplay = "";
         GameManager.instance.weaponDisplay = "";
-        GameManager.instance.abiltyDisplay = "";
+        GameManager.instance.jumpDisplay = "";
 
 
 

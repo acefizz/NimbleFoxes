@@ -67,6 +67,7 @@ public class Seeker : MonoBehaviour, IDamage
         //spawn the enemy in a different place
         if (HP <= 0)
         {
+            gameObject.GetComponent<MeshCollider>().enabled = false;
             enemyUI.SetActive(false);
             agent.isStopped = true;
             StartCoroutine(Death());
