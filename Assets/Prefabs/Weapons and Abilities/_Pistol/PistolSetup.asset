@@ -21,3 +21,4 @@ MonoBehaviour:
   gunShot: {fileID: 8300000, guid: 195d8474e450d8d4d92d4f6bf7623d67, type: 3}
   FieldOfView: 50
   pellets: 1
+  muzzlePos: {fileID: 6673460825438843992, guid: f1bca9618a1f2d04cb9fce79e56135b5, type: 3}

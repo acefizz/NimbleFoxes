@@ -8,6 +8,8 @@ public class SpreadShot : MonoBehaviour, IWeapon
 
     public void Fire(int damage)
     {
+        GameObject muzzle = GameManager.instance.playerScript.muzzlePos;
+        ParticleSystem muzzleFlash = GameManager.instance.playerScript.muzzleFlash;
         GameObject effect = GameManager.instance.playerScript.hitEffect;
 
         RaycastHit hit;
@@ -29,7 +31,15 @@ public class SpreadShot : MonoBehaviour, IWeapon
                     hit.collider.GetComponent<IDamage>().takeDamage((gun.shotDamage + damage));
                 }
                 if (effect)
-                    Instantiate(effect, hit.point, effect.transform.rotation);
+                {
+                    ParticleSystem tempMuzzle = Instantiate(muzzleFlash, muzzle.transform.position, muzzleFlash.transform.rotation);
+                    tempMuzzle.Play();
+                    GameObject bullet = Instantiate(effect, hit.point, effect.transform.rotation);
+                    Destroy(bullet, 2f);
+                    Destroy(tempMuzzle, 1f);
+                }
+                   
+
             }
         }
     }
