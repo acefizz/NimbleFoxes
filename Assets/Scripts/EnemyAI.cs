@@ -57,8 +57,6 @@ public class EnemyAI : MonoBehaviour, IDamage
         if (playerInRange && !isDying)
         {
             CanSeePlayer();
-            if (!isShooting) { StartCoroutine(shoot()); }
-
         }
         else if (agent.remainingDistance < 0.1f && agent.destination != GameManager.instance.player.transform.position && !isDying)
         {
@@ -98,6 +96,7 @@ public class EnemyAI : MonoBehaviour, IDamage
                 }
             }
         }
+
         if (agent.remainingDistance <= agent.stoppingDistance)
         {
             FacePlayer();
@@ -199,6 +198,7 @@ public class EnemyAI : MonoBehaviour, IDamage
             }
             UpdateEnemyHPBar();
             agent.SetDestination(GameManager.instance.player.transform.position);
+            FacePlayer();
             StartCoroutine(flashDamage());
             if (HP <= 0)
             {
