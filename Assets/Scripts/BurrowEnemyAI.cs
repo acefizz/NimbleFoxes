@@ -199,26 +199,28 @@ public class BurrowEnemyAI : MonoBehaviour, IDamage
 
     public void takeDamage(float dmg)
     {
-        HP -= dmg;
-        UpdateEnemyHPBar();
-        StartCoroutine(ShowHP());
-        agent.SetDestination(GameManager.instance.player.transform.position);
-        StartCoroutine(flashDamage());
-        isBurrowing = true;
-
-        if (HP <= 0)
+        if (!isDying)
         {
-            enemyUI.SetActive(false);
-            agent.isStopped = true;
-            isDying = true;
-            isShooting = false;
+            HP -= dmg;
+            UpdateEnemyHPBar();
+            StartCoroutine(ShowHP());
+            agent.SetDestination(GameManager.instance.player.transform.position);
+            StartCoroutine(flashDamage());
+            isBurrowing = true;
 
-            if (enemyDrop != null)
+            if (HP <= 0)
             {
-                Instantiate(enemyDrop, shootPos.position, transform.rotation);
+                enemyUI.SetActive(false);
+                agent.isStopped = true;
+                isDying = true;
+                isShooting = false;
+
+                if (enemyDrop != null)
+                {
+                    Instantiate(enemyDrop, shootPos.position, transform.rotation);
+                }
+                StartCoroutine(Death());
             }
-            StartCoroutine(Death());
-           
         }
     }
 

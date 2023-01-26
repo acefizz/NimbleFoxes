@@ -144,22 +144,22 @@ public class FlyerEnemyAI : MonoBehaviour, IDamage
 
     public virtual void takeDamage(float dmg)
     {
-        HP -= dmg;
-        UpdateEnemyHPBar();
-        StartCoroutine(ShowHP());
-        agent.SetDestination(GameManager.instance.player.transform.position);
-        StartCoroutine(flashDamage());
-
-        if (HP <= 0)
+        if (!isDying)
         {
-            enemyUI.SetActive(false);
-            agent.isStopped = true;
-            isDying = true;
-            StartCoroutine(Death());
-     
+            HP -= dmg;
+            UpdateEnemyHPBar();
+            StartCoroutine(ShowHP());
+            agent.SetDestination(GameManager.instance.player.transform.position);
+            StartCoroutine(flashDamage());
 
+            if (HP <= 0)
+            {
+                enemyUI.SetActive(false);
+                agent.isStopped = true;
+                isDying = true;
+                StartCoroutine(Death());
+            }
         }
-
     }
 
     public virtual IEnumerator Death()
