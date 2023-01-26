@@ -1505,6 +1505,10 @@ PrefabInstance:
       propertyPath: bossName
       value: Mr.Box
       objectReference: {fileID: 0}
+    - target: {fileID: 6983741779407670451, guid: 270a16bb9dfc7544eb6ef8d1ce2da38a, type: 3}
+      propertyPath: roamDist
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 270a16bb9dfc7544eb6ef8d1ce2da38a, type: 3}
 --- !u!1001 &281538656

@@ -112,7 +112,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         NavMeshHit hit;
         
         //Check if hit is valid
-        if (NavMesh.SamplePosition(new Vector3(randDir.x, 0, randDir.z), out hit, 1, 1))
+        if (NavMesh.SamplePosition(new Vector3(randDir.x, randDir.y, randDir.z), out hit, 1, 1))
         {
             NavMeshPath path = new NavMeshPath();
             agent.CalculatePath(hit.position, path);
