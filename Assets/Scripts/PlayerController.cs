@@ -81,6 +81,11 @@ public class PlayerController : MonoBehaviour
 
     public bool isDead;
 
+    //Managing volume sliders
+    public float sfxVolume;
+    public float musicVolume;
+    public float volume; //For the overall volume.
+
     void Start()
     {
         if(gunList.Count > 0)
@@ -613,6 +618,9 @@ public class PlayerController : MonoBehaviour
         maxJumps = data.maxJumps;
         HP = data.health > 0 ? data.health : HPOrig;
         HPOrig = data.maxHealth;
+        volume = data.volume;
+        sfxVolume = data.sfxVolume;
+        musicVolume = data.musicVolume;
         if (data.checkpointName != null)
             checkpointToSpawnAt = GameObject.Find(data.checkpointName);
         else 

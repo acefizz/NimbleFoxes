@@ -11,6 +11,12 @@ public class PlayerData
     public int maxJumps;
     public int health;
     public int maxHealth;
+
+    //Managing volume sliders
+    public float sfxVolume;
+    public float musicVolume;
+    public float volume; //For the overall volume.
+
     public int[] guns;
     public int[] abilities;
     public string checkpointName;
@@ -25,7 +31,12 @@ public class PlayerData
         maxHealth = player.GetOriginalHP();
         guns = new int[player.ReturnGunList().Count];
         abilities = new int[player.ReturnAbilities().Count];
-        checkpointName = player.checkpointToSpawnAt.name;
+        if(player.checkpointToSpawnAt)
+            checkpointName = player.checkpointToSpawnAt.name;
+
+        float sfxVolume = player.sfxVolume;
+        float musicVolume = player.musicVolume;
+        float volume = player.volume;
 
         for(int i = 0; i < guns.Length; ++i)
         {

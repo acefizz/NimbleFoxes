@@ -136,6 +136,8 @@ public class GameManager : MonoBehaviour
             Load();
         }
 
+        Debug.Log("Set volume");
+
         scene = SceneManager.GetActiveScene().buildIndex;
     }
 
@@ -258,9 +260,8 @@ public class GameManager : MonoBehaviour
     public void Save()
     {
         GameDataSave.SaveGameData(instance);
+        Debug.Log(playerScript.volume);
         GameDataSave.SavePlayerData(playerScript);
-        //scenePath = SceneManager.GetActiveScene().path;
-        //EditorSceneManager.SaveScene(SceneManager.GetActiveScene(), scenePath);
     }
 
     public void Load(/*int sceneNum*/)
@@ -271,6 +272,7 @@ public class GameManager : MonoBehaviour
         {
             playerScript.PlayerLoad(data);
             playerScript.UpdatePlayerHPBar();
+            
             playerSpawnLocation = playerScript.ReturnStartCheckpoint();
         }
 

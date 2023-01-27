@@ -8,6 +8,7 @@ public class ButtonFunctions : MonoBehaviour
     {
         //Unpause the game
         GameManager.instance.ShowMenu(GameManager.MenuType.CloseAll);
+        GameManager.instance.Save();
     }
     public void QuitGame()
     {

@@ -90,21 +90,40 @@ public class SoundManager : MonoBehaviour
     private void Start()
     {
         source = GameObject.FindGameObjectWithTag("GameController").GetComponent<AudioSource>();
+
+        //Set default audio
+        Debug.Log(GameManager.instance.playerScript.volume);
+        Debug.Log(GameManager.instance.playerScript.musicVolume);
+        Debug.Log(GameManager.instance.playerScript.sfxVolume);
+
+        gameAudio.SetFloat("MainVolume", GameManager.instance.playerScript.volume);
+        gameAudio.SetFloat("MusicVolume", GameManager.instance.playerScript.musicVolume);
+        gameAudio.SetFloat("SfxVolume", GameManager.instance.playerScript.sfxVolume);
+
     }
 
     public void SetVolume(float sliderValue)
     {
-        gameAudio.SetFloat("MainVolume", Mathf.Log10(sliderValue) * 20);
+        //Save to player.
+        var vol = Mathf.Log10(sliderValue) * 20;
+        GameManager.instance.playerScript.volume = vol;
+        gameAudio.SetFloat("MainVolume", vol);
         //ExampleSound();
     }
     public void SetMusicVolume(float sliderValue)
     {
-        gameAudio.SetFloat("MusicVolume", Mathf.Log10(sliderValue) * 20);
+        //Save to player.
+        var vol = Mathf.Log10(sliderValue) * 20;
+        GameManager.instance.playerScript.musicVolume = vol;
+        gameAudio.SetFloat("MusicVolume", vol);
         //ExampleSound();
     }
     public void SetSfxVolume(float sliderValue)
     {
-        gameAudio.SetFloat("SfxVolume", Mathf.Log10(sliderValue) * 20);
+        //Save to player.
+        var vol = Mathf.Log10(sliderValue) * 20;
+        GameManager.instance.playerScript.sfxVolume = vol;
+        gameAudio.SetFloat("SfxVolume", vol);
         ExampleSound();
     }
     void ExampleSound()
@@ -113,7 +132,7 @@ public class SoundManager : MonoBehaviour
     }
     public void PlayMusic()
     {
-        if(source.isPlaying) { return; }
+        if (source.isPlaying) { return; }
         source.Play();
     }
 }
