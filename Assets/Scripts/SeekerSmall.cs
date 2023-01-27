@@ -43,7 +43,7 @@ public class SeekerSmall : MonoBehaviour, IDamage
     {
         model.material.color = Color.red;
         yield return new WaitForSeconds(0.2f);
-        model.material.color = Color.white;
+        model.material.color = Color.black;
     }
     IEnumerator Death()
     {

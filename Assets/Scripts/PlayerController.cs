@@ -34,13 +34,15 @@ public class PlayerController : MonoBehaviour
     [Header("---| Gun Stats |---")]
     [SerializeField] List<GunSetup> gunStorage = new List<GunSetup>();
     [SerializeField] List<GunSetup> gunList = new List<GunSetup>();
+    [SerializeField] List<GameObject> muzzlePosition = new List<GameObject>(); 
+
     [SerializeField] GameObject gunModel;
     [SerializeField] float shotDamage;
     [SerializeField] float shotRate;
     [SerializeField] int shotDist;
     public GameObject hitEffect;
     public ParticleSystem muzzleFlash;
-    public Transform muzzlePos;
+    public GameObject muzzlePos;
     public string gunName;
     public int pellets;
     public float FieldOfView;
@@ -299,7 +301,7 @@ public class PlayerController : MonoBehaviour
         gunName = gun.gunName;
         FieldOfView = gun.FieldOfView;
         pellets = gun.pellets;  
-       // muzzlePos = gun.muzzlePos;    unable to get this to work properly
+       // muzzlePos = gun.muzzlePos;   // unable to get this to work properly
         gunModel.GetComponent<MeshFilter>().sharedMesh = gun.GunModel.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gun.GunModel.GetComponent<MeshRenderer>().sharedMaterial;
 
@@ -307,6 +309,7 @@ public class PlayerController : MonoBehaviour
         selectedGun = gunList.Count - 1;
 
         SetWeaponIcon();
+        setMuzzlePos();
     }
 
     public void AbilityPickup(AbilitySetup ability)
@@ -346,12 +349,13 @@ public class PlayerController : MonoBehaviour
         gunName = gunList[selectedGun].gunName;
         FieldOfView = gunList[selectedGun].FieldOfView;
         pellets = gunList[selectedGun].pellets;
-        //muzzlePos = gunList[selectedGun].muzzlePos;       unable to get this to work properly
-
+        //muzzlePos = gunList[selectedGun].muzzlePos;  //     unable to get this to work properly
+        
         gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[selectedGun].GunModel.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[selectedGun].GunModel.GetComponent<MeshRenderer>().sharedMaterial;
     
         SetWeaponIcon();
+        setMuzzlePos();
     }
 
     IEnumerator playSteps()
@@ -407,7 +411,34 @@ public class PlayerController : MonoBehaviour
     {
         return extraDmg;
     }
+    public void setMuzzlePos()
+    {
+        for (int i = 0; i < GameManager.instance.gunNames.Length; i++)
+        {
+            if (GameManager.instance.gunNames[i] == gunName)
+            {
+                switch (i)
+                { 
+                    case 0:
+                        muzzlePos = muzzlePosition[0];
+                        break;
+                    case 1:
+                        muzzlePos = muzzlePosition[1];
+                        break;
+                    case 2:
+                        muzzlePos = muzzlePosition[2];
+                        break;
+                    case 3:
+                        muzzlePos = muzzlePosition[3];
+                        break;
+                    case 4:
+                        muzzlePos = muzzlePosition[4];
+                        break;
+                }
+            }
 
+        }
+    }
     public void SetWeaponIcon()
     {
         for (int i = 0; i < GameManager.instance.gunNames.Length; i++)
