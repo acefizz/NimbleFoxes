@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameAudio: {fileID: 24100000, guid: 07ff31af15591cc4fb63a689701381f9, type: 2}
   exampleVolume: {fileID: 8300000, guid: ca9a487d7dcc0a647a2eb1f505a7a5c9, type: 3}
-  source: {fileID: 0}
+  source: {fileID: 2180892138682209679}
 --- !u!82 &2180892138682209679
 AudioSource:
   m_ObjectHideFlags: 0
@@ -62,7 +62,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.235
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

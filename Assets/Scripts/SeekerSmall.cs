@@ -24,7 +24,7 @@ public class SeekerSmall : MonoBehaviour, IDamage
         {
             StartCoroutine(Death());
             if (GameManager.instance.playerScript)
-                GameManager.instance.playerScript.AddHp(-1);
+                GameManager.instance.playerScript.takeDamage(-1);
         }
     }
     public virtual void takeDamage(float damage)
@@ -43,7 +43,7 @@ public class SeekerSmall : MonoBehaviour, IDamage
     {
         model.material.color = Color.red;
         yield return new WaitForSeconds(0.2f);
-        model.material.color = Color.white;
+        model.material.color = Color.black;
     }
     IEnumerator Death()
     {

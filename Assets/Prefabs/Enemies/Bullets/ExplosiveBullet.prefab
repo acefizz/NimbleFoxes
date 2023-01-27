@@ -53,6 +53,7 @@ MonoBehaviour:
   rb: {fileID: 7512355450051638949}
   explosion: {fileID: 768716667939246911}
   speed: 15
+  detonateTime: 5
 --- !u!33 &8768326777101472956
 MeshFilter:
   m_ObjectHideFlags: 0

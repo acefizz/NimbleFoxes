@@ -107,7 +107,7 @@ public class NinjaEnemyAI : MonoBehaviour, IDamage
         NavMeshHit hit;
 
         //Check if hit is valid
-        if (NavMesh.SamplePosition(new Vector3(randDir.x, 0, randDir.z), out hit, 1, 1))
+        if (NavMesh.SamplePosition(new Vector3(randDir.x, randDir.y, randDir.z), out hit, 1, 1))
         {
             NavMeshPath path = new NavMeshPath();
             agent.CalculatePath(hit.position, path);
@@ -175,28 +175,30 @@ public class NinjaEnemyAI : MonoBehaviour, IDamage
 
     public void takeDamage(float dmg)
     {
-        HP -= dmg;
-        UpdateEnemyHPBar();
-        agent.SetDestination(GameManager.instance.player.transform.position);
-
-        if(HP > 0)
+        if (!isDying)
         {
-            StartCoroutine(StartDisappear());
-        }
+            HP -= dmg;
+            UpdateEnemyHPBar();
+            agent.SetDestination(GameManager.instance.player.transform.position);
 
-        if (HP <= 0 && !isDying)
-        {
-            enemyUI.SetActive(false);
-            agent.isStopped = true;
-            isDying = true;
-            isShooting = false;
-
-            if (enemyDrop != null)
+            if (HP > 0)
             {
-                Instantiate(enemyDrop, shootPos.position, transform.rotation);
+                StartCoroutine(StartDisappear());
             }
-            StartCoroutine(Death());
-           
+
+            if (HP <= 0 && !isDying)
+            {
+                enemyUI.SetActive(false);
+                agent.isStopped = true;
+                isDying = true;
+                isShooting = false;
+
+                if (enemyDrop != null)
+                {
+                    Instantiate(enemyDrop, shootPos.position, transform.rotation);
+                }
+                StartCoroutine(Death());
+            }
         }
     }
 

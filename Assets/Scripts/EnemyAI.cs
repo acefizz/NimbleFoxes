@@ -57,8 +57,6 @@ public class EnemyAI : MonoBehaviour, IDamage
         if (playerInRange && !isDying)
         {
             CanSeePlayer();
-            if (!isShooting) { StartCoroutine(shoot()); }
-
         }
         else if (agent.remainingDistance < 0.1f && agent.destination != GameManager.instance.player.transform.position && !isDying)
         {
@@ -98,6 +96,7 @@ public class EnemyAI : MonoBehaviour, IDamage
                 }
             }
         }
+
         if (agent.remainingDistance <= agent.stoppingDistance)
         {
             FacePlayer();
@@ -112,7 +111,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         NavMeshHit hit;
         
         //Check if hit is valid
-        if (NavMesh.SamplePosition(new Vector3(randDir.x, 0, randDir.z), out hit, 1, 1))
+        if (NavMesh.SamplePosition(new Vector3(randDir.x, randDir.y, randDir.z), out hit, 1, 1))
         {
             NavMeshPath path = new NavMeshPath();
             agent.CalculatePath(hit.position, path);
@@ -185,33 +184,36 @@ public class EnemyAI : MonoBehaviour, IDamage
     }
     public virtual void takeDamage(float dmg)
     {
-        HP -= dmg;
-        if (CompareTag("Boss"))
+        if (!isDying)
         {
-            enemyUI.SetActive(true);
-            bossNameText.text = bossName;
-        }
-        else
-        {
-            StartCoroutine(ShowHP());
-        }
-        UpdateEnemyHPBar();
-        agent.SetDestination(GameManager.instance.player.transform.position);
-        StartCoroutine(flashDamage());
-        if (HP <= 0 && !isDying)
-        {
-            enemyUI.SetActive(false);
-            agent.isStopped = true;
-            isDying = true;
-            isShooting = false;
-            if (enemyDrop != null)
+            HP -= dmg;
+            if (CompareTag("Boss"))
             {
-                Instantiate(enemyDrop, shootPos.position, transform.rotation);
+                enemyUI.SetActive(true);
+                bossNameText.text = bossName;
             }
-            StartCoroutine(Death());
- 
-        }
+            else
+            {
+                StartCoroutine(ShowHP());
+            }
+            UpdateEnemyHPBar();
+            agent.SetDestination(GameManager.instance.player.transform.position);
+            FacePlayer();
+            StartCoroutine(flashDamage());
+            if (HP <= 0)
+            {
+                enemyUI.SetActive(false);
+                agent.isStopped = true;
+                isDying = true;
+                isShooting = false;
+                if (enemyDrop != null)
+                {
+                    Instantiate(enemyDrop, shootPos.position, transform.rotation);
+                }
+                StartCoroutine(Death());
 
+            }
+        }
     }
     public virtual IEnumerator Death()
     {

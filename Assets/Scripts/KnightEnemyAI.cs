@@ -103,7 +103,7 @@ public class KnightEnemyAI : MonoBehaviour, IDamage
         NavMeshHit hit;
 
         //Check if hit is valid
-        if (NavMesh.SamplePosition(new Vector3(randDir.x, 0, randDir.z), out hit, 1, 1))
+        if (NavMesh.SamplePosition(new Vector3(randDir.x, randDir.y, randDir.z), out hit, 1, 1))
         {
             NavMeshPath path = new NavMeshPath();
             agent.CalculatePath(hit.position, path);
@@ -159,24 +159,26 @@ public class KnightEnemyAI : MonoBehaviour, IDamage
 
     public void takeDamage(float dmg)
     {
-        HP -= dmg;
-        UpdateEnemyHPBar();
-        StartCoroutine(ShowHP());
-        agent.SetDestination(GameManager.instance.player.transform.position);
-        StartCoroutine(flashDamage());
-
-        if (HP <= 0)
+        if (!isDying)
         {
-            enemyUI.SetActive(false);
-            agent.isStopped = true;
-            isDying = true;
+            HP -= dmg;
+            UpdateEnemyHPBar();
+            StartCoroutine(ShowHP());
+            agent.SetDestination(GameManager.instance.player.transform.position);
+            StartCoroutine(flashDamage());
 
-            if (enemyDrop != null)
+            if (HP <= 0)
             {
-                Instantiate(enemyDrop, transform.position, transform.rotation);
+                enemyUI.SetActive(false);
+                agent.isStopped = true;
+                isDying = true;
+
+                if (enemyDrop != null)
+                {
+                    Instantiate(enemyDrop, transform.position, transform.rotation);
+                }
+                StartCoroutine(Death());
             }
-            StartCoroutine(Death());
-       
         }
     }
 
