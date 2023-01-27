@@ -179,8 +179,8 @@ public class PlayerController : MonoBehaviour
     public void takeDamage(int dmg)
    {
         aud.PlayOneShot(playerHurt[UnityEngine.Random.Range(0, playerHurt.Length)], playerHurtVol);
-        UpdatePlayerHPBar();
         HP -= dmg;
+        UpdatePlayerHPBar();
         StartCoroutine(PlayerDamageFlash());
         if (HP <= 0)
         {
