@@ -227,7 +227,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2180892138682209673, guid: 185f2594ae14c0c458a705a09f10d395, type: 3}
         m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
         m_MethodName: SetMusicVolume
         m_Mode: 0
@@ -2173,7 +2173,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2180892138682209673, guid: 185f2594ae14c0c458a705a09f10d395, type: 3}
         m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
         m_MethodName: SetSfxVolume
         m_Mode: 0
@@ -6266,7 +6266,7 @@ MonoBehaviour:
   weaponText: {fileID: 784738617}
   weaponDisplay: 
   abiltyText: {fileID: 474799673}
-  abiltyDisplay: 
+  jumpDisplay: 
   weapon1: {fileID: 667924488}
   weapon2: {fileID: 1656184387}
   weapon3: {fileID: 592190812}
@@ -6316,7 +6316,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -4129021137586181181, guid: 07ff31af15591cc4fb63a689701381f9, type: 2}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: bba57102ca12b944c8e8ee7ae3e71926, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

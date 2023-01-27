@@ -25,7 +25,7 @@ public class Seeker : MonoBehaviour, IDamage
     private void OnTriggerEnter(Collider other)
     {
         model.enabled = true;
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && HP > 0)
         {
             StartCoroutine(SpawnEnemies());
         }
@@ -67,7 +67,7 @@ public class Seeker : MonoBehaviour, IDamage
         //spawn the enemy in a different place
         if (HP <= 0)
         {
-            gameObject.GetComponent<MeshCollider>().enabled = false;
+            gameObject.GetComponent<BoxCollider>().enabled = false;
             enemyUI.SetActive(false);
             agent.isStopped = true;
             StartCoroutine(Death());
