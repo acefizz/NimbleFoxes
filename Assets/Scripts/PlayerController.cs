@@ -91,8 +91,8 @@ public class PlayerController : MonoBehaviour
 
         ResetHP();
 
-        modelBody.SetActive(false);
-        modelHead.SetActive(false);
+        //modelBody.SetActive(false);
+        //modelHead.SetActive(false);
         
     }
 
