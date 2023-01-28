@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
@@ -82,6 +83,14 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip exampleVolume;
     [SerializeField] private AudioSource source;
 
+    public Slider main;
+    public Slider music;
+    public Slider sfx;
+
+    float mainVol;
+    float musicVol;
+    float sfxVol;
+
     private void Awake()
     {
         //DontDestroyOnLoad(this.gameObject);
@@ -95,17 +104,20 @@ public class SoundManager : MonoBehaviour
     public void SetVolume(float sliderValue)
     {
         gameAudio.SetFloat("MainVolume", Mathf.Log10(sliderValue) * 20);
+        gameAudio.GetFloat("MainVolume", out mainVol);
         //ExampleSound();
     }
     public void SetMusicVolume(float sliderValue)
     {
         gameAudio.SetFloat("MusicVolume", Mathf.Log10(sliderValue) * 20);
+        gameAudio.GetFloat("MusicVolume", out musicVol);
         //ExampleSound();
     }
     public void SetSfxVolume(float sliderValue)
     {
         gameAudio.SetFloat("SfxVolume", Mathf.Log10(sliderValue) * 20);
         ExampleSound();
+        gameAudio.GetFloat("SfxVolume", out sfxVol);
     }
     void ExampleSound()
     {
@@ -115,5 +127,14 @@ public class SoundManager : MonoBehaviour
     {
         if(source.isPlaying) { return; }
         source.Play();
+    }
+    public void LoadVolume()
+    {
+        gameAudio.SetFloat("MusicVolume", Mathf.Log10(musicVol) * 20);
+        music.value = musicVol;
+        gameAudio.SetFloat("SfxVolume", Mathf.Log10(sfxVol) * 20);
+        sfx.value = sfxVol;
+        gameAudio.SetFloat("MainVolume", Mathf.Log10(mainVol) * 20);
+        main.value = mainVol;
     }
 }
