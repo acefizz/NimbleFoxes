@@ -35,9 +35,9 @@ public class Checkpoint : MonoBehaviour
 
             GameManager.instance.Save();
             GameManager.instance.Load();
-            
 
-            Destroy(gameObject);
+
+            gameObject.SetActive(false);
         }
     }
 }

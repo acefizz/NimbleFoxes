@@ -88,10 +88,11 @@ public class PlayerController : MonoBehaviour
 
         startCheckpoint = checkpointToSpawnAt.transform.position;
         SetPlayerPos();
-        
-        UpdatePlayerHPBar();
-        modelBody.SetActive(false);
-        modelHead.SetActive(false);
+
+        ResetHP();
+
+        //modelBody.SetActive(false);
+        //modelHead.SetActive(false);
         
     }
 
@@ -179,31 +180,33 @@ public class PlayerController : MonoBehaviour
     }
 
     public void takeDamage(int dmg)
-   {
-        aud.PlayOneShot(playerHurt[UnityEngine.Random.Range(0, playerHurt.Length)], playerHurtVol);
-        UpdatePlayerHPBar();
-        HP -= dmg;
-        StartCoroutine(PlayerDamageFlash());
-        if (HP <= 0)
+    {
+        if (!isDead)
         {
-            HP = 0;
-            GameManager.instance.ShowMenu(GameManager.MenuType.Lose, true);
-            GameManager.instance.Save();
-            if (lives > 0)
+            aud.PlayOneShot(playerHurt[UnityEngine.Random.Range(0, playerHurt.Length)], playerHurtVol);
+            HP -= dmg;
+            UpdatePlayerHPBar();
+            StartCoroutine(PlayerDamageFlash());
+            if (HP <= 0)
             {
+                HP = 0;
+                GameManager.instance.ShowMenu(GameManager.MenuType.Lose, true);
+                if (lives > 0)
+                {
 
-                GameManager.instance.respawnButton.interactable = true;
-                lives--;
-                GameManager.instance.SetRespawnText($"All of your light has been lost, you have {lives} balls of light remaining to revive");
-                isDead = true;
-                ResetHP();
-            }
-            else
-            {
-                GameManager.instance.checkpoint = startCheckpoint;
-                GameManager.instance.respawnButton.interactable = false;
-                GameManager.instance.SetRespawnText("You have no light left to revive, you can return to when you came to this world.");
-                isDead = true;
+                    GameManager.instance.respawnButton.interactable = true;
+                    lives--;
+                    GameManager.instance.Save();
+                    GameManager.instance.SetRespawnText($"All of your light has been lost, you have {lives} balls of light remaining to revive");
+                    isDead = true;
+                }
+                else
+                {
+                    GameManager.instance.checkpoint = startCheckpoint;
+                    GameManager.instance.respawnButton.interactable = false;
+                    GameManager.instance.SetRespawnText("You have no light left to revive, you can return to when you came to this world.");
+                    isDead = true;
+                }
             }
         }
     }

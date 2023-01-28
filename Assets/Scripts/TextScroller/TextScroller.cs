@@ -14,6 +14,8 @@ public class TextScroller : MonoBehaviour
 
     void Start()
     {
+        //Set cursor to visible if it's not
+        Cursor.visible = true;
         originalPos = text.transform.position;
     }
 

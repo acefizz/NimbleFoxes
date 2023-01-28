@@ -136,7 +136,7 @@ public class GameManager : MonoBehaviour
             Load();
         }
 
-        scene = SceneManager.GetActiveScene().buildIndex;
+        //scene = SceneManager.GetActiveScene().buildIndex;
     }
 
     private void Update()
@@ -283,7 +283,7 @@ public class GameManager : MonoBehaviour
 
     public int ReturnScene()
     {
-        return scene;
+        return SceneManager.GetActiveScene().buildIndex;
     }
 
     void IncreaseCoolDownTimer()
