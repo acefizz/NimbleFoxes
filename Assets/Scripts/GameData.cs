@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class GameData
@@ -17,6 +18,6 @@ public class GameData
         //spawn[1] = data.playerSpawnLocation.y;
         //spawn[2] = data.playerSpawnLocation.z;
 
-        scene = data.ReturnScene();
+        scene = SceneManager.GetActiveScene().buildIndex;
     }
 }
