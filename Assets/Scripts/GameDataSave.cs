@@ -70,13 +70,45 @@ public static class GameDataSave
         }
     }
 
+    public static void SaveOptionData(SoundManager sound)
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+        string path = Application.persistentDataPath + "/OptionData.save";
+        FileStream stream = new FileStream(path, FileMode.Create);
+
+        OptionData data = new OptionData(sound);
+
+        formatter.Serialize(stream, data);
+        stream.Close();
+    }
+
+    public static OptionData LoadOptionData()
+    {
+        string path = Application.persistentDataPath + "/OptionData.save";
+
+        if (File.Exists(path))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
+
+            OptionData data = formatter.Deserialize(stream) as OptionData;
+            stream.Close();
+
+            return data;
+        }
+        else
+        {
+            Debug.Log("Save file not found in" + path);
+            return null;
+        }
+    }
+
     public static void DeleteSaves()
     {
-        string[] filePaths = Directory.GetFiles(Application.persistentDataPath);
+        string playerPath = Application.persistentDataPath + "/PlayerData.save";
+        string continuePath = Application.persistentDataPath + "/Continue.save";
 
-        foreach(string file in filePaths)
-        {
-            File.Delete(file);
-        }
+        File.Delete(playerPath);
+        File.Delete(continuePath);
     }
 }

@@ -86,8 +86,6 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     [Range(1, 5)] public int speedCost = 1;
 
-
-
     [Header("--- Ability Cooldowns ---")]
     List<float> coolDowns = new List<float>();
     List<float> coolDownTracker = new List<float>();
