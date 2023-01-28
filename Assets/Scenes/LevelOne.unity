@@ -14080,6 +14080,39 @@ PrefabInstance:
       objectReference: {fileID: 776772550}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a528ee935687154191c79eb73a457b8, type: 3}
+--- !u!114 &1815904222 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 826700975, guid: 1a528ee935687154191c79eb73a457b8, type: 3}
+  m_PrefabInstance: {fileID: 1815904221}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1815904223 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 148296131, guid: 1a528ee935687154191c79eb73a457b8, type: 3}
+  m_PrefabInstance: {fileID: 1815904221}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1815904224 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 536179166, guid: 1a528ee935687154191c79eb73a457b8, type: 3}
+  m_PrefabInstance: {fileID: 1815904221}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1818383705 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4753028538822310, guid: b58fdf950bf832348af4bfaa2fd9f743, type: 3}
@@ -14550,6 +14583,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2180892138682209673, guid: 185f2594ae14c0c458a705a09f10d395, type: 3}
+      propertyPath: sfx
+      value: 
+      objectReference: {fileID: 1815904222}
+    - target: {fileID: 2180892138682209673, guid: 185f2594ae14c0c458a705a09f10d395, type: 3}
+      propertyPath: main
+      value: 
+      objectReference: {fileID: 1815904224}
+    - target: {fileID: 2180892138682209673, guid: 185f2594ae14c0c458a705a09f10d395, type: 3}
+      propertyPath: music
+      value: 
+      objectReference: {fileID: 1815904223}
     - target: {fileID: 2180892138682209678, guid: 185f2594ae14c0c458a705a09f10d395, type: 3}
       propertyPath: m_Name
       value: Music
